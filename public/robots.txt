@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.zss.ca
+
+# Sitemaps
+Sitemap: https://www.zss.ca/sitemap.xml
