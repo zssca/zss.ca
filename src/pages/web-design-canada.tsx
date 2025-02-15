@@ -49,7 +49,7 @@ export default function Web() {
         {/* Text Block */}
         <motion.div
           variants={responsiveVariants}
-          className="col-span-1 row-span-1 bg-white py-4 px-6 rounded-xl flex items-top justify-top md:order-1 bg-[url('/bg/F.svg')] bg-cover flex"
+          className="col-span-1 row-span-1 bg-white py-4 px-6 rounded-xl flex items-top justify-top md:order-1 bg-[url('/bg/F.svg')] bg-cover"
         >
 <WebHero />
         </motion.div>

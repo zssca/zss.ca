@@ -66,7 +66,7 @@ export default function Home() {
         {/* Services Block */}
         <motion.div
           variants={responsiveVariants}
-          className="col-span-1 row-span-1 md:row-span-2 bg-white bg-[url('/bg1.svg')] bg-fill bg-bottom rounded-xl flex items-center justify-center order-3 md:order-3 shadow-sm"
+          className="col-span-1 row-span-1 md:row-span-2 bg-white rounded-xl flex items-center justify-center order-3 md:order-3 shadow-sm"
         >
           <HomeServices />
         </motion.div>
@@ -107,7 +107,7 @@ export default function Home() {
           delay: 0.3,
           ease: [0.43, 0.13, 0.23, 0.96],
         }}
-        className="bg-white bg-[url('/bg1.svg')] bg-fill bg-bottom rounded-xl p-3 mt-4 shadow-sm"
+        className="bg-white rounded-xl p-3 mt-4 shadow-sm"
       >
         <HomeFaq />
       </motion.div>
