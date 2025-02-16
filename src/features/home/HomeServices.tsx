@@ -20,38 +20,42 @@ export default function Services() {
   ];
 
   return (
-    <div className="w-full p-1 max-w-md mx-auto">
-      <div className="flex flex-col space-y-1">
+    <div className="w-full mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         {services.map((service) => (
           <a
             key={service.url}
             href={service.url}
             className="
               group flex items-center justify-between
-              px-1 py-1 rounded-lg
-              transition-all duration-200 
+              pr-3 rounded-lg
+              transition-all duration-200 ease-in-out
               hover:bg-gray-50
-              text-gray-600
-              w-full
               border border-gray-100
               hover:border-gray-200
+              focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
             "
           >
-            <div className="flex items-center gap-3">
-              <div className="text-gray-500 p-1 bg-gray-50 rounded-md transition-all duration-200 group-hover:bg-white group-hover:text-gray-700">
+            <div className="flex items-center space-x-4">
+              <div className="
+                p-2 rounded-lg
+                bg-gray-50
+                group-hover:bg-white 
+                transition-colors duration-200
+              ">
                 {React.cloneElement(service.icon, {
-                  className: "w-5 h-5 flex-shrink-0"
+                  className: "w-6 h-6 text-gray-600 group-hover:text-gray-800"
                 })}
               </div>
-              <span className="text-sm font-medium text-gray-700 
-                            transition-colors duration-200 group-hover:text-gray-900">
+              <span className="text-base font-medium text-gray-700 
+                             group-hover:text-gray-900">
                 {service.name}
               </span>
             </div>
             <FiArrowRight 
               className="
-                w-4 h-4 text-gray-400 mr-2
-                transition-all duration-300 
+                w-5 h-5 text-gray-400
+                transition-all duration-300 ease-in-out
                 group-hover:translate-x-1
                 group-hover:text-gray-600
               " 

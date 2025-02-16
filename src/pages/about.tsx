@@ -1,275 +1,329 @@
-import {
-    FaHandshake,
-    FaMapMarkerAlt,
-    FaChartLine,
-    FaCanadianMapleLeaf,
-  } from "react-icons/fa";
-  import {
-    FiMonitor,
-    FiPenTool,
-    FiTarget,
-    FiSearch,
-    FiUsers,
-    FiChevronRight,
-  } from "react-icons/fi";
-  import MainLayout from "@/layouts/MainLayout";
-  import Image from "next/image";
-  
-  export default function About() {
-    const team = [
-      { 
-        name: "Sarah Johnson",
-        role: "Lead Designer",
-        exp: "12+ years",
-        img: "/team-sarah.jpg"
-      },
-      { 
-        name: "Michael Chen",
-        role: "SEO Strategist",
-        exp: "8+ years",
-        img: "/team-michael.jpg"
-      },
-      { 
-        name: "Emily Martin",
-        role: "Social Media Expert",
-        exp: "6+ years",
-        img: "/team-emily.jpg"
-      },
-    ];
-  
-    return (
-      <MainLayout>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 auto-rows-auto gap-8">
-            
-            {/* Company Story - Hero Section */}
-            <div className="col-span-full relative p-12 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-2xl shadow-blue-100/50 border border-white/20 backdrop-blur-lg">
-              <div className="max-w-5xl mx-auto text-center space-y-8">
-                <div className="inline-flex items-center bg-white/80 px-4 py-2 rounded-full shadow-sm">
-                  <FaCanadianMapleLeaf className="w-5 h-5 mr-2 text-blue-600" />
-                  <span className="font-medium tracking-wide text-sm uppercase text-blue-600">
-                    Canadian Owned & Operated
-                  </span>
-                </div>
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent leading-tight">
-                  Rooted in Canada,<br />
-                  Growing With Canadian Business
-                </h1>
-                <p className="text-gray-600 text-lg leading-relaxed max-w-3xl mx-auto">
-                  Founded in 2012 by Toronto entrepreneurs, Zenith Strategic Solutions bridges the gap between enterprise-level digital marketing and Canadian SME needs.
-                </p>
-              </div>
+import MainLayout from "@/layouts/MainLayout";
+import Image from "next/image";
+
+export default function AboutPage() {
+  return (
+    <MainLayout>
+      <section className="">
+        <div className="max-w-7xl mx-auto">
+          {/* 
+            Main bento grid container 
+            - Smaller gap (gap-4)
+            - 12-column layout on medium+
+            - Auto-height rows
+          */}
+          <div
+            className="
+              grid
+              grid-cols-1
+              md:grid-cols-12
+              gap-4
+              auto-rows-[minmax(200px,auto)]
+            "
+          >
+            {/* 1. Hero Text - col-span-7, row-span-2 */}
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-5 md:row-span-2 flex flex-col justify-center">
+              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+                Transforming brands through elevated digital experiences
+              </h1>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                For over a decade, we&apos;ve pioneered digital solutions that redefine
+                industry standards and create lasting value for global clients. Our
+                multidisciplinary teams blend strategy, creativity, and technology to
+                help you stay ahead in today&apos;s fast-paced digital landscape.
+              </p>
             </div>
-  
-            {/* Why Trust Us - Glassmorphic Card */}
-            <div className="col-span-full sm:col-span-3 md:col-span-2 relative p-8 bg-white/80 rounded-2xl shadow-2xl shadow-blue-100/50 border border-white/20 backdrop-blur-lg hover:shadow-blue-200/40 transition-shadow">
-              <div className="flex flex-col items-center text-center justify-center h-full space-y-6">
-                <div className="p-4 bg-blue-600/10 rounded-2xl">
-                  <FaHandshake className="w-8 h-8 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900">
-                  Why 500+ Canadian Businesses Trust Us
-                </h3>
-                <ul className="space-y-4 text-gray-600">
-                  {[
-                    "No Long-Term Contracts",
-                    "30-Day Results Guarantee",
-                    "Transparent Pricing",
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-center py-2 px-4 bg-white/50 rounded-lg shadow-sm hover:bg-white transition-colors">
-                      <FiChevronRight className="w-5 h-5 mr-2 text-blue-600" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+
+            {/* 2. Hero Image - col-span-5, row-span-2 */}
+            <div className="bg-white rounded-xl shadow-sm p-4 md:col-span-7 md:row-span-2 flex items-center">
+              <Image
+                src="/zss-team.webp"
+                alt="ZSS team collaborating in modern office"
+                className="w-full h-full rounded-lg"
+                width={800}
+                height={600}
+              />
             </div>
-  
-            {/* Team Showcase - Modern Cards */}
-            {team.map((member, index) => (
-              <div
-                key={index}
-                className="col-span-full sm:col-span-1 md:col-span-2 group relative p-8 bg-white/80 rounded-2xl shadow-2xl shadow-blue-100/30 border border-white/20 backdrop-blur-lg hover:shadow-blue-200/40 transition-all"
-              >
-                <div className="flex flex-col items-center text-center space-y-6">
-                  <div className="relative w-32 h-32 mb-4">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full transform group-hover:rotate-12 transition-transform" />
-                    <Image 
-                      src={member.img}
-                      alt={member.name}
-                      layout="fill"
-                      objectFit="cover"
-                      className="relative rounded-full border-4 border-white"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-semibold text-gray-900 mb-1">
-                      {member.name}
-                    </h4>
-                    <p className="text-gray-600 text-sm mb-3">{member.role}</p>
-                    <div className="text-xs font-medium text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full shadow-inner">
-                      {member.exp} experience
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-  
-            {/* Canadian Advantage - Grid Layout */}
-            <div className="col-span-full sm:col-span-3 md:col-span-4 relative p-10 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-2xl shadow-blue-100/50 border border-white/20 backdrop-blur-lg">
-              <div className="flex items-center mb-8">
-                <div className="p-3 bg-blue-600/10 rounded-xl mr-4">
-                  <FaMapMarkerAlt className="w-6 h-6 text-blue-600" />
-                </div>
-                <h2 className="text-2xl font-semibold text-gray-900">
-                  Built Exclusively for Canadian Markets
-                </h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-6">
-                  <h3 className="text-lg font-medium text-gray-900 border-l-4 border-blue-600 pl-4">
-                    We Master Local Challenges
-                  </h3>
-                  <ul className="space-y-4 text-gray-600">
-                    {[
-                      "Seasonal market fluctuations",
-                      "Bilingual audience engagement",
-                      "Local competition dynamics",
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-center p-4 bg-white/80 rounded-xl shadow-sm hover:shadow-md transition-all">
-                        <div className="w-8 h-8 bg-blue-600/10 flex items-center justify-center rounded-lg mr-3">
-                          <FiChevronRight className="w-4 h-4 text-blue-600" />
-                        </div>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="md:pl-8">
-                  <h3 className="text-lg font-medium text-gray-900 border-l-4 border-blue-600 pl-4">
-                    Canadian-Centric Approach
-                  </h3>
-                  <ul className="space-y-4 text-gray-600">
-                    {[
-                      "PIPEDA-compliant strategies",
-                      "Local SEO optimization",
-                      "Cultural relevance built-in",
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-center p-4 bg-white/80 rounded-xl shadow-sm hover:shadow-md transition-all">
-                        <div className="w-8 h-8 bg-blue-600/10 flex items-center justify-center rounded-lg mr-3">
-                          <FiChevronRight className="w-4 h-4 text-blue-600" />
-                        </div>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-  
-            {/* Services Grid - Hover Effects */}
-            <div className="col-span-full relative p-12 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-2xl shadow-blue-100/50 border border-white/20 backdrop-blur-lg">
-              <div className="max-w-4xl mx-auto space-y-12">
-                <h3 className="text-2xl font-semibold text-gray-900 text-center">
-                  Comprehensive Digital Solutions
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
-                  {[
-                    { icon: FiMonitor, title: "Web Design" },
-                    { icon: FiPenTool, title: "Branding" },
-                    { icon: FiPenTool, title: "Logo Design" },
-                    { icon: FiTarget, title: "PPC" },
-                    { icon: FiSearch, title: "SEO" },
-                    { icon: FiUsers, title: "Social Media" },
-                  ].map((service, index) => (
+
+            {/* 3. Trusted By (col-span-4) */}
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-4 flex flex-col justify-center">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+                Trusted by Leading Brands
+              </h2>
+              <p className="text-gray-600 text-sm sm:text-base mb-4">
+                Over the years, we&apos;ve partnered with a diverse range of global clients.
+                Here are a few who trust our expertise:
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 items-center">
+                {/* Replace with actual brand logos */}
+                {["/logo1.png", "/logo2.png", "/logo3.png", "/logo4.png"].map(
+                  (logo, idx) => (
                     <div
-                      key={index}
-                      className="group relative p-6 bg-white/80 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-white/20"
+                      key={idx}
+                      className="flex items-center justify-center bg-gray-50 rounded-md p-2"
                     >
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <service.icon className="w-8 h-8 text-blue-600 mb-4 mx-auto transform group-hover:scale-110 transition-transform" />
-                      <h4 className="text-sm font-semibold text-gray-900 text-center group-hover:text-blue-600 transition-colors">
-                        {service.title}
-                      </h4>
+                      <Image
+                        src={logo}
+                        alt={`Brand ${idx + 1}`}
+                        width={80}
+                        height={40}
+                        className="object-contain"
+                      />
                     </div>
-                  ))}
-                </div>
+                  )
+                )}
               </div>
             </div>
-  
-            {/* Process Timeline - Modern Vertical */}
-            <div className="col-span-full sm:col-span-3 md:col-span-3 relative p-10 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-2xl shadow-blue-100/50 border border-white/20 backdrop-blur-lg">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-8">
-                Our 3-Step Success Process
-              </h3>
-              <div className="space-y-8 relative before:absolute before:left-8 before:h-full before:w-px before:bg-blue-100">
+
+            {/* 4. Filler Text Block (col-span-4) */}
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+                Our Vision for the Future
+              </h2>
+              <p className="text-gray-600 text-sm sm:text-base mb-2">
+                We see a world where digital experiences are frictionless, data-driven,
+                and truly human-centric. By investing in emerging technologies, we aim
+                to build scalable platforms that empower businesses to operate faster
+                and smarter.
+              </p>
+              <p className="text-gray-600 text-sm sm:text-base">
+                Our commitment is to continuous learning, adaptation, and
+                transformation—enabling clients to innovate in the face of constant
+                change.
+              </p>
+            </div>
+
+            {/* 5. Filler Text Block (col-span-4) */}
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+                Collaborative Approach
+              </h2>
+              <p className="text-gray-600 text-sm sm:text-base mb-2">
+                From discovery workshops to post-launch analytics, our team works
+                side-by-side with yours to ensure success at every stage. We believe
+                transparency, open communication, and iterative feedback loops are key
+                to building great products.
+              </p>
+              <p className="text-gray-600 text-sm sm:text-base">
+                Whether you’re a startup or an established enterprise, we tailor our
+                process to fit your unique needs and strategic goals.
+              </p>
+            </div>
+
+            {/* 6. Mission (col-span-5) */}
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-5">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+                Our Mission
+              </h2>
+              <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                Combine technical excellence with artistic vision to create digital
+                experiences that drive measurable business results. Our mission is to
+                continuously push boundaries—enhancing customer engagement, driving
+                growth, and elevating brand reputation across every touchpoint.
+              </p>
+            </div>
+
+            {/* 7. Stats (col-span-7) */}
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-7">
+              <div className="grid grid-cols-2 gap-x-6 gap-y-7">
                 {[
-                  { step: 1, title: "Discovery Session", desc: "Free 30-minute strategy consultation" },
-                  { step: 2, title: "Custom Roadmap", desc: "Data-driven strategy development" },
-                  { step: 3, title: "Growth Execution", desc: "Continuous optimization & support" },
+                  {
+                    value: "45%",
+                    text: "Client results exceeded KPIs",
+                    color: "text-indigo-600",
+                  },
+                  {
+                    value: "3.5x",
+                    text: "Average lead increase",
+                    color: "text-emerald-600",
+                  },
+                  {
+                    value: "30%",
+                    text: "Organic traffic growth",
+                    color: "text-amber-600",
+                  },
+                  {
+                    value: "50%",
+                    text: "ROI improvement rate",
+                    color: "text-cyan-600",
+                  },
+                ].map((stat, index) => (
+                  <div key={index} className="text-center">
+                    <p className={`text-3xl font-bold ${stat.color}`}>{stat.value}</p>
+                    <p className="text-sm text-gray-600 mt-2">{stat.text}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-6 text-gray-600 text-sm sm:text-base">
+                These statistics highlight our commitment to measurable impact. We
+                focus on actionable goals that directly influence your bottom line and
+                long-term growth.
+              </p>
+            </div>
+
+            {/* 8. Core Principles (col-span-6) */}
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+                Core Principles
+              </h2>
+              <ul className="space-y-4">
+                {[
+                  {
+                    title: "Innovation First",
+                    text: "Pioneering solutions with emerging technologies",
+                  },
+                  {
+                    title: "Strategic Partnership",
+                    text: "Alignment with your long-term business goals",
+                  },
+                  {
+                    title: "Sustainable Scalability",
+                    text: "Architecture built for future growth",
+                  },
                 ].map((item, index) => (
+                  <li key={index}>
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm sm:text-base mt-1.5">
+                      {item.text}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 9. Development Philosophy (col-span-6) */}
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+                Development Philosophy
+              </h2>
+              <div className="grid gap-5 sm:grid-cols-2">
+                {[
+                  {
+                    title: "Strategic Architecture",
+                    text: "Our proprietary framework combines market analysis with technical audits to build solutions anchored in business reality.",
+                  },
+                  {
+                    title: "Agile Delivery",
+                    text: "A modular development process ensuring rapid deployment while maintaining enterprise-grade quality standards.",
+                  },
+                ].map((item, index) => (
+                  <div key={index} className="space-y-2">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm sm:text-base">
+                      {item.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 10. Milestones & Achievements (col-span-6) */}
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+                Milestones & Achievements
+              </h2>
+              <ol className="relative border-l border-gray-200">
+                {[
+                  {
+                    year: "2010",
+                    title: "Founded",
+                    description: "Started our journey with a small but passionate team.",
+                  },
+                  {
+                    year: "2015",
+                    title: "Global Expansion",
+                    description: "Opened new offices in Europe to better serve international clients.",
+                  },
+                  {
+                    year: "2020",
+                    title: "Award-Winning Innovations",
+                    description:
+                      "Recognized by industry experts for our cutting-edge digital solutions.",
+                  },
+                  {
+                    year: "2023",
+                    title: "Sustainable Growth",
+                    description:
+                      "Expanded services to include full-stack AI capabilities and data analytics.",
+                  },
+                ].map((item, index) => (
+                  <li key={index} className="mb-8 ml-4">
+                    <div className="absolute w-3 h-3 bg-indigo-500 rounded-full mt-1.5 -left-1.5 border border-white" />
+                    <time className="mb-1 text-sm font-normal leading-none text-gray-400">
+                      {item.year}
+                    </time>
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm sm:text-base">{item.description}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            {/* 11. Meet the Team (col-span-6) */}
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 text-center">
+                Meet the Team
+              </h2>
+              <p className="text-gray-600 text-sm sm:text-base text-center mb-6">
+                Our people are our greatest asset. Each member brings unique
+                perspectives and expertise, working collaboratively to deliver world-class
+                solutions.
+              </p>
+              <div className="grid grid-cols-2 gap-6">
+                {[
+                  { name: "Alice Johnson", role: "CEO", img: "/team1.jpg" },
+                  { name: "Bob Smith", role: "CTO", img: "/team2.jpg" },
+                  { name: "Carolyn Brown", role: "Head of Design", img: "/team3.jpg" },
+                  { name: "David Wilson", role: "Lead Developer", img: "/team4.jpg" },
+                ].map((person, idx) => (
                   <div
-                    key={index}
-                    className="relative pl-16 group"
+                    key={idx}
+                    className="flex flex-col items-center text-center space-y-3"
                   >
-                    <div className="absolute left-8 top-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold z-10 transform group-hover:scale-125 transition-transform">
-                      {item.step}
-                    </div>
-                    <div className="p-6 bg-white/80 rounded-xl shadow-sm hover:shadow-md transition-all">
-                      <h4 className="text-lg font-medium text-gray-900 mb-2">
-                        {item.title}
-                      </h4>
-                      <p className="text-gray-600 text-sm">{item.desc}</p>
+                    <Image
+                      src={person.img}
+                      alt={person.name}
+                      className="w-24 h-24 object-cover rounded-full"
+                      width={96}
+                      height={96}
+                    />
+                    <div>
+                      <h3 className="text-base font-semibold text-gray-900">
+                        {person.name}
+                      </h3>
+                      <p className="text-sm text-gray-500">{person.role}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-  
-            {/* Results Showcase - Animated Stats */}
-            <div className="col-span-full sm:col-span-3 md:col-span-3 relative p-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl shadow-2xl shadow-blue-900/30 overflow-hidden">
-              <div className="relative z-10 text-center space-y-10">
-                <FaChartLine className="w-12 h-12 mx-auto text-blue-200" />
-                <h3 className="text-2xl font-semibold text-white">Average Client Outcomes</h3>
-                <div className="grid grid-cols-3 gap-6">
-                  {[
-                    { value: "+45%", label: "Traffic Growth" },
-                    { value: "+30%", label: "Lead Increase" },
-                    { value: "3.5x", label: "ROI Boost" },
-                  ].map((metric, index) => (
-                    <div
-                      key={index}
-                      className="p-4 bg-blue-700/30 rounded-xl backdrop-blur-sm hover:bg-blue-700/40 transition-colors"
-                    >
-                      <div className="text-3xl font-bold text-white mb-2">{metric.value}</div>
-                      <div className="text-xs font-medium text-blue-200">{metric.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+
+            {/* 12. CTA (col-span-12) */}
+            <div className="bg-indigo-600 rounded-xl p-6 md:col-span-12 flex flex-col items-center text-center">
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">
+                Ready to Elevate Your Digital Presence?
+              </h2>
+              <p className="text-white text-sm sm:text-base max-w-xl mb-5">
+                Partner with us to innovate, transform, and excel in a constantly
+                evolving digital world. Whether you need a new website or a holistic
+                digital transformation, we&apos;re here to help you reach your goals.
+              </p>
+              <button
+                type="button"
+                className="inline-flex items-center px-5 py-2 border border-transparent text-sm sm:text-base font-medium rounded-md shadow-sm text-indigo-600 bg-white hover:bg-gray-50"
+              >
+                Contact Us Today
+              </button>
             </div>
-  
-            {/* Final CTA - Floating Effect */}
-            <div className="col-span-full relative p-16 bg-gradient-to-br from-gray-900 to-blue-900 rounded-2xl shadow-2xl shadow-blue-900/30 overflow-hidden">
-              <div className="relative z-10 max-w-2xl mx-auto text-center space-y-8">
-                <h2 className="text-3xl font-bold text-white leading-tight">
-                  Partner With Canada&apos;s<br />
-                  <span className="bg-gradient-to-r from-blue-400 to-blue-200 bg-clip-text text-transparent">
-                    Digital Marketing Elite
-                  </span>
-                </h2>
-                <button className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow hover:from-blue-500 hover:to-blue-400">
-                  Start Your Growth Journey
-                  <FiChevronRight className="w-5 h-5 ml-3 transform group-hover:translate-x-1 transition-transform" />
-                </button>
-                <p className="text-blue-300 text-sm">
-                  🇨🇦 Proudly serving Canadian businesses from coast to coast since 2012
-                </p>
-              </div>
-            </div>
-  
           </div>
         </div>
-      </MainLayout>
-    );
-  }
+      </section>
+    </MainLayout>
+  );
+}

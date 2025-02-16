@@ -37,7 +37,7 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
   </div>
 );
 
-const Testimonials: React.FC = () => {
+const AboutTestimonials: React.FC = () => {
   const testimonials = [
     {
       quote:
@@ -168,7 +168,7 @@ const Testimonials: React.FC = () => {
         >
           {testimonials.map((testimonial, index) => (
             <SwiperSlide key={index}>
-              <div className="px-8 pt-8 h-full flex flex-col">
+              <div className="p-8 h-full flex flex-col">
                 <div className="flex items-start space-x-5">
                   <div className="relative flex-shrink-0">
                     <Image
@@ -210,7 +210,7 @@ const Testimonials: React.FC = () => {
             <FaArrowLeft className="w-8 h-8 text-gray-600 hover:text-gray-800" />
           </button>
         {/* Review Count */}
-        <div className="flex justify-center text-gray-500 tracking-wide text-sm">
+        <div className="flex justify-center my-4 text-gray-500 tracking-wide text-sm">
           {`${currentIndex + 1}/${testimonials.length}`}
         </div>
           <button
@@ -241,4 +241,4 @@ const Testimonials: React.FC = () => {
   );
 };
 
-export default Testimonials;
+export default AboutTestimonials;
