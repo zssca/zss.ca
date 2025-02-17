@@ -30,34 +30,34 @@ export default function Services() {
               group flex items-center justify-between
               pr-3 rounded-lg
               transition-all duration-200 ease-in-out
-              hover:bg-gray-50
-              border border-gray-100
-              hover:border-gray-200
-              focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+              hover:bg-zinc-100
+              border border-zinc-100
+              hover:border-zinc-200
+              focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-transparent
             "
           >
             <div className="flex items-center space-x-4">
               <div className="
                 p-2 rounded-lg
-                bg-gray-50
-                group-hover:bg-white 
+                bg-zinc-100
+                group-hover:bg-zinc-200 
                 transition-colors duration-200
               ">
                 {React.cloneElement(service.icon, {
-                  className: "w-6 h-6 text-gray-600 group-hover:text-gray-800"
+                  className: "w-6 h-6 text-zinc-600 group-hover:text-zinc-800"
                 })}
               </div>
-              <span className="text-base font-medium text-gray-700 
-                             group-hover:text-gray-900">
+              <span className="text-base font-medium text-zinc-700 
+                             group-hover:text-zinc-900">
                 {service.name}
               </span>
             </div>
             <FiArrowRight 
               className="
-                w-5 h-5 text-gray-400
+                w-5 h-5 text-zinc-400
                 transition-all duration-300 ease-in-out
                 group-hover:translate-x-1
-                group-hover:text-gray-600
+                group-hover:text-zinc-600
               " 
             />
           </a>

@@ -1,115 +1,79 @@
-import { motion } from "framer-motion";
 import MainLayout from "@/layouts/MainLayout";
 import WebHero from "@/features/web/WebHero";
 import WebVideo from "@/features/web/WebVideo";
 import WebServices from "@/features/web/WebServices";
+import WebCounter from "@/features/web/WebCounter";
 import WebTestimonial from "@/features/web/WebTestimonial";
 import WebProjects from "@/features/web/WebProjects";
 import WebFaq from "@/features/web/WebFaq";
+import Link from 'next/link';
 
 export default function Web() {
-  // Staggered animation configuration
-  const staggerAnimation = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        staggerChildren: 0.2, // Delay between child elements
-        duration: 0.8,
-        ease: [0.43, 0.13, 0.23, 0.96], // Smooth easing curve
-      },
-    },
-  };
-
-  // Responsive animation variants
-  const responsiveVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      transition: { 
-        duration: 0.8, 
-        ease: [0.43, 0.13, 0.23, 0.96],
-        delay: 0.2 
-      }
-    },
-  };
-
   return (
     <MainLayout>
-      {/* First Section */}
-      <motion.div
-        variants={staggerAnimation}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-24 sm:mt-20 md:mt-28 lg:mt-28 xl:mt-28"
-      >
-        {/* Text Block */}
-        <motion.div
-          variants={responsiveVariants}
-          className="col-span-1 row-span-1 bg-white py-4 px-6 rounded-xl flex items-top justify-top md:order-1 bg-[url('/bg/F.svg')] bg-cover"
-        >
-<WebHero />
-        </motion.div>
+      {/* Main Grid Layout */}
+      <div className="grid grid-cols-12 auto-rows-auto gap-4">
+        {/* Hero Section */}
+        <div className="col-span-12 md:col-span-5 bg-white rounded-xl p-4 flex items-start justify-start bg-[url('/bg/F.svg')] bg-cover shadow-sm">
+          <WebHero />
+        </div>
 
-        {/* Video Block */}
-        <motion.div
-          variants={responsiveVariants}
-          className="col-span-1 md:col-span-2 row-span-1 md:row-span-3 bg-white rounded-xl flex items-center justify-center text-white order-2 md:order-2 shadow-sm"
-        >
+        {/* Video Section */}
+        <div className="col-span-12 md:col-span-7 row-span-2 bg-white rounded-xl flex items-center justify-center shadow-sm">
           <WebVideo />
-        </motion.div>
+        </div>
 
-        {/* Services Block */}
-        <motion.div
-          variants={responsiveVariants}
-          className="col-span-1 row-span-1 md:row-span-2 bg-white bg-[url('/bg1.svg')] bg-fill bg-bottom rounded-xl flex items-top justify-top order-3 md:order-3 shadow-sm"
-        >
+        {/* Services Section */}
+        <div className="col-span-12 md:col-span-5 p-1 bg-white rounded-xl flex items-center justify-center shadow-sm">
           <WebServices />
-        </motion.div>
-      </motion.div>
+        </div>
 
-      {/* Second Section: Testimonials & Projects */}
-      <motion.div
-        variants={staggerAnimation}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4"
-      >
-        {/* Projects Block */}
-        <motion.div
-          variants={responsiveVariants}
-          className="col-span-1 rounded-xl flex items-center justify-center text-black shadow-sm"
-        >
+        {/* Projects Section */}
+
+
+
+        {/* Services Section */}
+        <div className="col-span-12 md:col-span-12 bg-white p-2 rounded-xl flex items-center justify-center shadow-sm">
+          <WebCounter />
+        </div>
+        {/* Video Section */}
+        <div className="col-span-12 md:col-span-7 row-span-2 bg-white rounded-xl flex items-center justify-center shadow-sm">
           <WebProjects />
-        </motion.div>
+        </div>
 
-        {/* Testimonial Block */}
-        <motion.div
-          variants={responsiveVariants}
-          className="col-span-1 bg-white bg-[url('/bg/E.svg')] bg-cover bg-bottom rounded-xl flex items-center justify-center text-black shadow-sm"
-        >
+        <div className="col-span-12 md:col-span-5 row-span-1 bg-white rounded-xl flex items-start justify-start bg-[url('/bg/F.svg')] bg-cover shadow-sm">
           <WebTestimonial />
-        </motion.div>
-      </motion.div>
+        </div>
+<Link href="/contact"
+    className="col-span-12 md:col-span-5 row-span-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white 
+               rounded-xl shadow-sm transition-all duration-300 cursor-pointer 
+               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+               px-8 py-4 text-lg font-semibold
+               flex items-center justify-center space-x-2"
+    aria-label="Get a Free Consultation"
+  >
+    <span>Get a Free Consultation</span>
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      className="h-5 w-5 text-white animate-bounce-horizontal" 
+      viewBox="0 0 20 20" 
+      fill="currentColor"
+    >
+      <path 
+        fillRule="evenodd" 
+        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" 
+        clipRule="evenodd"
+      />
+    </svg>
+</Link>
 
-      {/* FAQ Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{
-          duration: 0.8,
-          delay: 0.3,
-          ease: [0.43, 0.13, 0.23, 0.96],
-        }}
-        className="bg-white bg-[url('/bg1.svg')] bg-fill bg-bottom rounded-xl p-3 mt-4 shadow-sm"
-      >
-        <WebFaq />
-      </motion.div>
+
+        
+        {/* FAQ Section */}
+        <div className="col-span-12 bg-white rounded-xl p-2 shadow-sm">
+          <WebFaq />
+        </div>
+      </div>
     </MainLayout>
   );
 }

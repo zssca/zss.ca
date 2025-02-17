@@ -13,7 +13,7 @@ export default function SwiperShaderSlider() {
         <div className="w-full max-w-4xl mx-auto">
             <Swiper
                 loop={true}
-                autoplay={{ delay: 2000, disableOnInteraction: false }}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
                 pagination={{ clickable: true, dynamicBullets: true }}
                 effect="fade"
                 fadeEffect={{ crossFade: true }}

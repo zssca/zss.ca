@@ -10,7 +10,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
       {/* Sticky Header */}
       <div
-        className="sticky top-0 left-0 w-full shadow-sm z-50"
+        className="sticky top-0 left-0 w-full z-50"
         style={{ height: "var(--header-height, 80px)" }} // Ensure header height consistency
       >
         <Header />

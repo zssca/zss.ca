@@ -205,11 +205,11 @@ const Testimonials: React.FC = () => {
             prevEl: navigationPrevRef.current,
             nextEl: navigationNextRef.current,
           }}
-          className="h-full pb-12"
+          className="h-full"
         >
           {testimonials.map((testimonial, index) => (
             <SwiperSlide key={index}>
-              <div className="p-8 h-full flex flex-col">
+              <div className="p-5 h-full flex flex-col">
                 <div className="flex items-start space-x-5">
                   <div className="relative flex-shrink-0">
                     <Image
@@ -227,7 +227,7 @@ const Testimonials: React.FC = () => {
                     <StarRating rating={testimonial.rating} />
                   </div>
                 </div>
-                <hr className="my-6 border-gray-100 opacity-50" />
+                <hr className="my-2 border-gray-100 opacity-50" />
                 <p className="text-gray-700 text-md leading-relaxed italic relative flex-1">
                   {testimonial.quote}
                 </p>
@@ -251,13 +251,13 @@ const Testimonials: React.FC = () => {
             <FaArrowLeft className="w-8 h-8 text-gray-600 hover:text-gray-800" />
           </button>
         {/* Review Count */}
-        <div className="flex justify-center my-4 text-gray-500 tracking-wide text-sm">
+        <div className="flex justify-center my-1 text-gray-500 tracking-wide text-sm">
           {`${currentIndex + 1}/${testimonials.length}`}
         </div>
           <button
             ref={navigationNextRef}
             disabled={isEnd}
-            className={`p-4  ${
+            className={`px-4  ${
               isEnd ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             aria-label="Next testimonials"

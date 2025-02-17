@@ -35,45 +35,17 @@ export default function AboutPage() {
             </div>
 
             {/* 2. Hero Image - col-span-5, row-span-2 */}
-            <div className="bg-white rounded-xl shadow-sm p-4 md:col-span-7 md:row-span-2 flex items-center">
+            <div className="bg-white rounded-xl shadow-sm p-[1px] md:col-span-7 md:row-span-2 flex items-center">
               <Image
                 src="/zss-team.webp"
                 alt="ZSS team collaborating in modern office"
-                className="w-full h-full rounded-lg"
+                className="w-full h-full rounded-xl"
                 width={800}
                 height={600}
               />
             </div>
 
             {/* 3. Trusted By (col-span-4) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-4 flex flex-col justify-center">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
-                Trusted by Leading Brands
-              </h2>
-              <p className="text-gray-600 text-sm sm:text-base mb-4">
-                Over the years, we&apos;ve partnered with a diverse range of global clients.
-                Here are a few who trust our expertise:
-              </p>
-              <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 items-center">
-                {/* Replace with actual brand logos */}
-                {["/logo1.png", "/logo2.png", "/logo3.png", "/logo4.png"].map(
-                  (logo, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-center bg-gray-50 rounded-md p-2"
-                    >
-                      <Image
-                        src={logo}
-                        alt={`Brand ${idx + 1}`}
-                        width={80}
-                        height={40}
-                        className="object-contain"
-                      />
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
 
             {/* 4. Filler Text Block (col-span-4) */}
             <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-4">
@@ -94,7 +66,7 @@ export default function AboutPage() {
             </div>
 
             {/* 5. Filler Text Block (col-span-4) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-4">
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-5">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
                 Collaborative Approach
               </h2>
@@ -111,7 +83,7 @@ export default function AboutPage() {
             </div>
 
             {/* 6. Mission (col-span-5) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-5">
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-3">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
                 Our Mission
               </h2>
@@ -124,7 +96,7 @@ export default function AboutPage() {
             </div>
 
             {/* 7. Stats (col-span-7) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-7">
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-4">
               <div className="grid grid-cols-2 gap-x-6 gap-y-7">
                 {[
                   {
@@ -162,7 +134,7 @@ export default function AboutPage() {
             </div>
 
             {/* 8. Core Principles (col-span-6) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-6">
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-3">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
                 Core Principles
               </h2>
@@ -194,7 +166,7 @@ export default function AboutPage() {
             </div>
 
             {/* 9. Development Philosophy (col-span-6) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-6">
+            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-5">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
                 Development Philosophy
               </h2>
@@ -265,47 +237,8 @@ export default function AboutPage() {
               </ol>
             </div>
 
-            {/* 11. Meet the Team (col-span-6) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 text-center">
-                Meet the Team
-              </h2>
-              <p className="text-gray-600 text-sm sm:text-base text-center mb-6">
-                Our people are our greatest asset. Each member brings unique
-                perspectives and expertise, working collaboratively to deliver world-class
-                solutions.
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                {[
-                  { name: "Alice Johnson", role: "CEO", img: "/team1.jpg" },
-                  { name: "Bob Smith", role: "CTO", img: "/team2.jpg" },
-                  { name: "Carolyn Brown", role: "Head of Design", img: "/team3.jpg" },
-                  { name: "David Wilson", role: "Lead Developer", img: "/team4.jpg" },
-                ].map((person, idx) => (
-                  <div
-                    key={idx}
-                    className="flex flex-col items-center text-center space-y-3"
-                  >
-                    <Image
-                      src={person.img}
-                      alt={person.name}
-                      className="w-24 h-24 object-cover rounded-full"
-                      width={96}
-                      height={96}
-                    />
-                    <div>
-                      <h3 className="text-base font-semibold text-gray-900">
-                        {person.name}
-                      </h3>
-                      <p className="text-sm text-gray-500">{person.role}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {/* 12. CTA (col-span-12) */}
-            <div className="bg-indigo-600 rounded-xl p-6 md:col-span-12 flex flex-col items-center text-center">
+            <div className="bg-indigo-600 rounded-xl p-6 md:col-span-6 flex flex-col items-center text-center">
               <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">
                 Ready to Elevate Your Digital Presence?
               </h2>

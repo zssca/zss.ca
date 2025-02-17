@@ -36,10 +36,10 @@ export default function Contact() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="mx-auto mt-24 sm:mt-20 md:mt-28 lg:mt-28 xl:mt-28"
+        className="mx-auto"
       >
         {/* Flex container for equal height sections */}
-        <div className="flex flex-col md:flex-row items-stretch gap-6">
+        <div className="flex flex-col md:flex-row items-stretch gap-4">
           {/* Hero Section */}
           <motion.section
             variants={fadeIn}
