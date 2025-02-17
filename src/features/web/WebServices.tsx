@@ -38,7 +38,7 @@ export default function Services() {
             className="
               group flex items-center 
               p-2 sm:p-2.5 rounded-lg border border-gray-100 
-              transition-all duration-150 bg-white hover:border-green-200 hover:bg-green-50
+              transition-all duration-150 bg-white hover:border-gray-200 hover:bg-grey-50
               w-full gap-1.5
             "
           >

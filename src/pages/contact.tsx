@@ -43,7 +43,7 @@ export default function Contact() {
           {/* Hero Section */}
           <motion.section
             variants={fadeIn}
-            className="flex-1 bg-white p-6 md:p-10 rounded-xl shadow-sm bg-[url('/bg/A.svg')] bg-cover bg-center flex items-top"
+            className="flex-1 bg-white p-6 md:p-10 rounded-xl shadow-sm bg-[url('/bg/H.svg')] bg-cover bg-center flex items-top"
           >
             <ContactHero />
           </motion.section>

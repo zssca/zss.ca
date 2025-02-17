@@ -36,7 +36,7 @@ const Footer: FC = () => {
             <div className="bg-gray-950 rounded-xl bg-[url('/bg/C.svg')] bg-cover bg-bottom shadow-2xl">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-6 gap-6">
         {/* Brand Section */}
-        <section className="bg-gray-900/50 backdrop-blur-lg rounded-lg p-6 space-y-4 hover:shadow-lg transition-shadow">
+        <section className="bg-gray-900/80 backdrop-blur-lg rounded-lg p-6 space-y-4 hover:shadow-lg transition-shadow">
           <h2 className="text-2xl font-bold text-gray-100">
             <span className="font-bold">Zenith</span>{" "}
             <span className="font-light text-gray-400">Strategic Solutions</span>
@@ -48,7 +48,7 @@ const Footer: FC = () => {
         </section>
 
         {/* Contact Section */}
-        <section className="bg-gray-900/50 backdrop-blur-lg rounded-lg p-6 space-y-6 hover:shadow-lg transition-shadow">
+        <section className="bg-gray-900/80 backdrop-blur-lg rounded-lg p-6 space-y-6 hover:shadow-lg transition-shadow">
           <h3 className="text-gray-100 font-semibold text-lg">Let&apos;s Talk</h3>
           <p className="text-gray-400 text-sm">
             We&apos;d love to hear from you. Reach out to us anytime!
@@ -79,7 +79,7 @@ const Footer: FC = () => {
         </section>
 
         {/* Legal Links */}
-        <section className="bg-gray-900/50 backdrop-blur-lg rounded-lg p-6 hover:shadow-lg transition-shadow">
+        <section className="bg-gray-900/80 backdrop-blur-lg rounded-lg p-6 hover:shadow-lg transition-shadow">
           <h3 className="text-gray-100 font-semibold text-lg mb-4">Quick Links</h3>
           <nav className="space-y-3">
             {legalLinks.map(({ name, href }) => (
