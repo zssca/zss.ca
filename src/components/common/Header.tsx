@@ -47,7 +47,7 @@ const MobileMenuButton = React.forwardRef<
     onClick={onToggle}
     aria-label={isOpen ? 'Close menu' : 'Open menu'}
     aria-expanded={isOpen}
-    className={`burger-menu relative z-50 md:hidden ml-2 transition-colors ${isOpen ? 'open' : ''}`}
+    className={`burger-menu relative z-40 md:hidden ml-2 transition-colors ${isOpen ? 'open' : ''}`}
   >
     <div className="hamburger">
       <span className="block absolute" />
@@ -131,7 +131,7 @@ const Navbar = () => {
   }, [handleClickOutside]);
 
   return (
-    <div className="fixed top-4 inset-x-0 z-50">
+    <div className="fixed top-4 inset-x-0 z-40">
       <div className="mx-auto px-4 max-w-7xl">
         <motion.nav
           animate={{ y: navbarHidden ? -100 : 0, opacity: navbarHidden ? 0 : 1 }}

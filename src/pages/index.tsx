@@ -44,28 +44,31 @@ export default function Home() {
         <div className="col-span-12 md:col-span-5 row-span-1 bg-stone-50 rounded-xl flex items-start justify-start shadow-sm">
           <HomeTestimonial />
         </div>
-<Link href="/contact"
-    className="col-span-12 md:col-span-5 row-span-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white 
-               rounded-xl shadow-sm transition-all duration-300 cursor-pointer 
-               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-               px-8 py-4 text-lg font-semibold
-               flex items-center justify-center space-x-2"
-    aria-label="Get a Free Consultation"
-  >
-    <span>Get a Free Consultation</span>
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      className="h-5 w-5 text-white animate-bounce-horizontal" 
-      viewBox="0 0 20 20" 
-      fill="currentColor"
+
+        <Link
+      href="/contact"
+      className="col-span-12 md:col-span-5 row-span-1 relative flex items-center justify-center gap-2 px-6 py-3 font-semibold text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl shadow-md transition-all duration-300 hover:from-blue-600 hover:to-blue-700 hover:shadow-lg"
     >
-      <path 
-        fillRule="evenodd" 
-        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" 
-        clipRule="evenodd"
-      />
-    </svg>
-</Link>
+      <span className="relative z-10">Get a Free Consultation</span>
+      <div className="relative z-10 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-5 h-5"
+        >
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </div>
+    </Link>
+
 
 
         

@@ -1,10 +1,11 @@
 import type { AppProps } from "next/app";
-import "@/styles/globals.css"; // Importing CSS with '@' alias
-
+import Loader from "@/components/common/Loader"; // Import the Loader component
+import "@/styles/globals.css"; // Import global styles
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Loader /> {/* Add Loader here */}
       <Component {...pageProps} />
     </>
   );
