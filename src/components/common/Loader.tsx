@@ -6,29 +6,20 @@ import Image from "next/image";
 const Loader = () => {
   const [loading, setLoading] = useState(true);
 
-  // Hide loader after all animations complete
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 4200); // Allows color overlays & text animations to finish
+    }, 4200);
     return () => clearTimeout(timer);
   }, []);
 
-  // Easing for smooth + snappy transitions
   const transitionEase = [0.65, 0.05, 0.36, 1];
 
   if (!loading) return null;
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 99999,
-        pointerEvents: "none",
-      }}
-    >
-      {/* Black (main) overlay with row layout for logo + text */}
+    <div style={{ position: "fixed", inset: 0, zIndex: 99999, pointerEvents: "none" }}>
+      {/* Black overlay */}
       <motion.div
         style={{
           position: "absolute",
@@ -41,90 +32,87 @@ const Loader = () => {
         }}
         initial={{ y: "0%" }}
         animate={{ y: "-100%" }}
-        transition={{
-          delay: 1.2, // Wait before sliding the black overlay up
-          duration: 0.7,
-          ease: transitionEase,
-        }}
+        transition={{ delay: 1.5, duration: 0.7, ease: transitionEase }}
       >
-        {/* Row container for logo and text */}
+        {/* Logo + Text container */}
         <motion.div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: "1rem",
-          }}
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{
-            duration: 0.7,
-            ease: transitionEase,
-            delay: 0.2,
+          style={{ display: "flex", gap: "1rem", alignItems: "center" }}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
           }}
         >
-          {/* Logo with a slight scale-in animation */}
+          {/* Enhanced Logo Animation */}
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{
-              duration: 0.7,
-              ease: transitionEase,
-              delay: 0.2,
+            initial={{ scale: 0, rotate: 0, opacity: 0 }}
+            animate={{
+              scale: 1,
+              rotate: 0,
+              opacity: 1,
+              transition: {
+                type: "spring",
+                stiffness: 150,
+                damping: 10,
+                delay: 0.2
+              }
             }}
+            whileHover={{ scale: 1.05 }}
           >
             <Image
-              src="/dark-logo.svg"
+              src="/light-logo.svg"
               alt="Zenith Logo"
               width={80}
               height={80}
             />
           </motion.div>
 
-          {/* Text container */}
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            {/* "Zenith" - bold, sliding in from the right, slower */}
+          {/* Text Container with Staggered Animations */}
+          <motion.div style={{ overflow: "hidden" }}>
             <motion.h4
-              initial={{ x: 50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{
-                duration: 1.2, // Slower for emphasis
-                ease: transitionEase,
-                delay: 0.3,
-              }}
-              style={{
-                color: "white",
-                fontSize: "1.5rem",
-                fontWeight: "bold",
-                margin: 0,
+              style={{ color: "white", fontSize: "2rem", fontWeight: "bold", margin: 0 }}
+              initial={{ y: 30, opacity: 0 }}
+              animate={{
+                y: 0,
+                opacity: 1,
+                transition: {
+                  type: "spring",
+                  stiffness: 120,
+                  damping: 12,
+                  delay: 0.4
+                }
               }}
             >
               Zenith
             </motion.h4>
-
-            {/* "Strategic Solutions" - lighter, also slides in from right, even slower */}
+            
             <motion.h5
-              initial={{ x: 50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{
-                duration: 1.4, // Slightly more delay for a staggered feel
-                ease: transitionEase,
-                delay: 0.4,
-              }}
               style={{
                 color: "white",
                 fontSize: "1rem",
                 fontWeight: 300,
-                margin: "0.25rem 0 0 0",
+                margin: "0.1rem 0 0 0",
+              }}
+              initial={{ y: 20, opacity: 0 }}
+              animate={{
+                y: 0,
+                opacity: 1,
+                transition: {
+                  type: "spring",
+                  stiffness: 120,
+                  damping: 12,
+                  delay: 0.6
+                }
               }}
             >
               Strategic Solutions
             </motion.h5>
-          </div>
+          </motion.div>
         </motion.div>
       </motion.div>
 
-      {/* Sequential Gray Overlays (dark to lighter) */}
+      {/* Gray Overlays */}
       {[15, 25, 35, 45, 55, 65].map((lightness, index) => (
         <motion.div
           key={index}
@@ -136,15 +124,10 @@ const Loader = () => {
           }}
           initial={{ y: "0%" }}
           animate={{ y: "-100%" }}
-          transition={{
-            delay: 1.9 + index * 0.15, // starts after black overlay begins to move
-            duration: 0.6,
-            ease: transitionEase,
-          }}
+          transition={{ delay: 2.1 + index * 0.15, duration: 0.6, ease: transitionEase }}
         />
       ))}
     </div>
   );
 };
-
 export default Loader;
