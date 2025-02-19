@@ -1,9 +1,20 @@
 // src/lib/sendgrid.ts
-import sgMail from '@sendgrid/mail';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
+import { MailService } from '@sendgrid/mail';
+
+let sgMail: MailService | null = null;
+
+const initSendGrid = async () => {
+  if (!sgMail) {
+    const mail = await import('@sendgrid/mail');
+    sgMail = mail.default;
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
+  }
+  return sgMail;
+};
 
 export const sendEmail = async (to: string, subject: string, html: string) => {
+  const sgMail = await initSendGrid();
   const msg = {
     to,
     from: process.env.EMAIL || 'info@zss.ca', // Use your configured email

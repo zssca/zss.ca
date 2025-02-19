@@ -42,14 +42,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const session = event.data.object as Stripe.Checkout.Session;
       console.log('Checkout Session Completed:', session);
 
-      // Extract client details from the session
       const customerEmail = session.customer_email || 'No email provided';
       const customerName = session.metadata?.name || 'No name provided';
       const planName = session.line_items?.data[0]?.description || 'Unknown plan';
-      const amountTotal = session.amount_total ? (session.amount_total / 100).toFixed(2) : 'Unknown'; // Convert cents to dollars
+      const amountTotal = session.amount_total ? (session.amount_total / 100).toFixed(2) : 'Unknown';
       const currency = session.currency || 'USD';
 
-      // Send email notification
       const emailHtml = `
         <h1>New Purchase Confirmation</h1>
         <p><strong>Customer Name:</strong> ${customerName}</p>
@@ -61,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       try {
         await sendEmail(
-          process.env.EMAIL || 'info@zss.ca', // Your email (recipient)
+          process.env.EMAIL || 'info@zss.ca',
           'New Purchase Confirmation',
           emailHtml
         );
