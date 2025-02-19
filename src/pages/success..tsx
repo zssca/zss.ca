@@ -16,8 +16,7 @@ const SuccessPage: NextPage<SuccessProps> = () => {
   );
 };
 
-
-export const getServerSideProps = async (context: GetServerSidePropsContext) => { // Less strict typing, but removes the need for GetServerSideProps
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const { query } = context;
   const { session_id } = query;
 
