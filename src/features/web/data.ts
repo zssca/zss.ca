@@ -7,7 +7,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Basic',
     price: '29',
-    priceId: 'price_Basic', // Example ID, replace with actual Stripe price ID
+    priceId: 'price_1Qu7yVP9fFsmlAaFOevgfl5w', // Example ID, replace with actual Stripe price ID
     description: 'Get online fast with a simple, stunning website',
     note: 'Perfect for startups and side hustles on a budget',
     features: [
