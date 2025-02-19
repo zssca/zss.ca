@@ -20,6 +20,7 @@ const PricingTable = () => {
     city: '',
     country: 'Canada',
   });
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   const getStepIndex = (step: Step): number => {
     const steps: Step[] = ['plan', 'info', 'confirmation'];
@@ -31,27 +32,49 @@ const PricingTable = () => {
     setCurrentStep('info');
   };
 
+  const validateUserInfo = (info: UserInfo): boolean => {
+    return !!info.name.trim() && !!info.email.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(info.email);
+  };
+
   const handleCheckout = async () => {
     if (!selectedPlan) {
       alert('Please select a plan first.');
       return;
     }
 
+    if (!selectedPlan.priceId || !selectedPlan.priceId.startsWith('price_')) {
+      console.error('Invalid price ID:', selectedPlan.priceId);
+      alert('Invalid plan selected. Please try again.');
+      return;
+    }
+
+    setIsCheckingOut(true);
     const stripe = await getStripe();
     if (!stripe) {
+      setIsCheckingOut(false);
       console.error('Stripe failed to load');
       alert('Stripe failed to load. Please try again.');
       return;
     }
 
     try {
-      console.log('Sending request to create checkout session with priceId:', selectedPlan.priceId, 'and userInfo:', userInfo);
+      const sanitizedUserInfo = {
+        name: userInfo.name.slice(0, 500),
+        email: userInfo.email.slice(0, 500),
+        company: userInfo.company.slice(0, 500),
+        phone: userInfo.phone.slice(0, 500),
+        address: userInfo.address.slice(0, 500),
+        city: userInfo.city.slice(0, 500),
+        country: userInfo.country.slice(0, 500),
+      };
+
+      console.log('Sending request to create checkout session with priceId:', selectedPlan.priceId, 'and userInfo:', sanitizedUserInfo);
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ priceId: selectedPlan.priceId, userInfo }),
+        body: JSON.stringify({ priceId: selectedPlan.priceId, userInfo: sanitizedUserInfo }),
       });
 
       if (!response.ok) {
@@ -71,6 +94,8 @@ const PricingTable = () => {
     } catch (error) {
       console.error('Error during checkout:', error);
       alert('An error occurred during checkout. Please try again.');
+    } finally {
+      setIsCheckingOut(false);
     }
   };
 
@@ -100,7 +125,13 @@ const PricingTable = () => {
               <InfoStep
                 userInfo={userInfo}
                 setUserInfo={setUserInfo}
-                nextStep={() => setCurrentStep('confirmation')}
+                nextStep={() => {
+                  if (validateUserInfo(userInfo)) {
+                    setCurrentStep('confirmation');
+                  } else {
+                    alert('Please fill in all required fields (name and email) correctly.');
+                  }
+                }}
                 backStep={() => setCurrentStep('plan')}
                 selectedPlan={selectedPlan}
               />
@@ -112,6 +143,7 @@ const PricingTable = () => {
                 plan={selectedPlan}
                 onComplete={handleCheckout}
                 backStep={() => setCurrentStep('info')}
+                isLoading={isCheckingOut}
               />
             )}
           </div>

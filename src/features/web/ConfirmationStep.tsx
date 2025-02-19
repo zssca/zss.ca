@@ -8,13 +8,15 @@ interface ConfirmationStepProps {
   plan: PricingTier;
   onComplete: () => void;
   backStep: () => void;
+  isLoading?: boolean; // Added isLoading as an optional boolean prop
 }
 
 const ConfirmationStep: React.FC<ConfirmationStepProps> = ({ 
   userInfo, 
   plan, 
   onComplete,
-  backStep
+  backStep,
+  isLoading = false // Default to false if not provided
 }) => {
   const handleSubmit = () => {
     console.log('Confirm button clicked, calling onComplete with plan:', plan, 'and userInfo:', userInfo);
@@ -143,11 +145,13 @@ const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
         
         <button
           onClick={handleSubmit}
-          disabled={!plan || !userInfo.name || !userInfo.email}
-          className="flex-1 px-4 py-2 rounded-lg font-medium text-sm bg-blue-600 text-white 
-                   hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center shadow-sm"
+          disabled={isLoading || !plan || !userInfo.name || !userInfo.email} // Include isLoading in disabled condition
+          className={`flex-1 px-4 py-2 rounded-lg font-medium text-sm bg-blue-600 text-white 
+                   hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center shadow-sm 
+                   ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          aria-label={`Confirm purchase for ${plan.title} plan${isLoading ? ' (processing)' : ''}`}
         >
-          Confirm
+          {isLoading ? 'Processing...' : 'Confirm'}
           <FiArrowRight className="h-4 w-4 ml-1" />
         </button>
       </div>
