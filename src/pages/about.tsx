@@ -1,260 +1,313 @@
 import MainLayout from "@/layouts/MainLayout";
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function AboutPage() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.3 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
   return (
     <MainLayout>
-      <section className="">
-        <div className="max-w-7xl mx-auto">
-          {/* 
-            Main bento grid container 
-            - Smaller gap (gap-4)
-            - 12-column layout on medium+
-            - Auto-height rows
-          */}
-          <div
-            className="
-              grid
-              grid-cols-1
-              md:grid-cols-12
-              gap-4
-              auto-rows-[minmax(200px,auto)]
-            "
+      <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-12 gap-8 auto-rows-[minmax(220px,auto)]"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
           >
-            {/* 1. Hero Text - col-span-7, row-span-2 */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-5 md:row-span-2 flex flex-col justify-center">
-              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-                Transforming brands through elevated digital experiences
+            {/* 1. Hero Section */}
+            <motion.div
+              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-10 md:col-span-5 md:row-span-2 flex flex-col justify-center border border-gray-100"
+              variants={itemVariants}
+            >
+              <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-cyan-500">
+                Pioneering Digital Success
               </h1>
               <p className="text-lg text-gray-700 leading-relaxed">
-                For over a decade, we&apos;ve pioneered digital solutions that redefine
-                industry standards and create lasting value for global clients. Our
-                multidisciplinary teams blend strategy, creativity, and technology to
-                help you stay ahead in today&apos;s fast-paced digital landscape.
+                Since 2010, we’ve empowered global brands with transformative digital solutions. From startups to Fortune 500s, our 15+ years of expertise deliver innovative websites, apps, and strategies that redefine industries and drive unparalleled growth.
               </p>
-            </div>
+            </motion.div>
 
-            {/* 2. Hero Image - col-span-5, row-span-2 */}
-            <div className="bg-white rounded-xl shadow-sm p-[1px] md:col-span-7 md:row-span-2 flex items-center">
+            <motion.div
+              className="rounded-3xl overflow-hidden md:col-span-7 md:row-span-2 shadow-xl"
+              variants={itemVariants}
+            >
               <Image
                 src="/zss-team.webp"
-                alt="ZSS team collaborating in modern office"
-                className="w-full h-full rounded-xl"
+                alt="Collaborative workspace in action"
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                 width={800}
                 height={600}
               />
-            </div>
+            </motion.div>
 
-            {/* 3. Trusted By (col-span-4) */}
+            {/* 2. Vision */}
+            <motion.div
+              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-4 border border-gray-100"
+              variants={itemVariants}
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h2>
+              <p className="text-gray-600">
+                We’re building a world where every digital interaction is seamless, intelligent, and impactful. By integrating AI, blockchain, and next-gen cloud tech, we aim to set the standard for scalable, sustainable innovation that powers businesses into the future.
+              </p>
+            </motion.div>
 
-            {/* 4. Filler Text Block (col-span-4) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-4">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
-                Our Vision for the Future
-              </h2>
-              <p className="text-gray-600 text-sm sm:text-base mb-2">
-                We see a world where digital experiences are frictionless, data-driven,
-                and truly human-centric. By investing in emerging technologies, we aim
-                to build scalable platforms that empower businesses to operate faster
-                and smarter.
+            {/* 3. Collaborative Approach */}
+            <motion.div
+              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-5 border border-gray-100"
+              variants={itemVariants}
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Approach</h2>
+              <p className="text-gray-600">
+                We align with your vision through deep discovery, iterative design, and relentless execution. Our multidisciplinary teams—spanning UX experts, developers, and strategists—work as an extension of your business, delivering tailored solutions that exceed goals.
               </p>
-              <p className="text-gray-600 text-sm sm:text-base">
-                Our commitment is to continuous learning, adaptation, and
-                transformation—enabling clients to innovate in the face of constant
-                change.
-              </p>
-            </div>
+            </motion.div>
 
-            {/* 5. Filler Text Block (col-span-4) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-5">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
-                Collaborative Approach
-              </h2>
-              <p className="text-gray-600 text-sm sm:text-base mb-2">
-                From discovery workshops to post-launch analytics, our team works
-                side-by-side with yours to ensure success at every stage. We believe
-                transparency, open communication, and iterative feedback loops are key
-                to building great products.
+            {/* 4. Mission */}
+            <motion.div
+              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-3 border border-gray-100"
+              variants={itemVariants}
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
+              <p className="text-gray-600">
+                To craft digital experiences that captivate, convert, and endure. We combine technical precision with creative flair to amplify your brand’s reach, engagement, and revenue across every platform and touchpoint.
               </p>
-              <p className="text-gray-600 text-sm sm:text-base">
-                Whether you’re a startup or an established enterprise, we tailor our
-                process to fit your unique needs and strategic goals.
-              </p>
-            </div>
+            </motion.div>
 
-            {/* 6. Mission (col-span-5) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-3">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
-                Our Mission
-              </h2>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                Combine technical excellence with artistic vision to create digital
-                experiences that drive measurable business results. Our mission is to
-                continuously push boundaries—enhancing customer engagement, driving
-                growth, and elevating brand reputation across every touchpoint.
-              </p>
-            </div>
-
-            {/* 7. Stats (col-span-7) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-4">
-              <div className="grid grid-cols-2 gap-x-6 gap-y-7">
+            {/* 5. Stats */}
+            <motion.div
+              className="bg-gradient-to-br from-indigo-50 to-cyan-50 rounded-3xl shadow-xl p-8 md:col-span-4"
+              variants={itemVariants}
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Proven Results</h2>
+              <div className="grid grid-cols-2 gap-6">
                 {[
-                  {
-                    value: "45%",
-                    text: "Client results exceeded KPIs",
-                    color: "text-indigo-600",
-                  },
-                  {
-                    value: "3.5x",
-                    text: "Average lead increase",
-                    color: "text-emerald-600",
-                  },
-                  {
-                    value: "30%",
-                    text: "Organic traffic growth",
-                    color: "text-amber-600",
-                  },
-                  {
-                    value: "50%",
-                    text: "ROI improvement rate",
-                    color: "text-cyan-600",
-                  },
+                  { value: "45%", text: "KPI Success Rate", color: "text-indigo-600" },
+                  { value: "3.5x", text: "Lead Growth", color: "text-emerald-600" },
+                  { value: "30%", text: "Traffic Increase", color: "text-amber-600" },
+                  { value: "50%", text: "ROI Improvement", color: "text-cyan-600" },
                 ].map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <p className={`text-3xl font-bold ${stat.color}`}>{stat.value}</p>
+                  <motion.div
+                    key={index}
+                    className="text-center"
+                    variants={itemVariants}
+                  >
+                    <p className={`text-4xl font-extrabold ${stat.color}`}>{stat.value}</p>
                     <p className="text-sm text-gray-600 mt-2">{stat.text}</p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-              <p className="mt-6 text-gray-600 text-sm sm:text-base">
-                These statistics highlight our commitment to measurable impact. We
-                focus on actionable goals that directly influence your bottom line and
-                long-term growth.
-              </p>
-            </div>
+              <p className="mt-6 text-gray-600 text-sm">Data-driven impact, every time.</p>
+            </motion.div>
 
-            {/* 8. Core Principles (col-span-6) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-3">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
-                Core Principles
-              </h2>
+            {/* 6. Core Principles */}
+            <motion.div
+              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-3 border border-gray-100"
+              variants={itemVariants}
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Values</h2>
               <ul className="space-y-4">
                 {[
-                  {
-                    title: "Innovation First",
-                    text: "Pioneering solutions with emerging technologies",
-                  },
-                  {
-                    title: "Strategic Partnership",
-                    text: "Alignment with your long-term business goals",
-                  },
-                  {
-                    title: "Sustainable Scalability",
-                    text: "Architecture built for future growth",
-                  },
+                  { title: "Innovation", text: "Breaking new ground with every project" },
+                  { title: "Integrity", text: "Transparent, honest partnerships" },
+                  { title: "Excellence", text: "Uncompromising quality in all we do" },
+                  { title: "Adaptability", text: "Thriving in a fast-changing world" },
                 ].map((item, index) => (
-                  <li key={index}>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm sm:text-base mt-1.5">
-                      {item.text}
-                    </p>
-                  </li>
+                  <motion.li key={index} variants={itemVariants}>
+                    <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+                    <p className="text-gray-600 text-sm">{item.text}</p>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
-            {/* 9. Development Philosophy (col-span-6) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-5">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
-                Development Philosophy
-              </h2>
-              <div className="grid gap-5 sm:grid-cols-2">
+            {/* 7. Development Philosophy */}
+            <motion.div
+              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-5 border border-gray-100"
+              variants={itemVariants}
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Philosophy</h2>
+              <div className="grid gap-6 sm:grid-cols-2">
                 {[
                   {
-                    title: "Strategic Architecture",
-                    text: "Our proprietary framework combines market analysis with technical audits to build solutions anchored in business reality.",
+                    title: "Strategic Foundations",
+                    text: "We start with in-depth research—market trends, user behavior, and your KPIs—to build solutions that win.",
                   },
                   {
-                    title: "Agile Delivery",
-                    text: "A modular development process ensuring rapid deployment while maintaining enterprise-grade quality standards.",
+                    title: "Agile Innovation",
+                    text: "Our sprint-based process delivers rapid prototypes, continuous feedback, and polished outcomes.",
                   },
                 ].map((item, index) => (
-                  <div key={index} className="space-y-2">
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm sm:text-base">
-                      {item.text}
-                    </p>
-                  </div>
+                  <motion.div key={index} variants={itemVariants}>
+                    <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+                    <p className="text-gray-600 text-sm">{item.text}</p>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            {/* 10. Milestones & Achievements (col-span-6) */}
-            <div className="bg-white rounded-xl shadow-sm p-5 md:col-span-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
-                Milestones & Achievements
-              </h2>
-              <ol className="relative border-l border-gray-200">
+            {/* 8. Milestones */}
+            <motion.div
+              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-6 border border-gray-100"
+              variants={itemVariants}
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Legacy</h2>
+              <ol className="relative border-l border-indigo-200">
                 {[
-                  {
-                    year: "2010",
-                    title: "Founded",
-                    description: "Started our journey with a small but passionate team.",
-                  },
-                  {
-                    year: "2015",
-                    title: "Global Expansion",
-                    description: "Opened new offices in Europe to better serve international clients.",
-                  },
-                  {
-                    year: "2020",
-                    title: "Award-Winning Innovations",
-                    description:
-                      "Recognized by industry experts for our cutting-edge digital solutions.",
-                  },
-                  {
-                    year: "2023",
-                    title: "Sustainable Growth",
-                    description:
-                      "Expanded services to include full-stack AI capabilities and data analytics.",
-                  },
+                  { year: "2010", title: "Founded", desc: "Began with a mission to innovate." },
+                  { year: "2013", title: "First Major Win", desc: "Doubled revenue for a retail giant." },
+                  { year: "2017", title: "Global Reach", desc: "Expanded to Asia and Europe." },
+                  { year: "2020", title: "Industry Leader", desc: "Awarded for groundbreaking UX." },
+                  { year: "2025", title: "AI Revolution", desc: "Launched full-stack AI solutions." },
                 ].map((item, index) => (
-                  <li key={index} className="mb-8 ml-4">
-                    <div className="absolute w-3 h-3 bg-indigo-500 rounded-full mt-1.5 -left-1.5 border border-white" />
-                    <time className="mb-1 text-sm font-normal leading-none text-gray-400">
-                      {item.year}
-                    </time>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm sm:text-base">{item.description}</p>
-                  </li>
+                  <motion.li
+                    key={index}
+                    className="mb-8 ml-6"
+                    variants={itemVariants}
+                  >
+                    <div className="absolute w-4 h-4 bg-indigo-500 rounded-full mt-1.5 -left-2" />
+                    <time className="text-sm text-gray-500">{item.year}</time>
+                    <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+                    <p className="text-gray-600 text-sm">{item.desc}</p>
+                  </motion.li>
                 ))}
               </ol>
-            </div>
+            </motion.div>
 
-            {/* 12. CTA (col-span-12) */}
-            <div className="bg-indigo-600 rounded-xl p-6 md:col-span-6 flex flex-col items-center text-center">
-              <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">
-                Ready to Elevate Your Digital Presence?
-              </h2>
-              <p className="text-white text-sm sm:text-base max-w-xl mb-5">
-                Partner with us to innovate, transform, and excel in a constantly
-                evolving digital world. Whether you need a new website or a holistic
-                digital transformation, we&apos;re here to help you reach your goals.
+            {/* 9. Our Process */}
+            <motion.div
+              className="bg-gradient-to-br from-indigo-50 to-cyan-50 rounded-3xl shadow-xl p-8 md:col-span-6"
+              variants={itemVariants}
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Process</h2>
+              <div className="space-y-6">
+                {[
+                  { step: "Discover", desc: "Uncover insights through workshops and audits." },
+                  { step: "Design", desc: "Craft intuitive, stunning interfaces." },
+                  { step: "Develop", desc: "Build robust, scalable systems." },
+                  { step: "Deliver", desc: "Launch and optimize for success." },
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    className="flex items-start space-x-4"
+                    variants={itemVariants}
+                  >
+                    <div className="w-8 h-8 bg-indigo-500 text-white rounded-full flex items-center justify-center font-semibold">
+                      {index + 1}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900">{item.step}</h3>
+                      <p className="text-gray-600 text-sm">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* 10. Case Studies */}
+            <motion.div
+              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-6 border border-gray-100"
+              variants={itemVariants}
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Success Stories</h2>
+              <div className="space-y-6">
+                {[
+                  {
+                    title: "Retail E-Commerce Overhaul",
+                    result: "Boosted sales by 200% in 6 months.",
+                  },
+                  {
+                    title: "SaaS Platform Redesign",
+                    desc: "Increased user retention by 40% with AI-driven UX.",
+                  },
+                  {
+                    title: "Healthcare App",
+                    desc: "Streamlined patient care, cutting wait times by 25%.",
+                  },
+                ].map((study, index) => (
+                  <motion.div
+                    key={index}
+                    className="border-l-4 border-indigo-500 pl-4"
+                    variants={itemVariants}
+                  >
+                    <h3 className="text-lg font-semibold text-gray-900">{study.title}</h3>
+                    <p className="text-gray-600 text-sm">{study.result || study.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* 11. Industry Expertise */}
+            <motion.div
+              className="bg-gradient-to-br from-cyan-50 to-indigo-50 rounded-3xl shadow-xl p-8 md:col-span-6"
+              variants={itemVariants}
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Industry Expertise</h2>
+              <div className="grid gap-6 sm:grid-cols-2">
+                {[
+                  { sector: "E-Commerce", desc: "Conversion-focused platforms." },
+                  { sector: "Healthcare", desc: "Secure, compliant solutions." },
+                  { sector: "Finance", desc: "Robust fintech innovations." },
+                  { sector: "Education", desc: "Engaging learning tools." },
+                ].map((item, index) => (
+                  <motion.div key={index} variants={itemVariants}>
+                    <h3 className="text-lg font-semibold text-gray-900">{item.sector}</h3>
+                    <p className="text-gray-600 text-sm">{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* 12. Testimonials */}
+            <motion.div
+              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-6 border border-gray-100"
+              variants={itemVariants}
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Client Voices</h2>
+              <div className="space-y-6">
+                {[
+                  { quote: "A game-changer for our business.", client: "RetailCo" },
+                  { quote: "Innovative and reliable.", client: "HealthTech" },
+                  { quote: "Exceeded every expectation.", client: "EduPlus" },
+                ].map((testimonial, index) => (
+                  <motion.div key={index} variants={itemVariants}>
+                    <p className="text-gray-600 italic">&quot;{testimonial.quote}&quot;</p>
+                    <p className="text-sm text-gray-500 mt-2">— {testimonial.client}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* 13. CTA */}
+            <motion.div
+              className="bg-gradient-to-r from-indigo-600 to-cyan-500 rounded-3xl p-10 md:col-span-12 text-center"
+              variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
+            >
+              <h2 className="text-3xl font-extrabold text-white mb-4">Ready to Transform Your Digital Presence?</h2>
+              <p className="text-white text-lg max-w-2xl mx-auto mb-8">
+                Partner with us to create standout digital experiences that drive results. Let’s turn your vision into reality—starting today.
               </p>
-              <button
-                type="button"
-                className="inline-flex items-center px-5 py-2 border border-transparent text-sm sm:text-base font-medium rounded-md shadow-sm text-indigo-600 bg-white hover:bg-gray-50"
-              >
-                Contact Us Today
-              </button>
-            </div>
-          </div>
+              <Link href="/contact">
+                <motion.span
+                  className="inline-block px-8 py-4 bg-white text-indigo-600 font-semibold rounded-full shadow-lg hover:bg-gray-100 cursor-pointer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Contact Us
+                </motion.span>
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </MainLayout>

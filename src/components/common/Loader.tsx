@@ -9,7 +9,7 @@ const Loader = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 4200);
+    }, 2800); // Reduced from 4200ms to 2800ms
     return () => clearTimeout(timer);
   }, []);
 
@@ -32,7 +32,7 @@ const Loader = () => {
         }}
         initial={{ y: "0%" }}
         animate={{ y: "-100%" }}
-        transition={{ delay: 1.5, duration: 0.7, ease: transitionEase }}
+        transition={{ delay: 1, duration: 0.5, ease: transitionEase }} // Faster: 1.5->1, 0.7->0.5
       >
         {/* Logo + Text container */}
         <motion.div
@@ -41,24 +41,42 @@ const Loader = () => {
           animate="visible"
           variants={{
             hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+            visible: { 
+              opacity: 1, 
+              transition: { 
+                staggerChildren: 0.1, // Faster: 0.15->0.1
+                delayChildren: 0.1 // Faster: 0.2->0.1
+              }
+            }
           }}
         >
-          {/* Enhanced Logo Animation */}
+          {/* Enhanced Logo Animation for Triangle */}
           <motion.div
-            initial={{ scale: 0, rotate: 0, opacity: 0 }}
-            animate={{
+            initial={{ 
+              scale: 0.6, 
+              y: -20,
+              opacity: 0,
+              filter: "blur(5px)"
+            }}
+            animate={{ 
               scale: 1,
-              rotate: 0,
+              y: 0,
               opacity: 1,
+              filter: "blur(0px)",
               transition: {
                 type: "spring",
-                stiffness: 150,
-                damping: 10,
-                delay: 0.2
+                stiffness: 250, // Increased for faster snap
+                damping: 20,
+                mass: 0.6,
+                delay: 0.2 // Faster: 0.3->0.2
               }
             }}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ 
+              scale: 1.05,
+              y: -2,
+              transition: { duration: 0.15 } // Faster: 0.2->0.15
+            }}
+            whileTap={{ scale: 0.95 }}
           >
             <Image
               src="/light-logo.svg"
@@ -68,20 +86,39 @@ const Loader = () => {
             />
           </motion.div>
 
-          {/* Text Container with Staggered Animations */}
+          {/* Text Container with Enhanced Staggered Animations */}
           <motion.div style={{ overflow: "hidden" }}>
             <motion.h4
-              style={{ color: "white", fontSize: "2rem", fontWeight: "bold", margin: 0 }}
-              initial={{ y: 30, opacity: 0 }}
+              style={{ 
+                color: "white", 
+                fontSize: "2rem", 
+                fontWeight: "bold", 
+                margin: 0,
+                letterSpacing: "-0.02em"
+              }}
+              initial={{ 
+                y: 50, 
+                opacity: 0,
+                skewY: 5,
+                filter: "blur(3px)"
+              }}
               animate={{
                 y: 0,
                 opacity: 1,
+                skewY: 0,
+                filter: "blur(0px)",
                 transition: {
                   type: "spring",
-                  stiffness: 120,
-                  damping: 12,
-                  delay: 0.4
+                  stiffness: 220, // Increased for speed
+                  damping: 16,
+                  mass: 0.6,
+                  delay: 0.3, // Faster: 0.5->0.3
+                  duration: 0.4 // Faster: 0.6->0.4
                 }
+              }}
+              whileHover={{
+                letterSpacing: "0.02em",
+                transition: { duration: 0.2 } // Faster: 0.3->0.2
               }}
             >
               Zenith
@@ -93,17 +130,31 @@ const Loader = () => {
                 fontSize: "1rem",
                 fontWeight: 300,
                 margin: "0.1rem 0 0 0",
+                letterSpacing: "0.05em"
               }}
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ 
+                y: 30, 
+                opacity: 0,
+                scale: 0.95,
+                filter: "blur(2px)"
+              }}
               animate={{
                 y: 0,
                 opacity: 1,
+                scale: 1,
+                filter: "blur(0px)",
                 transition: {
                   type: "spring",
-                  stiffness: 120,
-                  damping: 12,
-                  delay: 0.6
+                  stiffness: 200, // Increased for speed
+                  damping: 18,
+                  mass: 0.5,
+                  delay: 0.4, // Faster: 0.7->0.4
+                  duration: 0.3 // Faster: 0.5->0.3
                 }
+              }}
+              whileHover={{
+                x: 5,
+                transition: { duration: 0.15 } // Faster: 0.2->0.15
               }}
             >
               Strategic Solutions
@@ -124,7 +175,7 @@ const Loader = () => {
           }}
           initial={{ y: "0%" }}
           animate={{ y: "-100%" }}
-          transition={{ delay: 2.1 + index * 0.15, duration: 0.6, ease: transitionEase }}
+          transition={{ delay: 1.4 + index * 0.1, duration: 0.4, ease: transitionEase }} // Faster: 2.1->1.4, 0.15->0.1, 0.6->0.4
         />
       ))}
     </div>

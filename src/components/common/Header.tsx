@@ -24,18 +24,34 @@ const NAV_LINKS = [
 const LOGO = '/dark-logo.svg';
 
 const menuItemVariants = {
-  hidden: { opacity: 0, y: -10 },
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
   visible: (index: number) => ({
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
       type: 'spring',
-      stiffness: 300,
-      damping: 20,
-      delay: index * 0.05
-    }
-  })
+      stiffness: 400,
+      damping: 25,
+      delay: index * 0.1,
+    },
+  }),
+  exit: {
+    opacity: 0,
+    y: -20,
+    scale: 0.95,
+    transition: { duration: 0.2, ease: 'easeInOut' },
+  },
 };
+
+// Fix 1: Add proper types to NavLinkItem props
+interface NavLinkItemProps {
+  href: string;
+  name: string;
+  icon: React.ElementType;
+  isActive: boolean;
+  onClick?: () => void;
+}
 
 const MobileMenuButton = React.forwardRef<
   HTMLButtonElement,
@@ -47,35 +63,27 @@ const MobileMenuButton = React.forwardRef<
     onClick={onToggle}
     aria-label={isOpen ? 'Close menu' : 'Open menu'}
     aria-expanded={isOpen}
-    className={`burger-menu relative z-40 md:hidden ml-2 transition-colors ${isOpen ? 'open' : ''}`}
+    className={`menu-toggle relative z-40 md:hidden ml-2 w-[42px] h-10 rounded-lg transition-all duration-300 ease-in-out ${
+      isOpen ? 'open bg-gray-100' : 'bg-gray-50'
+    }`}
   >
-    <div className="hamburger">
-      <span className="block absolute" />
-      <span className="block absolute" />
-      <span className="block absolute" />
-    </div>
-    <div className="cross">
-      <span className="block absolute" />
-      <span className="block absolute" />
+    <div className="burger absolute inset-0 m-auto w-6 h-6">
+      <span className="line block absolute left-0 w-6 h-[2px] bg-gray-600 rounded-sm" />
+      <span className="line block absolute left-0 w-6 h-[2px] bg-gray-600 rounded-sm" />
+      <span className="line block absolute left-0 w-6 h-[2px] bg-gray-600 rounded-sm" />
     </div>
   </button>
 ));
 MobileMenuButton.displayName = 'MobileMenuButton';
 
-const NavLinkItem = ({ href, name, icon: Icon, isActive, onClick }: {
-  href: string;
-  name: string;
-  icon: React.ElementType;
-  isActive: boolean;
-  onClick?: () => void;
-}) => (
+const NavLinkItem: React.FC<NavLinkItemProps> = ({ href, name, icon: Icon, isActive, onClick }) => (
   <Link
     href={href}
     onClick={onClick}
-    className={`flex items-center gap-3 px-4 py-2 text-base font-medium rounded-lg transition-colors ${
+    className={`flex items-center gap-3 px-4 py-2 text-base font-medium rounded-lg transition-all duration-200 ease-in-out ${
       isActive
-        ? 'text-gray-900 bg-gray-100'
-        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800'
+        ? 'text-gray-900 bg-gray-100 shadow-sm'
+        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800 hover:shadow-sm'
     }`}
     aria-current={isActive ? 'page' : undefined}
   >
@@ -88,12 +96,12 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navbarHidden, setNavbarHidden] = useState(false);
   const pathname = usePathname();
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null); // Fix 2: Specify HTMLButtonElement type
+  const mobileMenuRef = useRef<HTMLDivElement>(null);   // Fix 3: Specify HTMLDivElement type
   const scrollY = useRef(0);
 
   const isActiveLink = useCallback(
-    (href: string) => pathname === href.split('#')[0],
+    (href: string) => pathname === href.split('#')[0], // Fix 4: Add type to href parameter
     [pathname]
   );
 
@@ -113,17 +121,22 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleToggleMenu = useCallback(() => setMenuOpen(prev => !prev), []);
+  const handleToggleMenu = useCallback(() => setMenuOpen((prev) => !prev), []);
 
-  const handleClickOutside = useCallback((event: MouseEvent) => {
-    if (
-      menuOpen &&
-      !menuButtonRef.current?.contains(event.target as Node) &&
-      !mobileMenuRef.current?.contains(event.target as Node)
-    ) {
-      setMenuOpen(false);
-    }
-  }, [menuOpen]);
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => { // Fix 5: Add MouseEvent type
+      if (
+        menuOpen &&
+        menuButtonRef.current &&
+        mobileMenuRef.current &&
+        !menuButtonRef.current.contains(event.target as Node) &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
+    },
+    [menuOpen]
+  );
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -131,12 +144,13 @@ const Navbar = () => {
   }, [handleClickOutside]);
 
   return (
-    <div className="fixed top-4 inset-x-0 z-40">
+    <div className="fixed top-4 inset-x-0 z-50">
       <div className="mx-auto px-4 max-w-7xl">
         <motion.nav
+          initial={false}
           animate={{ y: navbarHidden ? -100 : 0, opacity: navbarHidden ? 0 : 1 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="flex items-center justify-between bg-white rounded-xl px-4 pr-2 py-2 h-14 shadow-sm"
+          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+          className="flex items-center justify-between bg-white rounded-xl px-4 pr-2 py-2 h-14 shadow-md"
         >
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <Image
@@ -177,15 +191,14 @@ const Navbar = () => {
           {menuOpen && (
             <motion.div
               ref={mobileMenuRef}
-              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+              initial={{ opacity: 0, y: -20, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className="fixed md:hidden top-20 left-4 right-4 bg-white rounded-xl z-50 shadow-lg"
+              exit={{ opacity: 0, y: -20, scale: 0.98 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              className="fixed md:hidden top-20 left-4 right-4 bg-white rounded-xl z-40 shadow-xl border border-gray-100"
             >
               <motion.div
-                className="p-2 space-y-1"
-                variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
+                className="p-4 space-y-2"
                 initial="hidden"
                 animate="visible"
                 exit="hidden"

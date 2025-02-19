@@ -6,6 +6,7 @@ import WebCounter from "@/features/web/WebCounter";
 import WebTestimonial from "@/features/web/WebTestimonial";
 import WebProjects from "@/features/web/WebProjects";
 import WebFaq from "@/features/web/WebFaq";
+import WebPricingTable from "@/features/web/WebPricingTable";
 import Link from 'next/link';
 
 export default function Web() {
@@ -70,7 +71,9 @@ export default function Web() {
     </Link>
 
 
-
+    <div className="col-span-12 bg-white rounded-xl px-3 pt-6 pb-3 shadow-sm">
+          <WebPricingTable />
+        </div>
         
         {/* FAQ Section */}
         <div className="col-span-12 bg-white rounded-xl p-2 shadow-sm">

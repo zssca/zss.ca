@@ -1,96 +1,186 @@
 import { motion } from "framer-motion";
 import MainLayout from "@/layouts/MainLayout";
+import { useEffect, useState } from "react";
+import {
+  MdGavel,
+  MdDescription,
+  MdSecurity,
+  MdLink,
+  MdWarning,
+  MdBalance,
+  MdEmail
+} from "react-icons/md";
+import { FiShield } from "react-icons/fi";
 
 export default function TermsConditions() {
+  const [lastUpdated, setLastUpdated] = useState("");
+
+  useEffect(() => {
+    setLastUpdated(new Date().toLocaleDateString("en-CA", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    }));
+  }, []);
+
   return (
     <MainLayout>
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
-        className="container mx-auto px-4 py-8"
+        className="container mx-auto max-w-7xl"
       >
-        <h1 className="text-3xl font-bold mb-6">Terms and Conditions</h1>
-        
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">1. Acceptance of Terms</h2>
-          <p>Welcome to Zenith Strategic Solutions! By accessing <a href="https://zss.ca" className="text-blue-600">https://zss.ca</a>, you agree to be bound by these Terms and Conditions. If you disagree with any part, discontinue use immediately.</p>
-        </section>
+        {/* Header Section */}
+        <div className="mb-4 text-center bg-blue-50 rounded-2xl p-8 shadow-sm">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <FiShield className="w-8 h-8 text-blue-600" />
+            <h1 className="text-4xl font-bold text-gray-900">Terms & Conditions</h1>
+          </div>
+          <p className="text-lg text-gray-600">Last Updated: {lastUpdated}</p>
+        </div>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">2. Definitions</h2>
-          <ul className="list-disc pl-6">
-            <li><strong>Client/You:</strong> Website user</li>
-            <li><strong>Company/We:</strong> Zenith Strategic Solutions</li>
-            <li><strong>Website:</strong> https://zss.ca and subdomains</li>
-          </ul>
-        </section>
+        {/* Main Content */}
+        <div className="bg-white rounded-xl shadow-md p-8">
+          {/* Acceptance Section */}
+          <section className="mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <MdGavel className="w-8 h-8 text-blue-600" />
+              <h2 className="text-3xl font-semibold text-gray-900">Acceptance of Terms</h2>
+            </div>
+            <p className="text-gray-600 leading-relaxed text-lg mb-4">
+              By accessing and using https://zss.ca (&quot;the Website&quot;), you agree to be bound by these Terms and Conditions. 
+              If you disagree with any part, you must immediately discontinue use.
+            </p>
+            <div className="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+              <p className="text-gray-600">
+                Continued use after changes constitutes acceptance of revised terms.
+              </p>
+            </div>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">3. Intellectual Property</h2>
-          <p>All content (text, graphics, logos) is our property or licensed to us. You may:</p>
-          <ul className="list-disc pl-6 mb-4">
-            <li>View/store content for personal use</li>
-          </ul>
-          <p>You may <strong>not</strong>:</p>
-          <ul className="list-disc pl-6">
-            <li>Republish, sell, or redistribute content</li>
-            <li>Use content for commercial purposes without permission</li>
-            <li>Reverse engineer or extract source code</li>
-          </ul>
-        </section>
+          {/* Intellectual Property */}
+          <section className="mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <MdDescription className="w-8 h-8 text-blue-600" />
+              <h2 className="text-3xl font-semibold text-gray-900">Intellectual Property</h2>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="p-6 bg-gray-50 rounded-xl border border-gray-200">
+                <h3 className="text-xl font-medium mb-3 text-gray-900">Your Rights</h3>
+                <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                  <li>View content for personal use</li>
+                  <li>Share links with proper attribution</li>
+                  <li>Use free resources as intended</li>
+                </ul>
+              </div>
+              <div className="p-6 bg-gray-50 rounded-xl border border-gray-200">
+                <h3 className="text-xl font-medium mb-3 text-gray-900">Prohibited Uses</h3>
+                <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                  <li>Commercial reproduction</li>
+                  <li>Content modification</li>
+                  <li>Reverse engineering</li>
+                </ul>
+              </div>
+            </div>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">4. User Responsibilities</h2>
-          <p>You agree to:</p>
-          <ul className="list-disc pl-6">
-            <li>Use the Website lawfully</li>
-            <li>Not engage in hacking/spamming</li>
-            <li>Not impersonate others</li>
-            <li>Comply with all applicable laws (Canada Computer Use Act, PIPEDA)</li>
-          </ul>
-        </section>
+          {/* User Responsibilities */}
+          <section className="mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <MdSecurity className="w-8 h-8 text-blue-600" />
+              <h2 className="text-3xl font-semibold text-gray-900">User Obligations</h2>
+            </div>
+            <div className="p-6 bg-blue-50 rounded-xl border border-blue-200">
+              <ul className="list-disc pl-6 space-y-3 text-gray-600">
+                <li>Provide accurate information</li>
+                <li>Maintain account security</li>
+                <li>Comply with all applicable laws</li>
+                <li>No unauthorized access attempts</li>
+              </ul>
+            </div>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">5. Third-Party Links</h2>
-          <p>We may include links to external sites. We:</p>
-          <ul className="list-disc pl-6">
-            <li>Do not endorse these sites</li>
-            <li>Are not responsible for their content</li>
-          </ul>
-        </section>
+          {/* Third-Party Content */}
+          <section className="mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <MdLink className="w-8 h-8 text-blue-600" />
+              <h2 className="text-3xl font-semibold text-gray-900">External Links</h2>
+            </div>
+            <div className="p-6 bg-gray-50 rounded-xl border border-gray-200">
+              <p className="text-gray-600 mb-3">
+                We may link to third-party services. These:
+              </p>
+              <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                <li>Are not under our control</li>
+                <li>Have separate privacy policies</li>
+                <li>May require independent agreements</li>
+              </ul>
+            </div>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">6. Limitation of Liability</h2>
-          <p>To the maximum extent permitted by law:</p>
-          <ul className="list-disc pl-6">
-            <li>We exclude all warranties</li>
-            <li>We are not liable for any indirect/consequential damages</li>
-            <li>Total liability capped at CAD $100</li>
-          </ul>
-        </section>
+          {/* Limitations */}
+          <section className="mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <MdWarning className="w-8 h-8 text-blue-600" />
+              <h2 className="text-3xl font-semibold text-gray-900">Limitations</h2>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="p-6 bg-red-50 rounded-xl border border-red-200">
+                <h3 className="text-xl font-medium mb-3 text-gray-900">No Warranty</h3>
+                <p className="text-gray-600">
+                  Services provided &quot;as is&quot; without guarantees of accuracy or availability.
+                </p>
+              </div>
+              <div className="p-6 bg-red-50 rounded-xl border border-red-200">
+                <h3 className="text-xl font-medium mb-3 text-gray-900">Liability Cap</h3>
+                <p className="text-gray-600">
+                  Maximum liability limited to CAD $100 for any claim.
+                </p>
+              </div>
+            </div>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">7. Governing Law</h2>
-          <p>These terms are governed by Ontario laws. Any disputes must be resolved in Toronto courts.</p>
-        </section>
+          {/* Governing Law */}
+          <section className="mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <MdBalance className="w-8 h-8 text-blue-600" />
+              <h2 className="text-3xl font-semibold text-gray-900">Legal Jurisdiction</h2>
+            </div>
+            <div className="p-6 bg-gray-50 rounded-xl border border-gray-200">
+              <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                <li>Governed by Ontario laws</li>
+                <li>Disputes resolved in Toronto courts</li>
+                <li>UN Convention on Contracts excluded</li>
+              </ul>
+            </div>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">8. Changes to Terms</h2>
-          <p>We may update these terms at any time. Continued use constitutes acceptance.</p>
-        </section>
+          {/* Contact Section */}
+          <section className="mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <MdEmail className="w-8 h-8 text-blue-600" />
+              <h2 className="text-3xl font-semibold text-gray-900">Contact Information</h2>
+            </div>
+            <div className="p-6 bg-gray-50 rounded-xl border border-gray-200">
+              <div className="space-y-3 text-gray-600">
+                <p>Email: <a href="mailto:info@zss.ca" className="text-blue-600 hover:underline">info@zss.ca</a></p>
+                <p>Address: 123 Compliance Street, Toronto, ON M5V 2T6</p>
+                <p>Response Time: 5 business days</p>
+              </div>
+            </div>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">9. Termination</h2>
-          <p>We may suspend/terminate access for violations of these terms.</p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">Contact Information</h2>
-          <p>Questions? Contact us at <a href="mailto:info@zss.ca" className="text-blue-600">info@zss.ca</a></p>
-        </section>
-
-        <p className="text-sm text-gray-600">Last Updated: {new Date().toLocaleDateString()}</p>
+          {/* Compliance Footer */}
+          <div className="mt-12 pt-8 border-t border-gray-200">
+            <div className="flex items-center justify-center gap-2">
+              <FiShield className="w-5 h-5 text-gray-500" />
+              <p className="text-sm text-gray-500 text-center">
+                Governed by Canadian law • Version 1.2
+              </p>
+            </div>
+          </div>
+        </div>
       </motion.div>
     </MainLayout>
   );
