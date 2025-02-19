@@ -1,4 +1,3 @@
-// data.ts
 import React from 'react';
 import { FiLayout, FiPenTool, FiServer, FiZap } from 'react-icons/fi';
 import { PricingTier } from './types';
@@ -7,7 +6,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Basic',
     price: '29',
-    priceId: 'price_1Qu7yVP9fFsmlAaFOevgfl5w', // Example ID, replace with actual Stripe price ID
+    priceId: 'price_1Qu7yVP9fFsmlAaFOevgfl5w', // Correct Stripe Price ID (already valid)
     description: 'Get online fast with a simple, stunning website',
     note: 'Perfect for startups and side hustles on a budget',
     features: [
@@ -25,7 +24,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Starter',
     price: '49',
-    priceId: 'price_Starter', // Example ID, replace with actual Stripe price ID
+    priceId: 'price_1Qu8xVP9fFsmlAaFOevgfl5x', // Replace with your actual Stripe Price ID for Starter
     description: 'Launch your business with a standout online presence',
     note: 'Great for new ventures ready to shine',
     features: [
@@ -44,7 +43,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Professional',
     price: '149',
-    priceId: 'price_Professional', // Example ID, replace with actual Stripe price ID
+    priceId: 'price_1Qu8yVP9fFsmlAaFOevgfl5y', // Replace with your actual Stripe Price ID for Professional
     description: 'Grow confidently with a pro-level website',
     note: 'Ideal for established businesses stepping up',
     features: [
@@ -65,7 +64,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Enterprise',
     price: '499',
-    priceId: 'price_Enterprise', // Example ID, replace with actual Stripe price ID
+    priceId: 'price_1Qu8zVP9fFsmlAaFOevgfl5z', // Replace with your actual Stripe Price ID for Enterprise
     description: 'Scale big with a custom-built digital hub',
     note: 'Designed for businesses ready to dominate',
     features: [

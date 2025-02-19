@@ -9,6 +9,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'POST') {
     const { priceId, userInfo } = req.body;
 
+    console.log('Received priceId:', priceId); // Debug log
+
+    if (!priceId || !priceId.startsWith('price_')) {
+      return res.status(400).json({ error: 'Invalid price ID' });
+    }
+
     try {
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -18,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             quantity: 1,
           },
         ],
-        mode: 'subscription',
+        mode: 'payment', // Updated to 'payment' for one-time Prices
         success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/cancel`,
         customer_email: userInfo.email,
@@ -33,6 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
       res.status(200).json({ id: session.id });
     } catch (error) {
+      console.error('Stripe error:', error);
       res.status(500).json({ error: (error as Error).message });
     }
   } else {
