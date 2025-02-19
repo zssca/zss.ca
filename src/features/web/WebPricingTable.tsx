@@ -39,11 +39,13 @@ const PricingTable = () => {
 
     const stripe = await getStripe();
     if (!stripe) {
+      console.error('Stripe failed to load');
       alert('Stripe failed to load. Please try again.');
       return;
     }
 
     try {
+      console.log('Sending request to create checkout session with priceId:', selectedPlan.priceId, 'and userInfo:', userInfo);
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
@@ -52,10 +54,18 @@ const PricingTable = () => {
         body: JSON.stringify({ priceId: selectedPlan.priceId, userInfo }),
       });
 
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('API response error:', errorText);
+        throw new Error(`Failed to create checkout session: ${errorText}`);
+      }
+
       const { id } = await response.json();
+      console.log('Checkout session created with ID:', id);
 
       const result = await stripe.redirectToCheckout({ sessionId: id });
       if (result.error) {
+        console.error('Stripe redirect error:', result.error);
         alert(result.error.message);
       }
     } catch (error) {

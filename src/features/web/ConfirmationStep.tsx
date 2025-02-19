@@ -17,6 +17,11 @@ const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
   backStep
 }) => {
   const handleSubmit = () => {
+    console.log('Confirm button clicked, calling onComplete with plan:', plan, 'and userInfo:', userInfo);
+    if (!plan || !userInfo.name || !userInfo.email) {
+      alert('Please ensure a plan is selected and required user information is provided.');
+      return;
+    }
     onComplete();
   };
 
@@ -127,23 +132,24 @@ const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
 
       {/* Buttons Container */}
       <div className="flex flex-col md:flex-row gap-3 mt-6">
-      <button
-        onClick={backStep}
-        className="flex-1 px-4 py-2 rounded-lg font-medium text-sm text-gray-600 border border-gray-200 
-                 hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center shadow-sm"
-      >
-        <FiArrowLeft className="h-4 w-4 mr-1" />
-        Back
-      </button>
-      
-      <button
-        onClick={handleSubmit}
-        className="flex-1 px-4 py-2 rounded-lg font-medium text-sm bg-blue-600 text-white 
-                 hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center shadow-sm"
-      >
-        Confirm
-        <FiArrowRight className="h-4 w-4 ml-1" />
-      </button>
+        <button
+          onClick={backStep}
+          className="flex-1 px-4 py-2 rounded-lg font-medium text-sm text-gray-600 border border-gray-200 
+                   hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center shadow-sm"
+        >
+          <FiArrowLeft className="h-4 w-4 mr-1" />
+          Back
+        </button>
+        
+        <button
+          onClick={handleSubmit}
+          disabled={!plan || !userInfo.name || !userInfo.email}
+          className="flex-1 px-4 py-2 rounded-lg font-medium text-sm bg-blue-600 text-white 
+                   hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center shadow-sm"
+        >
+          Confirm
+          <FiArrowRight className="h-4 w-4 ml-1" />
+        </button>
       </div>
     </div>
   );

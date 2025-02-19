@@ -16,17 +16,17 @@ export default function AboutPage() {
 
   return (
     <MainLayout>
-      <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="">
+        <div className="max-w-7xl mx-auto">
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-12 gap-8 auto-rows-[minmax(220px,auto)]"
+            className="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[minmax(220px,auto)]"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             {/* 1. Hero Section */}
             <motion.div
-              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-10 md:col-span-5 md:row-span-2 flex flex-col justify-center border border-gray-100"
+              className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-10 md:col-span-5 md:row-span-2 flex flex-col justify-center border border-gray-100"
               variants={itemVariants}
             >
               <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-cyan-500">
@@ -38,7 +38,7 @@ export default function AboutPage() {
             </motion.div>
 
             <motion.div
-              className="rounded-3xl overflow-hidden md:col-span-7 md:row-span-2 shadow-xl"
+              className="rounded-xl overflow-hidden md:col-span-7 md:row-span-2 shadow-sm"
               variants={itemVariants}
             >
               <Image
@@ -52,7 +52,7 @@ export default function AboutPage() {
 
             {/* 2. Vision */}
             <motion.div
-              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-4 border border-gray-100"
+              className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-8 md:col-span-4 border border-gray-100"
               variants={itemVariants}
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h2>
@@ -63,7 +63,7 @@ export default function AboutPage() {
 
             {/* 3. Collaborative Approach */}
             <motion.div
-              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-5 border border-gray-100"
+              className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-8 md:col-span-5 border border-gray-100"
               variants={itemVariants}
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Approach</h2>
@@ -74,7 +74,7 @@ export default function AboutPage() {
 
             {/* 4. Mission */}
             <motion.div
-              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-3 border border-gray-100"
+              className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-8 md:col-span-3 border border-gray-100"
               variants={itemVariants}
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
@@ -85,7 +85,7 @@ export default function AboutPage() {
 
             {/* 5. Stats */}
             <motion.div
-              className="bg-gradient-to-br from-indigo-50 to-cyan-50 rounded-3xl shadow-xl p-8 md:col-span-4"
+              className="bg-gradient-to-br from-indigo-50 to-cyan-50 rounded-xl shadow-sm p-8 md:col-span-4"
               variants={itemVariants}
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Proven Results</h2>
@@ -111,7 +111,7 @@ export default function AboutPage() {
 
             {/* 6. Core Principles */}
             <motion.div
-              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-3 border border-gray-100"
+              className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-8 md:col-span-3 border border-gray-100"
               variants={itemVariants}
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Values</h2>
@@ -132,7 +132,7 @@ export default function AboutPage() {
 
             {/* 7. Development Philosophy */}
             <motion.div
-              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-5 border border-gray-100"
+              className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-8 md:col-span-5 border border-gray-100"
               variants={itemVariants}
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Philosophy</h2>
@@ -157,7 +157,7 @@ export default function AboutPage() {
 
             {/* 8. Milestones */}
             <motion.div
-              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-6 border border-gray-100"
+              className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-8 md:col-span-6 border border-gray-100"
               variants={itemVariants}
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Legacy</h2>
@@ -185,7 +185,7 @@ export default function AboutPage() {
 
             {/* 9. Our Process */}
             <motion.div
-              className="bg-gradient-to-br from-indigo-50 to-cyan-50 rounded-3xl shadow-xl p-8 md:col-span-6"
+              className="bg-gradient-to-br from-indigo-50 to-cyan-50 rounded-xl shadow-sm p-8 md:col-span-6"
               variants={itemVariants}
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Process</h2>
@@ -215,7 +215,7 @@ export default function AboutPage() {
 
             {/* 10. Case Studies */}
             <motion.div
-              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-6 border border-gray-100"
+              className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-8 md:col-span-6 border border-gray-100"
               variants={itemVariants}
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Success Stories</h2>
@@ -248,7 +248,7 @@ export default function AboutPage() {
 
             {/* 11. Industry Expertise */}
             <motion.div
-              className="bg-gradient-to-br from-cyan-50 to-indigo-50 rounded-3xl shadow-xl p-8 md:col-span-6"
+              className="bg-gradient-to-br from-cyan-50 to-indigo-50 rounded-xl shadow-sm p-8 md:col-span-6"
               variants={itemVariants}
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Industry Expertise</h2>
@@ -269,7 +269,7 @@ export default function AboutPage() {
 
             {/* 12. Testimonials */}
             <motion.div
-              className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-8 md:col-span-6 border border-gray-100"
+              className="bg-white/80 backdrop-blur-md rounded-xl shadow-sm p-8 md:col-span-6 border border-gray-100"
               variants={itemVariants}
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Client Voices</h2>
@@ -289,7 +289,7 @@ export default function AboutPage() {
 
             {/* 13. CTA */}
             <motion.div
-              className="bg-gradient-to-r from-indigo-600 to-cyan-500 rounded-3xl p-10 md:col-span-12 text-center"
+              className="bg-gradient-to-r from-indigo-600 to-cyan-500 rounded-xl p-10 md:col-span-12 text-center"
               variants={itemVariants}
               whileHover={{ scale: 1.02 }}
             >

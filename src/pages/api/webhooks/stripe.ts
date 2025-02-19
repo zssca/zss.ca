@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
-import { buffer } from 'micro';
+import { Buffer } from 'node:buffer';
 import { sendEmail } from '@/features/web/lib/sendgrid'; // Adjust the path as needed
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -12,6 +12,11 @@ export const config = {
     bodyParser: false,
   },
 };
+
+// Extend NextApiRequest to include ReadableStream methods if needed, or cast directly
+interface CustomNextApiRequest extends NextApiRequest {
+  arrayBuffer(): Promise<ArrayBuffer>;
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -29,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   let event: Stripe.Event;
-  const rawBody = await buffer(req);
+  const rawBody = Buffer.from(await (req as CustomNextApiRequest).arrayBuffer()); // Cast req to access arrayBuffer()
 
   try {
     event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
