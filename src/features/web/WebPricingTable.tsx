@@ -86,32 +86,6 @@ const PricingTable = () => {
       const { id } = await response.json();
       console.log('Checkout session created with ID:', id);
 
-      // Send email notification via API route
-      const emailResponse = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          to: process.env.EMAIL || 'info@zss.ca',
-          subject: 'New Checkout Initiated',
-          html: `
-            <h1>Checkout Initiated</h1>
-            <p><strong>Customer Name:</strong> ${sanitizedUserInfo.name}</p>
-            <p><strong>Customer Email:</strong> ${sanitizedUserInfo.email}</p>
-            <p><strong>Selected Plan:</strong> ${selectedPlan.title}</p>
-            <p><strong>Plan Price:</strong> ${selectedPlan.price} CAD</p>
-            <p><strong>Checkout Session ID:</strong> ${id}</p>
-          `,
-        }),
-      });
-
-      if (!emailResponse.ok) {
-        console.error('Failed to send email notification:', await emailResponse.text());
-      } else {
-        console.log('Checkout initiation email triggered via API');
-      }
-
       const result = await stripe.redirectToCheckout({ sessionId: id });
       console.log('Redirect result:', result); // Debug logging
       if (result.error) {
