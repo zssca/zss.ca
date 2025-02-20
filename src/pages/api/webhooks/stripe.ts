@@ -4,7 +4,7 @@ import { Buffer } from 'node:buffer';
 import { sendEmail } from '@/features/web/lib/sendgrid'; // Adjust the path as needed
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-01-27.acacia",
+  apiVersion: '2025-01-27.acacia',
 });
 
 export const config = {
@@ -54,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const currency = session.currency || 'USD';
 
       const emailHtml = `
-        <h1>New Purchase Confirmation</h1>
+        <h1>Purchase Confirmation</h1>
         <p><strong>Customer Name:</strong> ${customerName}</p>
         <p><strong>Customer Email:</strong> ${customerEmail}</p>
         <p><strong>Plan Purchased:</strong> ${planName}</p>
@@ -65,7 +65,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         await sendEmail(
           process.env.EMAIL || 'info@zss.ca',
-          'New Purchase Confirmation',
+          'Purchase Confirmation',
           emailHtml
         );
         console.log('Purchase confirmation email sent');

@@ -6,7 +6,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Basic',
     price: '29',
-    priceId: 'price_1Qu7yVP9fFsmlAaFOevgfl5w', // Correct Stripe Price ID (already valid)
+    priceId: 'price_1OuYVP9fFsm1Aa0eVgf15w', // Replace with your actual Stripe Price ID for Basic
     description: 'Get online fast with a simple, stunning website',
     note: 'Perfect for startups and side hustles on a budget',
     features: [
@@ -24,7 +24,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Starter',
     price: '49',
-    priceId: 'price_1Qu8xVP9fFsmlAaFOevgfl5x', // Replace with your actual Stripe Price ID for Starter
+    priceId: 'price_1OuYVP9fFsm1Aa0eVgf15x', // Replace with your actual Stripe Price ID for Starter
     description: 'Launch your business with a standout online presence',
     note: 'Great for new ventures ready to shine',
     features: [
@@ -43,7 +43,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Professional',
     price: '149',
-    priceId: 'price_1Qu8yVP9fFsmlAaFOevgfl5y', // Replace with your actual Stripe Price ID for Professional
+    priceId: 'price_1OuYVP9fFsm1Aa0eVgf15y', // Replace with your actual Stripe Price ID for Professional
     description: 'Grow confidently with a pro-level website',
     note: 'Ideal for established businesses stepping up',
     features: [
@@ -64,7 +64,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Enterprise',
     price: '499',
-    priceId: 'price_1Qu8zVP9fFsmlAaFOevgfl5z', // Replace with your actual Stripe Price ID for Enterprise
+    priceId: 'price_1OuYVP9fFsm1Aa0eVgf15z', // Replace with your actual Stripe Price ID for Enterprise
     description: 'Scale big with a custom-built digital hub',
     note: 'Designed for businesses ready to dominate',
     features: [

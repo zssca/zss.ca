@@ -7,6 +7,7 @@ import { Stepper } from './StepIndicator';
 import InfoStep from './InfoStep';
 import ConfirmationStep from './ConfirmationStep';
 import { getStripe } from './lib/stripe';
+import { sendEmail } from './lib/sendgrid'; // Adjust path as needed
 
 const PricingTable = () => {
   const [currentStep, setCurrentStep] = useState<Step>('plan');
@@ -86,7 +87,28 @@ const PricingTable = () => {
       const { id } = await response.json();
       console.log('Checkout session created with ID:', id);
 
+      // Send email notification for checkout initiation
+      const emailHtml = `
+        <h1>Checkout Initiated</h1>
+        <p><strong>Customer Name:</strong> ${sanitizedUserInfo.name}</p>
+        <p><strong>Customer Email:</strong> ${sanitizedUserInfo.email}</p>
+        <p><strong>Selected Plan:</strong> ${selectedPlan.title}</p>
+        <p><strong>Plan Price:</strong> ${selectedPlan.price} CAD</p>
+        <p><strong>Checkout Session ID:</strong> ${id}</p>
+      `;
+      try {
+        await sendEmail(
+          process.env.EMAIL || 'info@zss.ca',
+          'New Checkout Initiated',
+          emailHtml
+        );
+        console.log('Checkout initiation email sent');
+      } catch (emailError) {
+        console.error('Failed to send checkout initiation email:', emailError);
+      }
+
       const result = await stripe.redirectToCheckout({ sessionId: id });
+      console.log('Redirect result:', result); // Debug logging
       if (result.error) {
         console.error('Stripe redirect error:', result.error);
         alert(result.error.message);

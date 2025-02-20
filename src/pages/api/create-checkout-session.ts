@@ -37,6 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           country: userInfo.country,
         },
       });
+      console.log('Checkout session created with ID:', session.id);
       res.status(200).json({ id: session.id });
     } catch (error) {
       console.error('Stripe error:', error);

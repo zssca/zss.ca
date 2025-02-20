@@ -1,25 +1,10 @@
-import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
-export const getStripe = async (): Promise<Stripe | null> => {
-  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
-  console.log('Stripe Publishable Key:', publishableKey);
-
-  if (!publishableKey) {
-    console.error('Stripe publishable key is not configured');
-    throw new Error('Stripe publishable key is not configured');
+export const getStripe = async () => {
+  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+  const stripe = await stripePromise;
+  if (!stripe) {
+    console.error('Stripe failed to initialize');
   }
-
-  try {
-    console.log('Attempting to load Stripe with key:', publishableKey);
-    const stripe = await loadStripe(publishableKey);
-    if (!stripe) {
-      console.error('Failed to load Stripe library');
-      return null;
-    }
-    console.log('Stripe loaded successfully');
-    return stripe;
-  } catch (error) {
-    console.error('Error loading Stripe:', error);
-    return null;
-  }
+  return stripe;
 };
