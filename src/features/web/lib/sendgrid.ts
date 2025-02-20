@@ -1,30 +1,25 @@
+// src/features/web/lib/sendgrid.ts (or use src/pages/api/send-email.ts)
 import { MailService } from '@sendgrid/mail';
 
-let sgMail: MailService | null = null;
+export interface EmailOptions {
+  to: string;
+  subject: string;
+  html: string;
+}
 
-const initSendGrid = async () => {
-  if (!sgMail) {
-    const mail = await import('@sendgrid/mail');
-    sgMail = mail.default;
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
-    if (!process.env.SENDGRID_API_KEY) {
-      console.warn('SENDGRID_API_KEY not set, emails will fail');
-    }
-  }
-  return sgMail;
-};
+export const sendEmail = async (options: EmailOptions) => {
+  const sgMail = new MailService();
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
 
-export const sendEmail = async (to: string, subject: string, html: string) => {
-  const sgMail = await initSendGrid();
-  if (!sgMail) {
-    throw new Error('SendGrid not initialized');
+  if (!process.env.SENDGRID_API_KEY) {
+    throw new Error('SENDGRID_API_KEY not configured');
   }
 
   const msg = {
-    to,
-    from: process.env.EMAIL || 'info@zss.ca', // Use your configured email
-    subject,
-    html,
+    to: options.to,
+    from: process.env.EMAIL || 'info@zss.ca',
+    subject: options.subject,
+    html: options.html,
   };
 
   try {

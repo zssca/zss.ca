@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 import { Buffer } from 'node:buffer';
-import { sendEmail } from '@/features/web/lib/sendgrid'; // Adjust the path as needed
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-01-27.acacia',
@@ -63,14 +62,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       `;
 
       try {
-        await sendEmail(
-          process.env.EMAIL || 'info@zss.ca',
-          'Purchase Confirmation',
-          emailHtml
-        );
-        console.log('Purchase confirmation email sent');
+        const emailResponse = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            to: process.env.EMAIL || 'info@zss.ca',
+            subject: 'Purchase Confirmation',
+            html: emailHtml,
+          }),
+        });
+
+        if (!emailResponse.ok) {
+          const errorText = await emailResponse.text();
+          console.error('Failed to send purchase confirmation email via API:', errorText);
+        } else {
+          console.log('Purchase confirmation email triggered via API');
+        }
       } catch (error) {
-        console.error('Failed to send purchase confirmation email:', error);
+        console.error('Error triggering purchase confirmation email:', error);
+        // Continue processing even if email fails
       }
 
       break;
