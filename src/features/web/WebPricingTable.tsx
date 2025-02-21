@@ -1,3 +1,5 @@
+// src\features\web\WebPricingTable.tsx
+
 'use client';
 import React, { useState } from 'react';
 import { PRICING_TIERS } from './data';

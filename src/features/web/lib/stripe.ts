@@ -1,3 +1,5 @@
+// src\features\web\lib\stripe.ts
+
 import { loadStripe } from '@stripe/stripe-js';
 
 export const getStripe = async () => {

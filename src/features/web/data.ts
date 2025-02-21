@@ -1,3 +1,5 @@
+// src\features\web\data.ts
+
 import React from 'react';
 import { FiLayout, FiPenTool, FiServer, FiZap } from 'react-icons/fi';
 import { PricingTier } from './types';
@@ -6,7 +8,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Basic',
     price: '29',
-    priceId: 'price_1OuYVP9fFsm1Aa0eVgf15w', // Replace with your actual Stripe Price ID for Basic
+    priceId: 'price_1QungwP9fFsmlAaFnkibGEGM', // Replace with your actual Stripe Price ID for Basic
     description: 'Get online fast with a simple, stunning website',
     note: 'Perfect for startups and side hustles on a budget',
     features: [
@@ -24,7 +26,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Starter',
     price: '49',
-    priceId: 'price_1OuYVP9fFsm1Aa0eVgf15x', // Replace with your actual Stripe Price ID for Starter
+    priceId: 'prod_RoQa7liI7KZ5Zp', // Replace with your actual Stripe Price ID for Starter
     description: 'Launch your business with a standout online presence',
     note: 'Great for new ventures ready to shine',
     features: [

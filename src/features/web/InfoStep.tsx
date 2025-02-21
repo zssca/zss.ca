@@ -1,3 +1,5 @@
+// src\features\web\InfoStep.tsx
+
 'use client';
 import React from 'react';
 import { FiUser, FiBriefcase, FiMapPin, FiPhone, FiGlobe, FiArrowRight, FiArrowLeft } from 'react-icons/fi';

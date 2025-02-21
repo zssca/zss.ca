@@ -1,4 +1,4 @@
-// types.ts
+// src\features\web\types.ts
 export type Step = 'plan' | 'info' | 'confirmation';
 
 export interface PricingTier {

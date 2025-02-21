@@ -1,3 +1,5 @@
+// src\features\web\PricingCard.tsx
+
 'use client';
 import React, { useState } from 'react';
 import { FiCheck, FiLayout, FiPenTool, FiServer, FiZap, FiChevronDown, FiChevronUp } from 'react-icons/fi';

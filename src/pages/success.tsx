@@ -1,3 +1,5 @@
+// src\pages\success.tsx
+
 import { NextPage } from 'next';
 import { sendEmail } from '@/features/web/lib/sendgrid'; // Adjust the path as needed
 import Stripe from 'stripe';
@@ -50,11 +52,11 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       <p><strong>Session ID:</strong> ${session_id}</p>
     `;
 
-    await sendEmail(
-      process.env.EMAIL || 'info@zss.ca',
-      'New Purchase Confirmation',
-      emailHtml
-    );
+    await sendEmail({
+      to: process.env.EMAIL || 'info@zss.ca',
+      subject: 'New Purchase Confirmation',
+      html: emailHtml
+    });
   } catch (error) {
     console.error('Error sending success email:', error);
   }

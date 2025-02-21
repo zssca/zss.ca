@@ -1,4 +1,4 @@
-// InfoItem.tsx
+// src\features\web\InfoItem.tsx
 'use client';
 import React from 'react';
 

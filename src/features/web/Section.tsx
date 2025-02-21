@@ -1,4 +1,4 @@
-// Section.tsx
+// src\features\web\Section.tsx
 'use client';
 import React from 'react';
 

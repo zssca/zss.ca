@@ -1,3 +1,5 @@
+// src\pages\api\webhooks\stripe.ts
+
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 import { Buffer } from 'node:buffer';

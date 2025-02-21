@@ -1,3 +1,5 @@
+// src\features\web\ConfirmationStep.tsx
+
 'use client';
 import React from 'react';
 import { FiCheck, FiArrowLeft, FiArrowRight, FiLayout, FiPenTool, FiServer, FiZap } from 'react-icons/fi';
