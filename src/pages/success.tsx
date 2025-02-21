@@ -1,16 +1,30 @@
 import { NextPage } from 'next';
 import Stripe from 'stripe';
 import { GetServerSidePropsContext } from 'next';
-import { supabase } from '@/lib/supabaseClient'; // Import the shared client
+import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
 import MainLayout from '@/layouts/MainLayout';
-import { PRICING_TIERS } from '@/features/web/data'; // Import PRICING_TIERS
+import { PRICING_TIERS } from '@/features/web/data';
 
+// Define props interface
 interface SuccessProps {
   sessionId: string;
   customerName: string;
   planName: string;
   amountPaid: string;
+}
+
+// Define error interfaces
+interface SupabaseError {
+  code?: string;
+  message: string;
+  details?: string | null;
+  hint?: string | null;
+}
+
+interface GenericError {
+  message: string;
+  stack?: string;
 }
 
 const SuccessPage: NextPage<SuccessProps> = ({ sessionId, customerName, planName, amountPaid }) => {
@@ -62,6 +76,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const { session_id } = query;
 
   if (!session_id || typeof session_id !== 'string') {
+    console.log('Invalid or missing session_id, redirecting to home');
     return {
       redirect: {
         destination: '/',
@@ -71,36 +86,58 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   }
 
   try {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    // Validate environment variables
+    if (!process.env.STRIPE_SECRET_KEY || !process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      throw new Error('Missing required environment variables');
+    }
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
       apiVersion: '2025-01-27.acacia',
     });
 
-    // Expand line_items to retrieve price data
     const session = await stripe.checkout.sessions.retrieve(session_id, {
       expand: ['line_items'],
     });
 
     const customerName = session.metadata?.name || 'Customer';
-    // Get the priceId from the first line item and map it to the plan title
     const priceId = session.line_items?.data[0]?.price?.id;
     const planName = PRICING_TIERS.find(tier => tier.priceId === priceId)?.title || 'Unknown Plan';
-
     const amountTotal = session.amount_total ? (session.amount_total / 100).toFixed(2) : 'N/A';
     const currency = session.currency || 'CAD';
     const amountPaid = `${amountTotal} ${currency.toUpperCase()}`;
 
-    // Save subscription data to Supabase (SERVER-SIDE ONLY)
-    const { error } = await supabase.from('subscriptions').insert({
-      customer_name: customerName,
-      customer_email: session.customer_email || '',
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey, {
+      auth: { autoRefreshToken: false, persistSession: false },
+    });
+
+    const { error } = await supabaseAdmin.from('subscriptions').insert({
+      name: customerName,
+      email: session.customer_email || '',
       plan_name: planName,
-      amount_paid: amountPaid,
+      plan_price: amountPaid,
       stripe_session_id: session_id,
-      subscription_status: 'active',
+      status: 'active',
     });
 
     if (error) {
-      console.error('Error saving subscription to Supabase:', error);
+      const supabaseError = error as SupabaseError;
+      console.error('Supabase insertion failed:', {
+        sessionId: session_id,
+        errorCode: supabaseError.code,
+        errorMessage: supabaseError.message,
+        errorDetails: supabaseError.details,
+      });
+      // Optionally throw an error to redirect
+      // throw new Error(`Supabase error: ${supabaseError.message}`);
+    } else {
+      console.log('Subscription saved successfully:', {
+        sessionId: session_id,
+        name: customerName,
+        planName,
+        planPrice: amountPaid,
+      });
     }
 
     return {
@@ -112,13 +149,16 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       },
     };
   } catch (error) {
-    console.error('Error retrieving checkout session:', error);
+    const genericError = error as GenericError;
+    console.error('Error in getServerSideProps:', {
+      session_id,
+      message: genericError.message,
+      stack: genericError.stack,
+    });
     return {
-      props: {
-        sessionId: session_id,
-        customerName: 'Customer',
-        planName: 'Unknown Plan',
-        amountPaid: 'N/A',
+      redirect: {
+        destination: '/error',
+        permanent: false,
       },
     };
   }
