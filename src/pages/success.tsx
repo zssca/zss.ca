@@ -1,7 +1,4 @@
-// src\pages\success.tsx
-
 import { NextPage } from 'next';
-import { sendEmail } from '@/features/web/lib/sendgrid'; // Adjust the path as needed
 import Stripe from 'stripe';
 import { GetServerSidePropsContext } from 'next';
 
@@ -33,32 +30,21 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   try {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-      apiVersion: "2025-01-27.acacia",
+      apiVersion: '2025-01-27.acacia', // Consistent with create-checkout-session.ts
     });
 
     const session = await stripe.checkout.sessions.retrieve(session_id);
-    const customerEmail = session.customer_email || 'No email provided';
-    const customerName = session.metadata?.name || 'No name provided';
-    const planName = session.line_items?.data[0]?.description || 'Unknown plan';
-    const amountTotal = session.amount_total ? (session.amount_total / 100).toFixed(2) : 'Unknown';
-    const currency = session.currency || 'USD';
-
-    const emailHtml = `
-      <h1>New Purchase Confirmation</h1>
-      <p><strong>Customer Name:</strong> ${customerName}</p>
-      <p><strong>Customer Email:</strong> ${customerEmail}</p>
-      <p><strong>Plan Purchased:</strong> ${planName}</p>
-      <p><strong>Amount Paid:</strong> ${amountTotal} ${currency.toUpperCase()}</p>
-      <p><strong>Session ID:</strong> ${session_id}</p>
-    `;
-
-    await sendEmail({
-      to: process.env.EMAIL || 'info@zss.ca',
-      subject: 'New Purchase Confirmation',
-      html: emailHtml
+    // Optionally log session details for debugging or record-keeping
+    console.log('Checkout session retrieved:', {
+      sessionId: session_id,
+      customerEmail: session.customer_email,
+      customerName: session.metadata?.name,
+      planName: session.line_items?.data[0]?.description,
+      amountTotal: session.amount_total ? (session.amount_total / 100).toFixed(2) : 'Unknown',
+      currency: session.currency,
     });
   } catch (error) {
-    console.error('Error sending success email:', error);
+    console.error('Error retrieving checkout session:', error);
   }
 
   return {
