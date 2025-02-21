@@ -4,6 +4,7 @@ import { GetServerSidePropsContext } from 'next';
 import { supabase } from '@/lib/supabaseClient'; // Import the shared client
 import Link from 'next/link';
 import MainLayout from '@/layouts/MainLayout';
+import { PRICING_TIERS } from '@/features/web/data'; // Import PRICING_TIERS
 
 interface SuccessProps {
   sessionId: string;
@@ -15,8 +16,8 @@ interface SuccessProps {
 const SuccessPage: NextPage<SuccessProps> = ({ sessionId, customerName, planName, amountPaid }) => {
   return (
     <MainLayout>
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-xl shadow-lg p-8 max-w-md w-full">
+      <div className="min-h-screen flex items-center justify-center py-12">
+        <div className="bg-white rounded-xl shadow-sm p-8 max-w-7xl w-full">
           <div className="text-center">
             <svg
               className="w-16 h-16 mx-auto mb-6 text-green-500"
@@ -74,9 +75,15 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       apiVersion: '2025-01-27.acacia',
     });
 
-    const session = await stripe.checkout.sessions.retrieve(session_id);
+    // Expand line_items to retrieve price data
+    const session = await stripe.checkout.sessions.retrieve(session_id, {
+      expand: ['line_items'],
+    });
+
     const customerName = session.metadata?.name || 'Customer';
-    const planName = session.line_items?.data[0]?.description || 'Unknown Plan';
+    // Get the priceId from the first line item and map it to the plan title
+    const priceId = session.line_items?.data[0]?.price?.id;
+    const planName = PRICING_TIERS.find(tier => tier.priceId === priceId)?.title || 'Unknown Plan';
 
     const amountTotal = session.amount_total ? (session.amount_total / 100).toFixed(2) : 'N/A';
     const currency = session.currency || 'CAD';

@@ -15,7 +15,7 @@ export default function Web() {
       {/* Main Grid Layout */}
       <div className="grid grid-cols-12 auto-rows-auto gap-4">
         {/* Hero Section */}
-        <div className="col-span-12 md:col-span-5 bg-slate-50 rounded-xl p-4 flex items-start justify-start bg-[url('/bg/A.svg')] bg-cover shadow-sm">
+        <div className="col-span-12 md:col-span-5 bg-white rounded-xl p-4 flex items-start justify-start bg-[url('/bg/A.svg')] bg-cover shadow-sm">
           <WebHero />
         </div>
 

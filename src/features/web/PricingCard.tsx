@@ -19,9 +19,9 @@ const PricingCard: React.FC<PricingCardProps> = ({ onSelect, ...tier }) => {
   };
 
   return (
-    <div className={`relative bg-white rounded-xl border p-6
+    <div className={`relative bg-white rounded-xl border p-4
       ${tier.popular 
-        ? 'border-blue-200 bg-blue-50/30 shadow-md'
+        ? 'border-blue-200 bg-blue-100/20 shadow-sm'
         : 'border-gray-200 shadow-sm'}
       w-full`}>
       {tier.popular && (
@@ -33,13 +33,13 @@ const PricingCard: React.FC<PricingCardProps> = ({ onSelect, ...tier }) => {
       )}
 
       <div className="flex items-center justify-between mb-4">
-        <div className={`p-2 rounded-lg
+        <div className={`p-3 rounded-lg
           ${tier.popular 
             ? 'bg-blue-100 text-blue-700'
             : 'bg-gray-100 text-gray-600'}`}>
           {planIcons[tier.title as keyof typeof planIcons]}
         </div>
-        <span className="text-xs text-gray-500 bg-gray-50 px-2 py-0.5 rounded-full">Monthly</span>
+        <span className="text-xs text-gray-500 bg-gray-50 px-2 py-0.5 rounded-full">Billed Monthly</span>
       </div>
 
       <div className="mb-4 space-y-1">
@@ -57,15 +57,15 @@ const PricingCard: React.FC<PricingCardProps> = ({ onSelect, ...tier }) => {
         )}
       </div>
 
-      <div className="mb-6 border-t border-gray-200 pt-4">
+      <div className="mb-4 border rounded-lg pl-4 pr-2 py-2">
         <button 
           onClick={() => setIsFeaturesOpen(!isFeaturesOpen)}
-          className="md:hidden w-full flex justify-between items-center text-xs font-medium text-gray-700 uppercase tracking-wide pb-2"
+          className="md:hidden w-full flex justify-between items-center text-xs font-medium text-gray-700 uppercase tracking-wide"
           aria-expanded={isFeaturesOpen}
           aria-controls={`features-${tier.title}`}
         >
           <span>Features</span>
-          <span className={`p-1 rounded-full ${isFeaturesOpen ? 'bg-blue-100 text-blue-600' : 'text-gray-500'}`}>
+          <span className={`p-1 rounded-md bg-blue-50 ${isFeaturesOpen ? 'bg-blue-100 text-blue-600' : 'text-gray-500'}`}>
             {isFeaturesOpen ? <FiChevronUp className="h-4 w-4" /> : <FiChevronDown className="h-4 w-4" />}
           </span>
         </button>
@@ -75,7 +75,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ onSelect, ...tier }) => {
           className={`${isFeaturesOpen ? 'block' : 'hidden'} md:block`}
         >
           <h4 className="hidden md:block text-xs font-medium text-gray-600 uppercase tracking-wide mb-2">Included</h4>
-          <ul className="space-y-2">
+          <ul className="space-y-2 pt-4 pb-2">
             {tier.features.map((feature, i) => (
               <li 
                 key={i} 
