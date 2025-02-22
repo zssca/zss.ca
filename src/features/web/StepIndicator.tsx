@@ -108,7 +108,7 @@ interface StepperProps {
 
 export const Stepper: React.FC<StepperProps> = ({ steps, currentStep }) => {
   return (
-    <div className="flex justify-between items-start max-w-4xl mx-auto px-4 py-6">
+    <div className="flex justify-between items-start max-w-4xl mx-auto px-4 py-4">
       {steps.map((step, index) => (
         <StepIndicator
           key={step}

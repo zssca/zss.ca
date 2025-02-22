@@ -83,7 +83,7 @@ const NavLinkItem: React.FC<NavLinkItemProps> = ({ href, name, icon: Icon, isAct
     className={`flex items-center gap-3 px-4 py-2 text-base font-medium rounded-lg transition-all duration-200 ease-in-out ${
       isActive
         ? 'text-gray-900 bg-gray-100 shadow-sm'
-        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800 hover:shadow-sm'
+        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-800 hover:shadow-sm'
     }`}
     aria-current={isActive ? 'page' : undefined}
   >
@@ -198,7 +198,7 @@ const Navbar = () => {
               className="fixed md:hidden top-20 left-4 right-4 bg-white rounded-xl z-40 shadow-xl border border-gray-100"
             >
               <motion.div
-                className="p-4 space-y-2"
+                className="p-2 space-y-2"
                 initial="hidden"
                 animate="visible"
                 exit="hidden"

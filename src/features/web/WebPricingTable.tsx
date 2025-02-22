@@ -126,7 +126,7 @@ const PricingTable = () => {
 
   return (
     <div className="w-full">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
         {/* Stepper */}
         <div className="max-w-sm mx-auto mb-6">
           <Stepper
@@ -137,7 +137,7 @@ const PricingTable = () => {
 
         {/* Error Display */}
         {error && (
-          <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-md text-sm max-w-6xl mx-auto">
+          <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-md text-sm max-w-7xl mx-auto">
             {error}
           </div>
         )}
