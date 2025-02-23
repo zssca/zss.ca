@@ -150,7 +150,7 @@ const Navbar = () => {
           initial={false}
           animate={{ y: navbarHidden ? -100 : 0, opacity: navbarHidden ? 0 : 1 }}
           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-          className="flex items-center justify-between bg-white rounded-xl px-4 pr-2 py-2 h-14 shadow-md"
+          className="flex items-center justify-between bg-white rounded-xl pr-2 pl-2 py-2 h-14 shadow-md"
         >
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <Image
@@ -161,9 +161,10 @@ const Navbar = () => {
               className="h-10 w-10"
               priority
             />
-            <span className="text-xl font-semibold whitespace-nowrap tracking-tighter">
-              Zenith <span className="font-light">Strategic Solutions</span>
-            </span>
+<div className="flex flex-col gap-0">
+  <span className="text-2xl text-gray-700 font-semibold mt-[-1px]">Zenith</span>
+  <span className="text-md font-light tracking-tighter text-gray-500 mt-[-9px]">Strategic Solutions</span>
+</div>
           </Link>
 
           <div className="hidden md:flex items-center gap-2">

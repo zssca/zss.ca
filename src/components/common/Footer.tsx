@@ -34,7 +34,7 @@ const Footer: FC = () => {
   return (
     <footer className="max-w-7xl mx-auto px-4 py-12">
             <div className="bg-gray-950 rounded-xl bg-[url('/bg/C.svg')] bg-cover bg-bottom shadow-2xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-6 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4 gap-4">
         {/* Brand Section */}
         <section className="bg-gray-900/80 backdrop-blur-lg rounded-lg p-6 space-y-4 hover:shadow-lg transition-shadow">
           <h2 className="text-2xl font-bold text-gray-100">
@@ -96,7 +96,7 @@ const Footer: FC = () => {
       </div>
 
       {/* Copyright */}
-      <div className="py-6 border-t border-gray-800/50 mt-8">
+      <div className="py-6 border-t border-gray-800/50 mt-5">
         <div className="text-center text-sm text-gray-500">
           <p>&copy; {currentYear} Zenith Strategic Solutions</p>
           <p className="mt-1 text-xs">Precision Engineered Excellence</p>
