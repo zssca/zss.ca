@@ -71,7 +71,7 @@ export default function Web() {
     </Link>
 
 
-    <div className="col-span-12 bg-white rounded-xl px-3 pt-6 pb-3 shadow-sm">
+    <div className="col-span-12 bg-white rounded-xl p-2 pt-6 shadow-sm">
           <WebPricingTable />
         </div>
         

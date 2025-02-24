@@ -6,9 +6,9 @@ import { PricingTier, UserInfo } from './types';
 interface ConfirmationStepProps {
   userInfo: UserInfo;
   plan: PricingTier;
-  onComplete: () => void; // Note: This could be () => Promise<void> if async is needed
+  onComplete: () => void;
   backStep: () => void;
-  isLoading?: boolean; // Re-added as optional prop
+  isLoading?: boolean;
 }
 
 const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
@@ -16,9 +16,9 @@ const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
   plan,
   onComplete,
   backStep,
-  isLoading = false, // Default to false if not provided
+  isLoading = false,
 }) => {
-  const [error, setError] = useState<string | null>(null); // Internal error state
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async () => {
     setError(null);
@@ -28,7 +28,6 @@ const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
       return;
     }
 
-    // Call onComplete (which triggers checkout in WebPricingTable)
     onComplete();
   };
 
@@ -40,10 +39,10 @@ const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 max-w-4xl w-full mx-auto">
+    <div className="bg-blue-50/10 rounded-lg border border-gray-200 shadow-sm p-4 max-w-4xl w-full mx-auto">
       {/* Header */}
       <div className="text-center mb-6">
-        <div className="inline-flex items-center justify-center bg-blue-100 text-blue-700 p-2 rounded-lg mb-2">
+        <div className="inline-flex items-center justify-center bg-green-100 text-green-700 p-2 rounded-lg mb-2">
           <FiCheck className="h-6 w-6" />
         </div>
         <h3 className="text-xl font-semibold text-gray-900 tracking-tight">Order Confirmation</h3>
@@ -59,8 +58,8 @@ const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
       <div className="grid md:grid-cols-2 gap-6">
         {/* Chosen Subscription Plan Card */}
         <div
-          className={`relative bg-white rounded-xl border p-6 ${
-            plan.popular ? 'border-blue-200 bg-blue-50/30 shadow-md' : 'border-gray-200 shadow-sm'
+          className={`relative bg-white rounded-lg border p-6 ${
+            plan.popular ? 'border-blue-200 bg-blue-50/30 shadow-sm' : 'border-gray-200 shadow-sm'
           }`}
         >
           {plan.popular && (
@@ -113,45 +112,49 @@ const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
           </div>
         </div>
 
-        {/* Contact Information Section */}
-        <div className="bg-gray-50 rounded-lg border border-gray-200 shadow-sm p-4 flex flex-col">
-          <h4 className="text-sm font-medium text-gray-600 uppercase tracking-wide mb-3">
-            Contact Information
-          </h4>
-          <dl className="space-y-3 flex-1">
-            <div>
-              <dt className="text-xs font-medium text-gray-600">Full Name</dt>
-              <dd className="text-sm text-gray-900">{userInfo.name || 'N/A'}</dd>
+        {/* Improved Contact Information Section */}
+        <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-4 flex flex-col">
+          <h4 className="text-lg font-semibold text-gray-900 mb-6">Contact Information</h4>
+          <div className="space-y-3">
+            {/* Individual Field Containers */}
+            <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 bg-gray-50 border border-gray-200 rounded-md p-3">
+              <dt className="text-gray-500 font-medium uppercase tracking-wide text-xs sm:text-sm">Full Name</dt>
+              <dd className="text-gray-900 font-medium text-sm">{userInfo.name || ''}</dd>
             </div>
-            <div>
-              <dt className="text-xs font-medium text-gray-600">Email</dt>
-              <dd className="text-sm text-gray-900">{userInfo.email || 'N/A'}</dd>
+
+            <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 bg-gray-50 border border-gray-200 rounded-md p-3">
+              <dt className="text-gray-500 font-medium uppercase tracking-wide text-xs sm:text-sm">Email</dt>
+              <dd className="text-gray-900 font-medium text-sm">{userInfo.email || ''}</dd>
             </div>
-            <div>
-              <dt className="text-xs font-medium text-gray-600">Company</dt>
-              <dd className="text-sm text-gray-900">{userInfo.company || 'N/A'}</dd>
+
+            <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 bg-gray-50 border border-gray-200 rounded-md p-3">
+              <dt className="text-gray-500 font-medium uppercase tracking-wide text-xs sm:text-sm">Company</dt>
+              <dd className="text-gray-900 font-medium text-sm">{userInfo.company || ''}</dd>
             </div>
-            <div>
-              <dt className="text-xs font-medium text-gray-600">Phone</dt>
-              <dd className="text-sm text-gray-900">{userInfo.phone || 'N/A'}</dd>
+
+            <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 bg-gray-50 border border-gray-200 rounded-md p-3">
+              <dt className="text-gray-500 font-medium uppercase tracking-wide text-xs sm:text-sm">Phone</dt>
+              <dd className="text-gray-900 font-medium text-sm">{userInfo.phone || ''}</dd>
             </div>
-            <div>
-              <dt className="text-xs font-medium text-gray-600">Address</dt>
-              <dd className="text-sm text-gray-900">
+
+            <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 bg-gray-50 border border-gray-200 rounded-md p-3">
+              <dt className="text-gray-500 font-medium uppercase tracking-wide text-xs sm:text-sm">Address</dt>
+              <dd className="text-gray-900 font-medium text-sm">
                 {userInfo.address || userInfo.city || userInfo.country ? (
-                  <>
+                  <div className="space-y-1">
                     {userInfo.address && <div>{userInfo.address}</div>}
-                    <div className="text-gray-700">
-                      {userInfo.city && <span>{userInfo.city}, </span>}
-                      {userInfo.country || 'N/A'}
-                    </div>
-                  </>
+                    {(userInfo.city || userInfo.country) && (
+                      <div className="text-gray-700">
+                        {userInfo.city && `${userInfo.city}, `}{userInfo.country || ''}
+                      </div>
+                    )}
+                  </div>
                 ) : (
-                  'N/A'
+                  ''
                 )}
               </dd>
             </div>
-          </dl>
+          </div>
         </div>
       </div>
 
@@ -160,7 +163,7 @@ const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
         <button
           onClick={backStep}
           disabled={isLoading}
-          className="flex-1 px-4 py-2 rounded-lg font-medium text-sm text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 px-4 py-2 rounded-lg font-medium text-sm bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <FiArrowLeft className="h-4 w-4 mr-1" />
           Back
@@ -174,7 +177,7 @@ const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
           }`}
           aria-label={`Confirm purchase for ${plan.title} plan${isLoading ? ' (processing)' : ''}`}
         >
-          {isLoading ? 'Processing...' : 'Confirm'}
+          {isLoading ? 'Processing...' : 'Proceed to Payment'}
           <FiArrowRight className="h-4 w-4 ml-1" />
         </button>
       </div>
