@@ -2,7 +2,7 @@
 
 'use client';
 import React from 'react';
-import { FiUser, FiBriefcase, FiMapPin, FiPhone, FiGlobe, FiArrowRight, FiArrowLeft } from 'react-icons/fi';
+import { FiUser, FiBriefcase, FiMapPin, FiPhone, FiMail, FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import InputField from './InputField';
 import { UserInfo, PricingTier } from './types';
 
@@ -38,7 +38,7 @@ const InfoStep: React.FC<InfoStepProps> = ({ userInfo, setUserInfo, nextStep, ba
             onChange={e => setUserInfo(prev => ({ ...prev, name: e.target.value }))} 
           />
           <InputField 
-            icon={<FiGlobe className="h-4 w-4 text-gray-600" />}
+            icon={<FiMail className="h-4 w-4 text-gray-600" />}
             type="email"
             placeholder="Email Address *"
             value={userInfo.email}
@@ -70,12 +70,19 @@ const InfoStep: React.FC<InfoStepProps> = ({ userInfo, setUserInfo, nextStep, ba
               value={userInfo.city}
               onChange={e => setUserInfo(prev => ({ ...prev, city: e.target.value }))}
             />
-            <InputField 
-              icon={<FiGlobe className="h-4 w-4 text-gray-600" />}
-              placeholder="Country"
-              value="Canada"
-              disabled
-            />
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <FiMapPin className="h-4 w-4 text-gray-600" />
+              </div>
+              <select
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                value={userInfo.country}
+                onChange={e => setUserInfo(prev => ({ ...prev, country: e.target.value }))}
+              >
+                <option value="Canada">Canada</option>
+                <option value="USA">United States</option>
+              </select>
+            </div>
           </div>
         </div>
 
