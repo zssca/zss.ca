@@ -47,9 +47,9 @@ const SuccessPage: NextPage<SuccessProps> = ({
 }) => {
   return (
     <MainLayout>
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="pb-12">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-lg p-8 sm:p-12 transition-all duration-300 hover:shadow-xl">
+          <div className="mx-auto bg-white rounded-xl transition-all duration-300 hover:shadow-sm max-w-7xl">
             <div className="text-center">
               {/* Animated Checkmark */}
               <div className="mb-8 animate-scale-in">
