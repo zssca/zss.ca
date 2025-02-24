@@ -2,9 +2,9 @@ const WebHero = () => (
   <section aria-labelledby="WebHero-heading">
     <h1
       id="WebHero-heading"
-      className="mx-auto text-left rounded-xl flex flex-col items-start justify-center text-3xl lg:text-4xl font-bold text-soil"
+      className="mx-auto text-left rounded-xl flex flex-col items-start justify-center text-xl lg:text-lg font-bold bg-gradient-to-b from-gray-950 to-gray-800 text-transparent bg-clip-text shadow-sm"
     >
-      Zenith is a Canadian web design agency
+      Professional Website Designs Tailored for North American Businesses—Built to Captivate, Convert, and Scale Your Success
     </h1>
   </section>
 );
