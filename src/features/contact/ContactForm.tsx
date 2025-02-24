@@ -21,13 +21,23 @@ const ContactForm = () => {
 
   const handleFormSubmit: SubmitHandler<FormData> = async (formData) => {
     try {
-      // Simulated API call - replace with actual implementation
-      console.log("Form submission data:", formData);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to send email");
+      }
+
       setStatus({ type: "success", message: "Message sent successfully!" });
       reset();
     } catch (err) {
+      console.error("Form submission error:", err);
       const errorMessage = err instanceof Error ? err.message : "Failed to send message";
       setStatus({ type: "error", message: errorMessage });
     }

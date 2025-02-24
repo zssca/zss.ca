@@ -1,126 +1,97 @@
-import sendgrid from '@sendgrid/mail';
+import sgMail from "@sendgrid/mail";
 
-// Set SendGrid API key from environment variable
-sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
+// Set the SendGrid API key from environment variables
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', ['POST']);
-    return res
-      .status(405)
-      .json({ success: false, message: `Method ${req.method} not allowed.` });
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method not allowed" });
   }
 
   const { name, email, message } = req.body;
 
-  // Validate request body
+  // Validate input
   if (!name || !email || !message) {
-    return res.status(400).json({
-      success: false,
-      message: 'Please provide name, email, and message.',
-    });
+    return res.status(400).json({ message: "All fields are required" });
   }
 
-  // Debugging logs for environment variables (useful during development)
-  if (!process.env.SENDGRID_API_KEY || !process.env.EMAIL) {
-    console.error('Missing required environment variables.');
-  }
-
-  console.log("SENDGRID_API_KEY Loaded:", !!process.env.SENDGRID_API_KEY);
-  console.log("EMAIL Loaded:", !!process.env.EMAIL);
-
-  // Define email options
-  const mailOptions = {
-    to: process.env.EMAIL, // Your business email address
-    from: `no-reply@zss.ca`, // Verified domain email address in SendGrid
-    replyTo: email, // Visitor's email address for replies
-    subject: `New message from ${name}`,
+  const msg = {
+    to: process.env.EMAIL, // e.g., "info@zss.ca"
+    from: "info@zss.ca", // Replace with your verified SendGrid sender email
+    subject: `New Contact Form Submission from ${name}`,
+    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
     html: `
-      <html>
+      <!DOCTYPE html>
+      <html lang="en">
       <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
           body {
             margin: 0;
             padding: 0;
-            background-color: #f1f5f9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #1f2937;
-            line-height: 1.6;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333333;
           }
           .container {
             width: 100%;
             max-width: 600px;
-            margin: 40px auto;
+            margin: 0 auto;
             background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
             overflow: hidden;
-            border: 1px solid #d1d5db;
           }
           .header {
-            background-color: #2563eb;
-            color: #ffffff;
+            background-color: #d3d3d3;
             padding: 20px;
             text-align: center;
-            border-bottom: 4px solid #1d4ed8;
+            border-bottom: 1px solid #e0e0e0;
           }
           .header h1 {
             margin: 0;
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 20px;
+            color: #555555;
           }
           .content {
-            padding: 25px;
-            font-size: 16px;
+            padding: 30px;
           }
           .content p {
-            margin: 15px 0;
+            margin: 10px 0;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #666666;
           }
-          .content p strong {
-            color: #2563eb;
+          .content strong {
+            color: #444444;
           }
           .footer {
-            background-color: #f3f4f6;
+            background-color: #f0f0f0;
             padding: 15px;
             text-align: center;
-            font-size: 14px;
-            color: #6b7280;
-            border-top: 1px solid #e5e7eb;
+            font-size: 12px;
+            color: #888888;
+            border-top: 1px solid #e0e0e0;
           }
-          .footer a {
-            color: #2563eb;
+          a {
+            color: #777777;
             text-decoration: none;
-          }
-          .footer a:hover {
-            text-decoration: underline;
-          }
-          @media (max-width: 600px) {
-            .container {
-              margin: 20px;
-              border-radius: 6px;
-            }
-            .header h1 {
-              font-size: 20px;
-            }
-            .content {
-              padding: 20px;
-            }
           }
         </style>
       </head>
       <body>
         <div class="container">
           <div class="header">
-            <h1>New Contact Message</h1>
+            <h1>New Contact Form Submission</h1>
           </div>
           <div class="content">
             <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> <a href="mailto:${email}" style="color: #2563eb;">${email}</a></p>
-            <p><strong>Message:</strong></p>
-            <p>${message}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong> ${message}</p>
           </div>
           <div class="footer">
-            <p>This email was sent from your website's contact form.</p>
+            <p>Sent from <a href="mailto:info@zss.ca">info@zss.ca</a> | ZSS Contact Form</p>
           </div>
         </div>
       </body>
@@ -129,15 +100,13 @@ export default async function handler(req, res) {
   };
 
   try {
-    // Send email using SendGrid
-    await sendgrid.send(mailOptions);
-    return res
-      .status(200)
-      .json({ success: true, message: 'Email sent successfully.' });
+    await sgMail.send(msg);
+    return res.status(200).json({ message: "Email sent successfully" });
   } catch (error) {
-    console.error('Error sending email:', error.response ? error.response.body : error.message);
-    return res
-      .status(500)
-      .json({ success: false, message: 'Failed to send email. Please try again later.' });
+    console.error("SendGrid error:", error);
+    if (error.response) {
+      console.error("SendGrid response:", error.response.body);
+    }
+    return res.status(500).json({ message: "Failed to send email" });
   }
 }
