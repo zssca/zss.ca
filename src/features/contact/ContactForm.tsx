@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import {
-  TextField,
-  Button,
-  Container,
-  Box,
-  CircularProgress,
-  Alert,
-} from "@mui/material";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface FormData {
   name: string;
@@ -16,7 +9,7 @@ interface FormData {
   message: string;
 }
 
-const SimpleContactForm: React.FC = () => {
+const ContactForm: React.FC = () => {
   const {
     handleSubmit,
     control,
@@ -71,59 +64,86 @@ const SimpleContactForm: React.FC = () => {
     }
   };
 
+  const fieldVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    focus: { borderColor: "#93C5FD" }, // Tailwind's blue-300
+  };
+
   return (
-    <Container maxWidth="sm" sx={{ mt: 4, p: 3 }}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      className=""
+    >
+      {/* Subtle Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/20 to-purple-50/20 pointer-events-none" />
+
       {/* Success Message */}
-      {successMessage && (
-        <Alert
-          severity="success"
-          sx={{
-            mb: 2,
-            fontWeight: "bold",
-            backgroundColor: "#d4edda",
-            color: "#155724",
-            border: "1px solid #c3e6cb",
-            borderRadius: "8px",
-          }}
-        >
-          {successMessage}
-        </Alert>
-      )}
+      <AnimatePresence>
+        {successMessage && (
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 50 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="mb-6 p-4 bg-green-50/90 border-l-4 border-green-400 text-green-800 rounded-lg flex items-center gap-3 shadow-sm"
+          >
+            <AiOutlineCheckCircle className="text-2xl" />
+            <p className="font-medium text-sm">{successMessage}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Error Message */}
-      {errorMessage && (
-        <Alert
-          severity="error"
-          sx={{
-            mb: 2,
-            fontWeight: "bold",
-            backgroundColor: "#f8d7da",
-            color: "#721c24",
-            border: "1px solid #f5c6cb",
-            borderRadius: "8px",
-          }}
-        >
-          {errorMessage}
-        </Alert>
-      )}
+      <AnimatePresence>
+        {errorMessage && (
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 50 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="mb-6 p-4 bg-red-50/90 border-l-4 border-red-400 text-red-800 rounded-r-lg shadow-sm"
+          >
+            <p className="font-medium text-sm">{errorMessage}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-7 relative z-10">
         {/* Name Field */}
         <Controller
           name="name"
           control={control}
           rules={{ required: "Name is required" }}
           render={({ field }) => (
-            <TextField
-              {...field}
-              label="Name *"
-              placeholder="John Doe"
-              fullWidth
-              margin="normal"
-              disabled={isSubmitting}
-              error={!!errors.name}
-              helperText={errors.name?.message}
-            />
+            <motion.div variants={fieldVariants} initial="initial" animate="animate">
+              <input
+                {...field}
+                type="text"
+                placeholder="Your Name"
+                className={`w-full p-4 rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 bg-white/80 shadow-sm ${
+                  errors.name
+                    ? "border-red-400"
+                    : "border-gray-200 focus:border-blue-300"
+                } ${isSubmitting ? "bg-gray-50 cursor-not-allowed" : ""}`}
+                disabled={isSubmitting}
+              />
+              <AnimatePresence>
+                {errors.name && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="mt-2 text-sm text-red-600 font-medium"
+                  >
+                    {errors.name.message}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </motion.div>
           )}
         />
 
@@ -139,17 +159,32 @@ const SimpleContactForm: React.FC = () => {
             },
           }}
           render={({ field }) => (
-            <TextField
-              {...field}
-              label="Email *"
-              type="email"
-              placeholder="john@example.com"
-              fullWidth
-              margin="normal"
-              disabled={isSubmitting}
-              error={!!errors.email}
-              helperText={errors.email?.message}
-            />
+            <motion.div variants={fieldVariants} initial="initial" animate="animate">
+              <input
+                {...field}
+                type="email"
+                placeholder="Your Email"
+                className={`w-full p-4 rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 bg-white/80 shadow-sm ${
+                  errors.email
+                    ? "border-red-400"
+                    : "border-gray-200 focus:border-blue-300"
+                } ${isSubmitting ? "bg-gray-50 cursor-not-allowed" : ""}`}
+                disabled={isSubmitting}
+              />
+              <AnimatePresence>
+                {errors.email && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="mt-2 text-sm text-red-600 font-medium"
+                  >
+                    {errors.email.message}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </motion.div>
           )}
         />
 
@@ -159,58 +194,77 @@ const SimpleContactForm: React.FC = () => {
           control={control}
           rules={{ required: "Message is required" }}
           render={({ field }) => (
-            <TextField
-              {...field}
-              label="Message *"
-              placeholder="Your message here..."
-              fullWidth
-              margin="normal"
-              multiline
-              rows={4}
-              disabled={isSubmitting}
-              error={!!errors.message}
-              helperText={errors.message?.message}
-            />
+            <motion.div variants={fieldVariants} initial="initial" animate="animate">
+              <textarea
+                {...field}
+                placeholder="Your Message"
+                className={`w-full p-4 rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 bg-white/80 shadow-sm resize-y min-h-[150px] ${
+                  errors.message
+                    ? "border-red-400"
+                    : "border-gray-200 focus:border-blue-300"
+                } ${isSubmitting ? "bg-gray-50 cursor-not-allowed" : ""}`}
+                disabled={isSubmitting}
+              />
+              <AnimatePresence>
+                {errors.message && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="mt-2 text-sm text-red-600 font-medium"
+                  >
+                    {errors.message.message}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </motion.div>
           )}
         />
 
         {/* Submit Button */}
-        <Box textAlign="center" mt={3}>
-          <Button
-            type="submit"
-            variant="contained"
-            size="large"
-            sx={{
-              backgroundColor: isSuccessful ? "#4caf50" : "",
-              color: "white",
-              transition: "background-color 0.3s ease-in-out",
-              borderRadius: "50px",
-              padding: "10px 30px",
-              fontWeight: "bold",
-              width: "100%",
-            }}
-            disabled={isSubmitting}
-            startIcon={
-              isSubmitting ? (
-                <CircularProgress size="1em" />
-              ) : isSuccessful ? (
-                <AiOutlineCheckCircle size="1em" />
-              ) : null
-            }
-          >
-            {isSubmitting ? "Sending..." : isSuccessful ? "Sent!" : "Send Message"}
-          </Button>
-        </Box>
-
-        {/* Disclaimer */}
-        <Box textAlign="center" mt={2}>
-          <p style={{ fontSize: "0.75rem", color: "#888" }}>
-            By submitting, you agree to receive emails from us.
-          </p>
-        </Box>
+        <motion.button
+          type="submit"
+          disabled={isSubmitting}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+          whileTap={{ y: isSubmitting ? 0 : 2 }}
+          className={`w-full py-4 px-8 rounded-lg font-semibold text-white transition-all duration-300 flex items-center justify-center gap-2 shadow-sm ${
+            isSuccessful
+              ? "bg-green-500 hover:bg-green-600"
+              : "bg-blue-600 hover:bg-blue-700"
+          } ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""}`}
+        >
+          {isSubmitting ? (
+            <motion.svg
+              className="h-5 w-5 text-white"
+              viewBox="0 0 24 24"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v8H4z"
+              />
+            </motion.svg>
+          ) : isSuccessful ? (
+            <AiOutlineCheckCircle className="text-xl" />
+          ) : null}
+          {isSubmitting ? "Sending..." : isSuccessful ? "Sent!" : "Send Message"}
+        </motion.button>
       </form>
-    </Container>
+    </motion.div>
   );
 };
 
-export default SimpleContactForm;
+export default ContactForm;
