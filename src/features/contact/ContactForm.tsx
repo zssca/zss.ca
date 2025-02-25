@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { FiSend, FiCheckCircle, FiXCircle } from "react-icons/fi";
-import { ImSpinner8 } from "react-icons/im";
+import {
+  TextField,
+  Button,
+  Container,
+  Box,
+  CircularProgress,
+  Alert,
+} from "@mui/material";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 interface FormData {
   name: string;
@@ -9,177 +16,201 @@ interface FormData {
   message: string;
 }
 
-const ContactForm = () => {
+const SimpleContactForm: React.FC = () => {
   const {
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
     reset,
-  } = useForm<FormData>({ mode: "onTouched" });
+  } = useForm<FormData>({
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+    mode: "onBlur",
+  });
 
-  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isSuccessful, setIsSuccessful] = useState(false);
 
-  const handleFormSubmit: SubmitHandler<FormData> = async (formData) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    setSuccessMessage(null);
+    setErrorMessage(null);
+    setIsSuccessful(false);
+
     try {
       const response = await fetch("/api/send-email", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to send email");
+        throw new Error(errorData.message || "Failed to submit form");
       }
 
-      setStatus({ type: "success", message: "Message sent successfully!" });
+      setSuccessMessage(
+        "Your message has been sent successfully! We will get back to you soon."
+      );
+      setIsSuccessful(true);
       reset();
+
+      setTimeout(() => {
+        setIsSuccessful(false);
+      }, 3000);
     } catch (err) {
-      console.error("Form submission error:", err);
-      const errorMessage = err instanceof Error ? err.message : "Failed to send message";
-      setStatus({ type: "error", message: errorMessage });
+      console.error("Error:", err);
+      if (err instanceof Error) {
+        setErrorMessage(err.message);
+      } else {
+        setErrorMessage("An unexpected error occurred. Please try again.");
+      }
     }
   };
 
   return (
-    <div className="">
-      <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
-        {status && (
-          <div
-            role="alert"
-            className={`p-4 rounded-md flex items-start gap-3 ${
-              status.type === "success"
-                ? "bg-green-50 text-green-700"
-                : "bg-red-50 text-red-700"
-            }`}
-          >
-            {status.type === "success" ? (
-              <FiCheckCircle className="shrink-0 mt-0.5" />
-            ) : (
-              <FiXCircle className="shrink-0 mt-0.5" />
-            )}
-            <p className="text-sm">{status.message}</p>
-          </div>
-        )}
+    <Container maxWidth="sm" sx={{ mt: 4, p: 3 }}>
+      {/* Success Message */}
+      {successMessage && (
+        <Alert
+          severity="success"
+          sx={{
+            mb: 2,
+            fontWeight: "bold",
+            backgroundColor: "#d4edda",
+            color: "#155724",
+            border: "1px solid #c3e6cb",
+            borderRadius: "8px",
+          }}
+        >
+          {successMessage}
+        </Alert>
+      )}
 
-        <div className="space-y-5">
-          <Controller
-            name="name"
-            control={control}
-            rules={{ required: "Name is required" }}
-            render={({ field }) => (
-              <div className="space-y-1">
-                <label htmlFor="name" className="text-sm font-medium text-gray-700">
-                  Full Name
-                </label>
-                <input
-                  {...field}
-                  id="name"
-                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 ${
-                    errors.name
-                      ? "border-red-300 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-300 focus:border-gray-500 focus:ring-gray-500"
-                  }`}
-                  aria-invalid={!!errors.name}
-                />
-                {errors.name && (
-                  <p role="alert" className="text-sm text-red-600">
-                    {errors.name.message}
-                  </p>
-                )}
-              </div>
-            )}
-          />
+      {/* Error Message */}
+      {errorMessage && (
+        <Alert
+          severity="error"
+          sx={{
+            mb: 2,
+            fontWeight: "bold",
+            backgroundColor: "#f8d7da",
+            color: "#721c24",
+            border: "1px solid #f5c6cb",
+            borderRadius: "8px",
+          }}
+        >
+          {errorMessage}
+        </Alert>
+      )}
 
-          <Controller
-            name="email"
-            control={control}
-            rules={{
-              required: "Email is required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
-              },
-            }}
-            render={({ field }) => (
-              <div className="space-y-1">
-                <label htmlFor="email" className="text-sm font-medium text-gray-700">
-                  Email Address
-                </label>
-                <input
-                  {...field}
-                  id="email"
-                  type="email"
-                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 ${
-                    errors.email
-                      ? "border-red-300 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-300 focus:border-gray-500 focus:ring-gray-500"
-                  }`}
-                  aria-invalid={!!errors.email}
-                />
-                {errors.email && (
-                  <p role="alert" className="text-sm text-red-600">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-            )}
-          />
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        {/* Name Field */}
+        <Controller
+          name="name"
+          control={control}
+          rules={{ required: "Name is required" }}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Name *"
+              placeholder="John Doe"
+              fullWidth
+              margin="normal"
+              disabled={isSubmitting}
+              error={!!errors.name}
+              helperText={errors.name?.message}
+            />
+          )}
+        />
 
-          <Controller
-            name="message"
-            control={control}
-            rules={{ required: "Message is required" }}
-            render={({ field }) => (
-              <div className="space-y-1">
-                <label htmlFor="message" className="text-sm font-medium text-gray-700">
-                  Message
-                </label>
-                <textarea
-                  {...field}
-                  id="message"
-                  rows={4}
-                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 ${
-                    errors.message
-                      ? "border-red-300 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-300 focus:border-gray-500 focus:ring-gray-500"
-                  }`}
-                  aria-invalid={!!errors.message}
-                />
-                {errors.message && (
-                  <p role="alert" className="text-sm text-red-600">
-                    {errors.message.message}
-                  </p>
-                )}
-              </div>
-            )}
-          />
+        {/* Email Field */}
+        <Controller
+          name="email"
+          control={control}
+          rules={{
+            required: "Email is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+              message: "Enter a valid email",
+            },
+          }}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Email *"
+              type="email"
+              placeholder="john@example.com"
+              fullWidth
+              margin="normal"
+              disabled={isSubmitting}
+              error={!!errors.email}
+              helperText={errors.email?.message}
+            />
+          )}
+        />
 
-          <button
+        {/* Message Field */}
+        <Controller
+          name="message"
+          control={control}
+          rules={{ required: "Message is required" }}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Message *"
+              placeholder="Your message here..."
+              fullWidth
+              margin="normal"
+              multiline
+              rows={4}
+              disabled={isSubmitting}
+              error={!!errors.message}
+              helperText={errors.message?.message}
+            />
+          )}
+        />
+
+        {/* Submit Button */}
+        <Box textAlign="center" mt={3}>
+          <Button
             type="submit"
+            variant="contained"
+            size="large"
+            sx={{
+              backgroundColor: isSuccessful ? "#4caf50" : "",
+              color: "white",
+              transition: "background-color 0.3s ease-in-out",
+              borderRadius: "50px",
+              padding: "10px 30px",
+              fontWeight: "bold",
+              width: "100%",
+            }}
             disabled={isSubmitting}
-            className="w-full bg-gray-800 text-white py-2.5 px-4 rounded-md hover:bg-gray-700 
-                     disabled:bg-gray-400 flex items-center justify-center gap-2 transition-colors
-                     focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            startIcon={
+              isSubmitting ? (
+                <CircularProgress size="1em" />
+              ) : isSuccessful ? (
+                <AiOutlineCheckCircle size="1em" />
+              ) : null
+            }
           >
-            {isSubmitting ? (
-              <>
-                <ImSpinner8 className="animate-spin" />
-                <span>Sending...</span>
-              </>
-            ) : (
-              <>
-                <FiSend className="shrink-0" />
-                <span>Send Message</span>
-              </>
-            )}
-          </button>
-        </div>
+            {isSubmitting ? "Sending..." : isSuccessful ? "Sent!" : "Send Message"}
+          </Button>
+        </Box>
+
+        {/* Disclaimer */}
+        <Box textAlign="center" mt={2}>
+          <p style={{ fontSize: "0.75rem", color: "#888" }}>
+            By submitting, you agree to receive emails from us.
+          </p>
+        </Box>
       </form>
-    </div>
+    </Container>
   );
 };
 
-export default ContactForm;
+export default SimpleContactForm;
