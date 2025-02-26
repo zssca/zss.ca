@@ -78,6 +78,7 @@ const PricingTable = () => {
         priceId: selectedPlan.priceId,
         userInfo: sanitizedUserInfo,
         planTitle: selectedPlan.title,
+        mode: 'payment', // Added for one-time payment
       });
 
       const response = await fetch('/api/create-checkout-session', {
@@ -87,6 +88,7 @@ const PricingTable = () => {
           priceId: selectedPlan.priceId,
           userInfo: sanitizedUserInfo,
           planTitle: selectedPlan.title,
+          mode: 'payment', // Explicitly specify one-time payment
         }),
       });
 
@@ -133,7 +135,7 @@ const PricingTable = () => {
           <div className="grid grid-cols-1 gap-6 pt-8 sm:grid-cols-2 md:grid-cols-4">
             {PRICING_TIERS.map((tier) => (
               <PricingCard
-                key={tier.title} // Unique key for each tier
+                key={tier.title}
                 title={tier.title}
                 price={tier.price}
                 priceId={tier.priceId}
@@ -143,7 +145,7 @@ const PricingTable = () => {
                 cta={tier.cta}
                 popular={tier.popular}
                 icon={tier.icon}
-                deliveryTime={tier.deliveryTime} // Added deliveryTime prop
+                deliveryTime={tier.deliveryTime}
                 onSelect={() => handlePlanSelect(tier)}
               />
             ))}

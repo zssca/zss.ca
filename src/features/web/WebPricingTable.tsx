@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { PRICING_TIERS } from './data';
+import { PRICING_TIERS } from './data'; // Should contain subscription tiers
 import { Step, PricingTier, UserInfo } from './types';
 import PricingCard from './PricingCard';
 import { Stepper } from './StepIndicator';
@@ -18,32 +18,28 @@ const PricingTable = () => {
     phone: '',
     address: '',
     city: '',
-    country: 'Canada', // Default country
+    country: 'Canada',
   });
   const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const [error, setError] = useState<string | null>(null); // Added for error feedback
+  const [error, setError] = useState<string | null>(null);
 
-  // Map steps to indices for Stepper
   const getStepIndex = (step: Step): number => {
     const steps: Step[] = ['plan', 'info', 'confirmation'];
     return steps.indexOf(step);
   };
 
-  // Handle plan selection and move to next step
   const handlePlanSelect = (plan: PricingTier) => {
     setSelectedPlan(plan);
     setCurrentStep('info');
-    setError(null); // Clear any previous errors
+    setError(null);
   };
 
-  // Validate user info before proceeding
   const validateUserInfo = (info: UserInfo): boolean => {
     const isNameValid = !!info.name.trim();
     const isEmailValid = !!info.email.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(info.email);
     return isNameValid && isEmailValid;
   };
 
-  // Handle checkout process
   const handleCheckout = async () => {
     if (!selectedPlan) {
       setError('Please select a plan first.');
@@ -62,7 +58,7 @@ const PricingTable = () => {
     }
 
     setIsCheckingOut(true);
-    setError(null); // Clear previous errors
+    setError(null);
 
     try {
       const stripe = await getStripe();
@@ -70,7 +66,6 @@ const PricingTable = () => {
         throw new Error('Stripe.js failed to load');
       }
 
-      // Sanitize userInfo to prevent excessively long inputs (Stripe metadata has limits)
       const sanitizedUserInfo = {
         name: userInfo.name.slice(0, 500),
         email: userInfo.email.slice(0, 500),
@@ -85,6 +80,7 @@ const PricingTable = () => {
         priceId: selectedPlan.priceId,
         userInfo: sanitizedUserInfo,
         planTitle: selectedPlan.title,
+        mode: 'subscription', // Changed to subscription mode
       });
 
       const response = await fetch('/api/create-checkout-session', {
@@ -95,7 +91,8 @@ const PricingTable = () => {
         body: JSON.stringify({
           priceId: selectedPlan.priceId,
           userInfo: sanitizedUserInfo,
-          planTitle: selectedPlan.title, // Include planTitle as required by API
+          planTitle: selectedPlan.title,
+          mode: 'subscription', // Explicitly specify subscription mode
         }),
       });
 
@@ -113,8 +110,6 @@ const PricingTable = () => {
         console.error('Stripe redirect error:', stripeError);
         throw new Error(stripeError.message);
       }
-
-      // Note: onComplete is typically not reached due to redirect, but kept for consistency
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
       console.error('Checkout error:', errorMessage);
@@ -127,22 +122,16 @@ const PricingTable = () => {
   return (
     <div className="w-full">
       <div className="mx-auto max-w-7xl">
-        {/* Stepper */}
         <div className="max-w-sm mx-auto mb-6">
-          <Stepper
-            steps={['Plan', 'Info', 'Confirm']}
-            currentStep={getStepIndex(currentStep)}
-          />
+          <Stepper steps={['Plan', 'Info', 'Confirm']} currentStep={getStepIndex(currentStep)} />
         </div>
 
-        {/* Error Display */}
         {error && (
           <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-md text-sm max-w-7xl mx-auto">
             {error}
           </div>
         )}
 
-        {/* Step Content */}
         {currentStep === 'plan' ? (
           <div className="grid grid-cols-1 gap-6 pt-8 sm:grid-cols-2 md:grid-cols-4">
             {PRICING_TIERS.map((tier) => (
