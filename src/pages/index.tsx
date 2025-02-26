@@ -28,8 +28,6 @@ export default function Home() {
           <HomeServices />
         </div>
 
-        {/* Projects Section */}
-
 
 
         {/* Services Section */}
