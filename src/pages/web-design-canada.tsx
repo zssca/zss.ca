@@ -7,8 +7,7 @@ import WebTestimonial from "@/features/web/WebTestimonial";
 import WebProjects from "@/features/web/WebProjects";
 import WebFaq from "@/features/web/WebFaq";
 import WebPricingTable from "@/features/web/WebPricingTable";
-import Link from 'next/link';
-import { FaArrowRight } from 'react-icons/fa'; // Importing right arrow icon from react-icons
+import WhatsAppButton from '@/components/common/WhatsAppButton';
 
 export default function Web() {
   return (
@@ -45,17 +44,10 @@ export default function Web() {
           <WebTestimonial />
         </div>
 
-        {/* Button with Arrow Icon and Hover Animation */}
-        <Link
-          href="/contact"
-          className="col-span-12 md:col-span-5 row-span-1 bg-white rounded-xl flex items-center justify-center shadow-sm group"
-        >
-          <button className="shiny-cta w-full h-full p-4 flex items-center justify-center gap-4">
-            <span>Get a Free Consultation</span>
-            <FaArrowRight className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-2" />
-          </button>
-        </Link>
 
+        <div className="col-span-12 md:col-span-5 row-span-1 bg-white rounded-xl flex items-center justify-center shadow-sm overflow-hidden">
+          <WhatsAppButton />
+        </div>
         {/* Pricing Table */}
         <div className="col-span-12 bg-white rounded-xl p-2 pt-6 shadow-sm">
           <WebPricingTable />
