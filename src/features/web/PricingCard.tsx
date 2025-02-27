@@ -12,7 +12,7 @@ interface PricingCardProps extends PricingTier {
 const PricingCard: React.FC<PricingCardProps> = ({ onSelect, ...tier }) => {
   const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
   const planIcons = {
-    'Basic': <FiZap className="h-6 w-6" />, // Added for new Basic plan
+    'Basic': <FiZap className="h-6 w-6" />,
     'Starter': <FiLayout className="h-6 w-6" />,
     'Professional': <FiPenTool className="h-6 w-6" />,
     'Enterprise': <FiServer className="h-6 w-6" />,
@@ -54,6 +54,11 @@ const PricingCard: React.FC<PricingCardProps> = ({ onSelect, ...tier }) => {
         </div>
         {tier.note && (
           <p className="mt-1 text-xs text-gray-500 italic">{tier.note}</p>
+        )}
+        {tier.initialSetupTime && (
+          <p className="mt-1 text-xs text-gray-600">
+            <span className="font-medium">Initial Setup:</span> {tier.initialSetupTime}
+          </p>
         )}
       </div>
 

@@ -10,6 +10,9 @@ import WebPricingTable from "@/features/web/WebPricingTable";
 import WhatsAppButton from '@/components/common/WhatsAppButton';
 
 export default function Web() {
+  // Custom message about website design
+  const whatsappMessage = "Hi! I'm interested in your website design services. Can you tell me more about your pricing and process?";
+
   return (
     <MainLayout>
       {/* Main Grid Layout */}
@@ -44,10 +47,11 @@ export default function Web() {
           <WebTestimonial />
         </div>
 
-
+        {/* WhatsApp Button Section */}
         <div className="col-span-12 md:col-span-5 row-span-1 bg-white rounded-xl flex items-center justify-center shadow-sm overflow-hidden">
-          <WhatsAppButton />
+          <WhatsAppButton message={whatsappMessage} />
         </div>
+
         {/* Pricing Table */}
         <div className="col-span-12 bg-white rounded-xl p-2 pt-6 shadow-sm">
           <WebPricingTable />

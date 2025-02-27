@@ -3,10 +3,16 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { FC } from 'react';
 import { motion } from 'framer-motion';
 
-const WhatsAppButton: FC = () => {
+// Define props interface for the component
+interface WhatsAppButtonProps {
+  message?: string; // Optional prop for custom message
+}
+
+const WhatsAppButton: FC<WhatsAppButtonProps> = ({ message }) => {
   const phoneNumber = "+14039093133";
-  const message = "Hi! I'd like to chat about your services. Are you available?";
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  // Use the provided message or fall back to a default
+  const defaultMessage = message || "Hi! I'd like to chat about your services. Are you available?";
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
   const buttonVariants = {
     hover: { 

@@ -17,9 +17,8 @@ export default function Contact() {
 
           {/* Second Column - Contact Form */}
           <div
-            className="col-span-12 md:col-span-6 row-span-3 bg-white rounded-xl p-4 flex flex-col shadow-sm"
+            className="col-span-12 md:col-span-6 row-span-3 bg-white rounded-xl p-2 flex flex-col shadow-sm"
           >
-            <h2 className="text-3xl font-bold mb-6">Send us a message</h2>
             <div className="flex-grow">
               <ContactForm />
             </div>

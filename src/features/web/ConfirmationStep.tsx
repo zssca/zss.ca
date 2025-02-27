@@ -91,6 +91,11 @@ const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
               <span className="text-gray-500 text-sm">/mo</span>
             </div>
             {plan.note && <p className="mt-1 text-xs text-gray-500 italic">{plan.note}</p>}
+            {plan.initialSetupTime && (
+              <p className="mt-1 text-xs text-gray-600">
+                <span className="font-medium">Initial Setup:</span> {plan.initialSetupTime}
+              </p>
+            )}
           </div>
 
           <div className="border-t border-gray-200 pt-4">
@@ -177,7 +182,7 @@ const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
           }`}
           aria-label={`Confirm purchase for ${plan.title} plan${isLoading ? ' (processing)' : ''}`}
         >
-          {isLoading ? 'Processing...' : 'Proceed to Payment'}
+          {isLoading ? 'Processing...' : `${plan.cta}`} {/* Updated to use plan.cta */}
           <FiArrowRight className="h-4 w-4 ml-1" />
         </button>
       </div>

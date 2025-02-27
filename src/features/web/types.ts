@@ -4,9 +4,10 @@ export type Step = 'plan' | 'info' | 'confirmation';
 export interface PricingTier {
   title: string;
   price: string;
-  priceId: string; // Add this line to include priceId
+  priceId: string;
   description: string;
   note?: string;
+  initialSetupTime?: string; // Added optional field
   features: string[];
   cta: string;
   popular?: boolean;

@@ -6,9 +6,10 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Basic',
     price: '29',
-    priceId: 'price_1Qvq87P9fFsmlAaFwG5wtLba', // Replace with actual recurring Stripe Price ID (e.g., $29/month)
+    priceId: 'price_1Qvq87P9fFsmlAaFwG5wtLba',
     description: 'Affordable website essentials, billed monthly',
     note: 'Perfect for startups needing a simple online presence',
+    initialSetupTime: '1-2 weeks',
     features: [
       '3 Page Website (Home, About, Contact)',
       'Mobile-Friendly Design',
@@ -18,15 +19,16 @@ export const PRICING_TIERS: PricingTier[] = [
       'Domain & Hosting Included',
       'Monthly Support & Updates'
     ],
-    cta: 'Subscribe Now',
+    cta: 'Launch Easy', // Updated CTA
     icon: React.createElement(FiZap, { className: "h-6 w-6" }),
   },
   {
     title: 'Starter',
     price: '49',
-    priceId: 'price_1Qvq86P9fFsmlAaFuNiEIMYL', // Replace with actual recurring Stripe Price ID (e.g., $49/month)
+    priceId: 'price_1Qvq86P9fFsmlAaFuNiEIMYL',
     description: 'Your business online, with monthly enhancements',
     note: 'Great for growing ventures with ongoing needs',
+    initialSetupTime: '2-3 weeks',
     features: [
       '5 Page Website (Customizable)',
       'Mobile-First, Sleek Design',
@@ -36,15 +38,16 @@ export const PRICING_TIERS: PricingTier[] = [
       'Domain & Hosting Included',
       'Monthly Updates & Support'
     ],
-    cta: 'Subscribe Now',
+    cta: 'Grow Now', // Updated CTA
     icon: React.createElement(FiLayout, { className: "h-6 w-6" }),
   },
   {
     title: 'Professional',
     price: '149',
-    priceId: 'price_1Qvpn7P9fFsmlAaFASKKtnmA', // Replace with actual recurring Stripe Price ID (e.g., $149/month)
+    priceId: 'price_1Qvpn7P9fFsmlAaFASKKtnmA',
     description: 'Pro-grade website management, billed monthly',
     note: 'Best for businesses scaling up with premium tools',
+    initialSetupTime: '3-4 weeks',
     features: [
       '15 Page Website (Tailored Layout)',
       'Unique, Custom Design',
@@ -54,16 +57,17 @@ export const PRICING_TIERS: PricingTier[] = [
       'Portfolio or Testimonials',
       'Domain, Hosting & Ongoing Care'
     ],
-    cta: 'Subscribe Now',
+    cta: 'Scale Smart', // Updated CTA
     popular: true,
     icon: React.createElement(FiPenTool, { className: "h-6 w-6" }),
   },
   {
     title: 'Enterprise',
     price: '499',
-    priceId: 'price_1Qvq86P9fFsmlAaFFUyGPYpa', // Replace with actual recurring Stripe Price ID (e.g., $499/month)
+    priceId: 'price_1Qvq86P9fFsmlAaFFUyGPYpa',
     description: 'Total web domination with monthly bespoke service',
     note: 'Tailored for enterprises aiming to lead',
+    initialSetupTime: '4-6 weeks',
     features: [
       'Unlimited Pages & Sections',
       'Bespoke Web Solutions',
@@ -73,7 +77,7 @@ export const PRICING_TIERS: PricingTier[] = [
       'Top-Tier Security',
       '24/7 Priority Support'
     ],
-    cta: 'Subscribe Now',
+    cta: 'Dominate Today', // Updated CTA
     icon: React.createElement(FiServer, { className: "h-6 w-6" }),
   },
 ];

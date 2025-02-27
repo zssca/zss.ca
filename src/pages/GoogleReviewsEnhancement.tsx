@@ -10,6 +10,9 @@ import WhatsAppButton from '@/components/common/WhatsAppButton';
 import { FC } from 'react';
 
 const GoogleReviews: FC = () => {
+  // Custom message relevant to the pricing plans
+  const whatsappMessage = "Hi! I'm interested in your Google Reviews pricing plans. Can you tell me more about the options?";
+
   return (
     <MainLayout>
       {/* Main Grid Layout */}
@@ -26,7 +29,7 @@ const GoogleReviews: FC = () => {
 
         {/* WhatsApp Button Section */}
         <div className="col-span-12 md:col-span-5 row-span-1 rounded-xl flex items-center justify-center overflow-hidden">
-          <WhatsAppButton />
+          <WhatsAppButton message={whatsappMessage} />
         </div>
         
         {/* Services Section */}
