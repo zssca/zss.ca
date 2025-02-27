@@ -1,5 +1,4 @@
 // src/pages/_document.tsx
-
 import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
 import { FC } from "react";
@@ -15,8 +14,9 @@ const Document: FC = () => {
         <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/web-app-manifest-512x512.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#ffffff" />
-        <meta name="msapplication-TileColor" content="#ffffff" />
+        {/* Set theme-color to Tailwind gray-200 (#e5e7eb) */}
+        <meta name="theme-color" content="#e5e7eb" />
+        <meta name="msapplication-TileColor" content="#e5e7eb" />
         <meta name="msapplication-TileImage" content="/web-app-manifest-192x192.png" />
       </Head>
       <body>

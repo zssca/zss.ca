@@ -1,8 +1,14 @@
+// src/layouts/MainLayout.tsx
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
+import { FC, ReactNode } from "react";
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
+interface MainLayoutProps {
+  children: ReactNode;
+}
+
+const MainLayout: FC<MainLayoutProps> = ({ children }) => {
   return (
     <div className="main-layout flex flex-col min-h-screen mx-auto max-w-7xl">
       {/* Scroll Progress Bar */}
@@ -28,4 +34,6 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       <Footer />
     </div>
   );
-}
+};
+
+export default MainLayout;
