@@ -57,43 +57,43 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg p-4 w-full mx-auto">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="p-2 rounded-lg bg-blue-100 text-blue-700">
-          <FiMessageSquare className="h-6 w-6" />
+    <div className="bg-white rounded-lg p-2 w-full mx-auto">
+      <div className="flex items-center gap-4 mb-8">
+        <div className="p-3 rounded-lg bg-blue-100 text-blue-700">
+          <FiMessageSquare className="h-7 w-7" />
         </div>
         <div>
-          <h3 className="text-xl font-semibold text-gray-900 tracking-tight">Contact Us</h3>
-          <p className="text-sm text-gray-600">Send us a message with your details</p>
+          <h3 className="text-2xl font-semibold text-gray-900 tracking-tight">Contact Us</h3>
+          <p className="text-base text-gray-600">Send us a message with your details</p>
         </div>
       </div>
 
       {successMessage && (
-        <div className="mb-6 p-3 bg-green-50 border border-green-200 text-green-700 rounded-md text-xs">
+        <div className="mb-8 p-4 bg-green-50 border border-green-200 text-green-700 rounded-md text-sm">
           {successMessage}
         </div>
       )}
 
       {errorMessage && (
-        <div className="mb-6 p-3 bg-red-50 border border-red-200 text-red-700 rounded-md text-sm">
+        <div className="mb-8 p-4 bg-red-50 border border-red-200 text-red-700 rounded-md text-sm">
           {errorMessage}
         </div>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
         <Controller
           name="name"
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
             <div className="relative">
-              <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600" />
+              <FiUser className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-600" />
               <input
                 {...field}
                 type="text"
                 placeholder="Full Name"
                 disabled={isSubmitting}
-                className={`w-full pl-10 pr-4 py-2 border rounded-md outline-none transition-colors duration-200 ${
+                className={`w-full pl-12 pr-5 py-4 border rounded-md outline-none text-base transition-colors duration-200 ${
                   errors.name 
                     ? "border-red-200 focus:ring-2 focus:ring-red-100 focus:border-red-500" 
                     : "border-gray-200 focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
@@ -112,13 +112,13 @@ const ContactForm: React.FC = () => {
           }}
           render={({ field }) => (
             <div className="relative">
-              <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600" />
+              <FiMail className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-600" />
               <input
                 {...field}
                 type="email"
                 placeholder="Email Address"
                 disabled={isSubmitting}
-                className={`w-full pl-10 pr-4 py-2 border rounded-md outline-none transition-colors duration-200 ${
+                className={`w-full pl-12 pr-5 py-4 border rounded-md outline-none text-base transition-colors duration-200 ${
                   errors.email 
                     ? "border-red-200 focus:ring-2 focus:ring-red-100 focus:border-red-500" 
                     : "border-gray-200 focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
@@ -136,13 +136,13 @@ const ContactForm: React.FC = () => {
           }}
           render={({ field }) => (
             <div className="relative">
-              <FiPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600" />
+              <FiPhone className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-600" />
               <input
                 {...field}
                 type="tel"
                 placeholder="Phone Number"
                 disabled={isSubmitting}
-                className={`w-full pl-10 pr-4 py-2 border rounded-md outline-none transition-colors duration-200 ${
+                className={`w-full pl-12 pr-5 py-4 border rounded-md outline-none text-base transition-colors duration-200 ${
                   errors.phone 
                     ? "border-red-200 focus:ring-2 focus:ring-red-100 focus:border-red-500" 
                     : "border-gray-200 focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
@@ -158,12 +158,12 @@ const ContactForm: React.FC = () => {
           rules={{ required: true }}
           render={({ field }) => (
             <div className="relative">
-              <FiMessageSquare className="absolute left-3 top-4 h-4 w-4 text-gray-600" />
+              <FiMessageSquare className="absolute left-4 top-5 h-5 w-5 text-gray-600" />
               <textarea
                 {...field}
                 placeholder="Your Message"
                 disabled={isSubmitting}
-                className={`w-full pl-10 pr-4 py-2 border rounded-md min-h-[100px] outline-none transition-colors duration-200 ${
+                className={`w-full pl-12 pr-5 py-4 border rounded-md min-h-[150px] outline-none text-base transition-colors duration-200 ${
                   errors.message 
                     ? "border-red-200 focus:ring-2 focus:ring-red-100 focus:border-red-500" 
                     : "border-gray-200 focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
@@ -173,18 +173,18 @@ const ContactForm: React.FC = () => {
           )}
         />
 
-        <div className="flex flex-col gap-3 mt-8">
+        <div className="flex flex-col gap-4 mt-10">
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full px-4 py-2 rounded-md font-medium text-sm transition-colors duration-200 flex items-center justify-center shadow-sm ${
+            className={`w-full px-6 py-4 rounded-md font-medium text-base transition-colors duration-200 flex items-center justify-center shadow-sm ${
               isSubmitting 
                 ? "opacity-50 cursor-not-allowed bg-gray-200 text-gray-500" 
                 : "bg-blue-600 text-white hover:bg-blue-700"
             }`}
           >
             {isSubmitting ? "Sending..." : "Send Message"}
-            {!isSubmitting && <FiArrowRight className="h-4 w-4 ml-2" />}
+            {!isSubmitting && <FiArrowRight className="h-5 w-5 ml-3" />}
           </button>
         </div>
       </form>
