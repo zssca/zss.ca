@@ -40,11 +40,11 @@ const ComparisonTable: React.FC = () => {
           <FiStar className="h-9 w-9 text-yellow-600" />
         </span>
         <div>
-          <h3 className="text-xl font-semibold text-gray-900 tracking-tight">
-            Why Zenith?
+          <h3 className="text-lg font-semibold text-gray-900 tracking-tight">
+            Why Zenith Strategic Solutions?
           </h3>
           <p className="text-gray-600 text-xs leading-relaxed">
-            Compare Zenith with DIY and Digital Agency solutions.
+            Compare Us with other options.
           </p>
         </div>
       </div>

@@ -2,71 +2,92 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown, FiHelpCircle } from "react-icons/fi";
 
-const HomeFaq = () => {
+const WebFaq = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-  // FAQ data structure
+  // FAQ data structure tailored for small business owners and startups
   const faqColumns = [
     [
       {
-        question: "How can a professional website help my local business compete?",
-        answer: `A high-quality website acts as your 24/7 sales rep - building credibility and showcasing what makes your business unique. 87% of consumers research online before visiting, and our custom-crafted sites help you win those crucial first impressions against bigger competitors.`,
+        question: "How can a Zenith website boost my small business in Canada?",
+        answer: `A Zenith website is your 24/7 growth engine—custom-built to showcase your unique brand and attract local customers. With over 87% of people researching online before buying, our sleek, mobile-first designs help you stand out and win against bigger competitors.`,
       },
       {
-        question: "What makes your websites better for attracting local customers?",
-        answer: `We optimize every site for local SEO with Google Business Profile integration, service area targeting, and mobile-first design. Over 60% of web traffic comes from phones - our responsive designs ensure seamless experiences that convert browsers into buyers.`,
+        question: "How do you help me dominate local search results?",
+        answer: `We bake advanced local SEO into every site—think Google Maps integration, service area targeting, and keyword optimization. With 220+ SEO-optimized sites delivered, we ensure your business ranks high when nearby customers search for your services.`,
       },
       {
-        question: "I'm not tech-savvy - can I manage the website myself?",
-        answer: `Absolutely! We build on user-friendly platforms with simple drag-and-drop editors. Plus, we provide free video tutorials and priority support. Most owners learn to update content in under 30 minutes - no coding needed!`,
+        question: "How fast can I get my business online with Zenith?",
+        answer: `Our Basic plan launches a 3-page site in days, perfect for startups. Clients like Sarah’s Artisan Bakery saw 40-50% more traffic within 90 days. We handle the heavy lifting so you can focus on running your business.`,
       },
       {
-        question: "How quickly will I see results from my new website?",
-        answer: `Our clients typically see 40-60% more web traffic within 90 days. We implement immediate SEO fundamentals during launch and provide monthly performance reports to track your growth.`,
+        question: "Can Zenith create content and visuals for my website?",
+        answer: `Absolutely! We offer professional photography and copywriting that reflect your brand—like we did for Mei’s Tea House, doubling their online orders. Your site will pop with compelling visuals and words that convert.`,
       },
       {
-        question: "Can you help with photos and content for my site?",
-        answer: `Yes! Our full-service package includes professional photography and copywriting tailored to your brand voice. We'll highlight your unique value proposition and craft compelling calls-to-action that drive conversions.`,
+        question: "What’s included in your pricing plans?",
+        answer: `Every plan includes free hosting, a domain (1st year), SSL security, SEO basics, and maintenance. From $29/mo for Basic to $499/mo for Enterprise, you get transparent value—no hidden fees, just results.`,
+      },
+      {
+        question: "How do you ensure my site loads lightning-fast?",
+        answer: `Speed matters—53% of mobile users ditch slow sites. With 190+ high-speed sites delivered, we use optimized code, image compression, and premium hosting to hit 90+ Google PageSpeed scores, loading in under 1.5 seconds.`,
+      },
+      {
+        question: "Can you revamp my outdated website?",
+        answer: `Yes! We’ve completed 140+ redesigns, like TechFix Solutions, boosting their visibility. We’ll modernize your site, keep your brand intact, and make it a customer magnet with better conversions.`,
       },
     ],
     [
       {
-        question: "What's included in your web design pricing?",
-        answer: `Our transparent packages include hosting setup, SSL security, contact forms, SEO optimization, and 12 months of maintenance. No hidden fees - we'll provide a detailed proposal showing exactly how we'll help grow your business.`,
+        question: "How will my site grow with my business?",
+        answer: `Our scalable, cloud-powered designs—like those for Wilson Home Decor—let you add pages, services, or bookings effortlessly. Start small with 3 pages or scale to unlimited with our Enterprise plan.`,
       },
       {
-        question: "How do you make websites load faster?",
-        answer: `Speed is crucial - 53% of mobile users leave slow sites. We use optimized coding, image compression, and premium hosting to achieve 90+ Google PageSpeed scores. Most client sites load in under 1.5 seconds.`,
+        question: "Will my site turn visitors into loyal customers?",
+        answer: `Yes! With custom features like hassle-free booking (think Tranquil Yoga Studio) and lead-capturing forms, plus 300+ landing pages created, we craft experiences that keep customers coming back.`,
       },
       {
-        question: "Can you update my existing website?",
-        answer: `Absolutely! 70% of our projects are website revamps. We'll analyze your current site, identify improvements, and implement modern designs that convert better while preserving your brand identity.`,
+        question: "How do you amplify my social media reach?",
+        answer: `We integrate your site with social platforms, driving traffic both ways. Clients like Adjei Music Studio use this to promote offers and book clients seamlessly, growing their audience fast.`,
       },
       {
-        question: "How will my website handle future growth?",
-        answer: `We build scalable sites with easy expansion capabilities. Add new services, team members, or locations with just a few clicks. Our modular designs grow with your business at minimal cost.`,
+        question: "What security measures protect my website?",
+        answer: `Rock-solid security is standard—SSL encryption, regular backups, and monitoring keep your site safe. Our Enterprise clients, like Elite Fitness Center, enjoy enterprise-grade protection for peace of mind.`,
       },
       {
-        question: "Do you help with marketing after launch?",
-        answer: `Yes! Choose our Growth Package for Google Ads management, social media integration, and email marketing setup. We'll help implement automated systems to turn visitors into repeat customers.`,
+        question: "Can Zenith help with marketing after launch?",
+        answer: `Definitely! Add our Growth Package for Google Ads, social media tools, and email marketing—like we did for Al-Sayed Travel Agency. We’ll set up systems to turn visitors into repeat buyers.`,
       },
-    ]
+      {
+        question: "How does Zenith ensure a great user experience?",
+        answer: `Our professional UX/UI designs—like those for Gupta Language Academy—make navigation effortless on any device. With 60% of traffic from mobile, we prioritize sleek, responsive layouts that delight users.`,
+      },
+      {
+        question: "Why choose Zenith over DIY or other agencies?",
+        answer: `Unlike DIY struggles or pricey agencies ($5,000+), Zenith offers custom designs, advanced SEO, and support from $29/mo. With 180+ businesses launched, we deliver results that scale your success without breaking the bank.`,
+      },
+    ],
   ];
 
   return (
     <section className="pt-4 mx-auto max-w-7xl">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">
-          Frequently Asked Questions
-        </h2>
-        <p className="text-gray-600 text-sm sm:text-base">
-          Find answers to the most common questions about our services
-        </p>
+      <div className="mb-4 ml-4 flex items-start gap-3">
+        <span className="bg-blue-100 p-1.5 rounded-lg">
+          <FiHelpCircle className="h-9 w-9 text-blue-600" />
+        </span>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 tracking-tight">
+            Frequently Asked Questions
+          </h3>
+          <p className="text-gray-600 text-xs leading-relaxed">
+  Got questions? We’ve got answers—learn how Zenith’s website design make growing your small business or startup a breeze.
+</p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
@@ -117,4 +138,4 @@ const HomeFaq = () => {
   );
 };
 
-export default HomeFaq;
+export default WebFaq;

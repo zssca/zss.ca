@@ -89,7 +89,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ onSelect, ...tier }) => {
                 <div className={`flex-shrink-0 p-1 rounded-md ${tier.popular ? 'bg-blue-100' : 'bg-gray-100'}`}>
                   <FiCheck className="h-3 w-3 text-green-500" />
                 </div>
-                <span className="text-xs pt-[2px] leading-tight">{feature}</span>
+                <span className="text-xs pt-[3px] leading-tight">{feature}</span>
               </li>
             ))}
           </ul>

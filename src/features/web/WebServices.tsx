@@ -1,32 +1,34 @@
+'use client';
 import React from 'react';
 import { 
   FiMonitor, 
-  FiDroplet,
+  FiStar, 
   FiSearch, 
-  FiShare2,
-  FiShield,
-  FiZap,
-  FiLayout,
-  FiCloud,
-  FiUsers,
-  FiMapPin,
-  FiPhoneCall
+  FiShare2, 
+  FiShield, 
+  FiZap, 
+  FiLayout, 
+  FiCloud, 
+  FiUsers, 
+  FiMapPin, 
+  FiPhoneCall, 
+  FiCalendar 
 } from 'react-icons/fi';
 
-export default function Services() {
+const Services: React.FC = () => {
   const features = [
-    { name: "Mobile-Friendly Design", icon: <FiMonitor /> },
-    { name: "Strong Local Branding", icon: <FiDroplet /> },
-    { name: "SEO for Local Search", icon: <FiSearch /> },
-    { name: "Social Media Connection", icon: <FiShare2 /> },
-    { name: "Fast Loading & Performance", icon: <FiZap /> },
-    { name: "Secure & Reliable Hosting", icon: <FiShield /> },
-    { name: "User-Friendly Navigation", icon: <FiLayout /> },
-    { name: "Easy Online Booking", icon: <FiPhoneCall /> },
-    { name: "Google Maps Integration", icon: <FiMapPin /> },
-    { name: "Cloud-Based Scalability", icon: <FiCloud /> },
-    { name: "Customer Engagement Features", icon: <FiUsers /> },
-    { name: "Comprehensive Contact Options", icon: <FiPhoneCall /> },
+    { name: "Sleek Mobile-First Design", icon: <FiMonitor />, id: "mobile-design" },
+    { name: "Bold Local Brand Identity", icon: <FiStar />, id: "local-branding" },
+    { name: "Dominate Local SEO", icon: <FiSearch />, id: "seo-local" },
+    { name: "Amplify Your Social Reach", icon: <FiShare2 />, id: "social-media" },
+    { name: "Lightning-Fast Load Times", icon: <FiZap />, id: "performance" },
+    { name: "Rock-Solid Security & Hosting", icon: <FiShield />, id: "hosting" },
+    { name: "Effortless User Experience", icon: <FiLayout />, id: "navigation" },
+    { name: "Hassle-Free Online Booking", icon: <FiCalendar />, id: "booking" },
+    { name: "Pinpoint Google Maps Presence", icon: <FiMapPin />, id: "maps" },
+    { name: "Grow Big with Cloud Power", icon: <FiCloud />, id: "scalability" },
+    { name: "Turn Visitors into Loyal Clients", icon: <FiUsers />, id: "engagement" },
+    { name: "Connect Instantly with Customers", icon: <FiPhoneCall />, id: "contact" },
   ];
 
   return (
@@ -58,3 +60,5 @@ export default function Services() {
     </div>
   );
 }
+
+export default Services;

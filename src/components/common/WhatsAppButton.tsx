@@ -64,13 +64,13 @@ const WhatsAppButton: FC<WhatsAppButtonProps> = ({ message }) => {
                 )}
               </motion.div>
               <div className="flex flex-col">
-                <span className="text-xs text-white/90 uppercase tracking-wider font-medium">
+                <span className="text-xs text-white/90 uppercase tracking-wider font-light">
                   {isMobile ? 'Online Now' : 'Get in Touch'}
                 </span>
-                <span className={`font-semibold text-white leading-tight ${
+                <span className={`font-medium text-white tracking-tight leading-tight ${
                   isMobile ? 'text-base md:text-lg' : 'text-sm md:text-base'
                 }`}>
-                  {isMobile ? 'Chat About Our Services' : 'Contact Us'}
+                  {isMobile ? 'Get a Free Consultation on Whatsapp' : 'Get a Free Consultation '}
                 </span>
               </div>
             </div>
