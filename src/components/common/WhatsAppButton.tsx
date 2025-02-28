@@ -12,7 +12,7 @@ const WhatsAppButton: FC<WhatsAppButtonProps> = ({ message }) => {
   const phoneNumber = "+14039093133";
   const defaultMessage = message || "Hi! I'd like to chat about your services. Are you available?";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
-  const contactUsUrl = "/contact-us";
+  const contactUsUrl = "/contact";
 
   useEffect(() => {
     const checkMobile = () => {

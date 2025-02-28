@@ -69,13 +69,13 @@ const ContactForm: React.FC = () => {
       </div>
 
       {successMessage && (
-        <div className="mb-8 p-4 bg-green-50 border border-green-200 text-green-700 rounded-md text-sm">
+        <div className="mb-8 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg text-sm">
           {successMessage}
         </div>
       )}
 
       {errorMessage && (
-        <div className="mb-8 p-4 bg-red-50 border border-red-200 text-red-700 rounded-md text-sm">
+        <div className="mb-8 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
           {errorMessage}
         </div>
       )}
@@ -93,7 +93,7 @@ const ContactForm: React.FC = () => {
                 type="text"
                 placeholder="Full Name"
                 disabled={isSubmitting}
-                className={`w-full pl-12 pr-5 py-4 border rounded-md outline-none text-base transition-colors duration-200 ${
+                className={`w-full pl-12 pr-5 py-4 border rounded-lg outline-none text-base transition-colors duration-200 ${
                   errors.name 
                     ? "border-red-200 focus:ring-2 focus:ring-red-100 focus:border-red-500" 
                     : "border-gray-200 focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
@@ -118,7 +118,7 @@ const ContactForm: React.FC = () => {
                 type="email"
                 placeholder="Email Address"
                 disabled={isSubmitting}
-                className={`w-full pl-12 pr-5 py-4 border rounded-md outline-none text-base transition-colors duration-200 ${
+                className={`w-full pl-12 pr-5 py-4 border rounded-lg outline-none text-base transition-colors duration-200 ${
                   errors.email 
                     ? "border-red-200 focus:ring-2 focus:ring-red-100 focus:border-red-500" 
                     : "border-gray-200 focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
@@ -142,7 +142,7 @@ const ContactForm: React.FC = () => {
                 type="tel"
                 placeholder="Phone Number"
                 disabled={isSubmitting}
-                className={`w-full pl-12 pr-5 py-4 border rounded-md outline-none text-base transition-colors duration-200 ${
+                className={`w-full pl-12 pr-5 py-4 border rounded-lg outline-none text-base transition-colors duration-200 ${
                   errors.phone 
                     ? "border-red-200 focus:ring-2 focus:ring-red-100 focus:border-red-500" 
                     : "border-gray-200 focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
@@ -163,7 +163,7 @@ const ContactForm: React.FC = () => {
                 {...field}
                 placeholder="Your Message"
                 disabled={isSubmitting}
-                className={`w-full pl-12 pr-5 py-4 border rounded-md min-h-[150px] outline-none text-base transition-colors duration-200 ${
+                className={`w-full pl-12 pr-5 py-4 border rounded-lg min-h-[150px] outline-none text-base transition-colors duration-200 ${
                   errors.message 
                     ? "border-red-200 focus:ring-2 focus:ring-red-100 focus:border-red-500" 
                     : "border-gray-200 focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
@@ -177,7 +177,7 @@ const ContactForm: React.FC = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full px-6 py-4 rounded-md font-medium text-base transition-colors duration-200 flex items-center justify-center shadow-sm ${
+            className={`w-full px-6 py-4 rounded-lg font-medium text-base transition-colors duration-200 flex items-center justify-center shadow-sm ${
               isSubmitting 
                 ? "opacity-50 cursor-not-allowed bg-gray-200 text-gray-500" 
                 : "bg-blue-600 text-white hover:bg-blue-700"

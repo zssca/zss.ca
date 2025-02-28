@@ -122,7 +122,7 @@ const PricingTable = () => {
   return (
     <div className="w-full">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-sm mx-auto mb-6">
+        <div className="max-w-sm mx-auto">
           <Stepper steps={['Plan', 'Info', 'Confirm']} currentStep={getStepIndex(currentStep)} />
         </div>
 
@@ -143,7 +143,7 @@ const PricingTable = () => {
             ))}
           </div>
         ) : (
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             {currentStep === 'info' && (
               <InfoStep
                 userInfo={userInfo}

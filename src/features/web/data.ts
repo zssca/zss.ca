@@ -1,3 +1,4 @@
+// src\features\web\data.ts
 import React from 'react';
 import { FiLayout, FiPenTool, FiServer, FiZap } from 'react-icons/fi';
 import { PricingTier } from './types';
@@ -6,78 +7,74 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Basic',
     price: '29',
-    priceId: 'price_1Qvq87P9fFsmlAaFwG5wtLba',
-    description: 'Affordable website essentials, billed monthly',
-    note: 'Perfect for startups needing a simple online presence',
-    initialSetupTime: '1-2 weeks',
+    priceId: 'price_1Qvq87P9fFsmlAaFwG5wtLba', // Replace with your actual Stripe Price ID
+    description: 'Launch your presence with a sleek, no-fuss Next.js website—ideal for tight budgets and new ventures.',
+    note: 'Get online quickly with the essentials.',
     features: [
-      '3 Page Website (Home, About, Contact)',
-      'Mobile-Friendly Design',
-      'Basic SEO Setup',
-      'Contact Form Included',
-      'Social Media Links',
-      'Domain & Hosting Included',
-      'Monthly Support & Updates'
+      'Quick launch: 3-page Next.js site',
+      'Mobile-ready design',
+      'Essential SEO & SSL security',
+      'Lead capture with contact form',
+      'Social media integration',
+      'Free domain & hosting (1st year)',
+      'Basic upkeep & content tips',
     ],
-    cta: 'Launch Easy', // Updated CTA
-    icon: React.createElement(FiZap, { className: "h-6 w-6" }),
+    cta: 'Start Simple',
+    icon: React.createElement(FiZap, { className: 'h-6 w-6' }),
   },
   {
     title: 'Starter',
     price: '49',
-    priceId: 'price_1Qvq86P9fFsmlAaFuNiEIMYL',
-    description: 'Your business online, with monthly enhancements',
-    note: 'Great for growing ventures with ongoing needs',
-    initialSetupTime: '2-3 weeks',
+    priceId: 'price_1Qvq86P9fFsmlAaFuNiEIMYL', // Replace with your actual Stripe Price ID
+    description: 'Strengthen your brand with a polished Next.js website that caters to growing businesses.',
+    note: 'Expand your reach with more features.',
     features: [
-      '5 Page Website (Customizable)',
-      'Mobile-First, Sleek Design',
-      'Essential SEO Boost',
-      'Contact Form + Google Map',
-      'Social Media Integration',
-      'Domain & Hosting Included',
-      'Monthly Updates & Support'
+      'Grow your reach: 5-page site',
+      'Boost visibility with enhanced SEO',
+      'Custom forms for better engagement',
+      'Optional blog to share your story',
+      'Track success with analytics',
+      'Free domain & hosting (1st year)',
+      'Reliable maintenance & support',
     ],
-    cta: 'Grow Now', // Updated CTA
-    icon: React.createElement(FiLayout, { className: "h-6 w-6" }),
+    cta: 'Launch Now',
+    icon: React.createElement(FiLayout, { className: 'h-6 w-6' }),
   },
   {
     title: 'Professional',
     price: '149',
-    priceId: 'price_1Qvpn7P9fFsmlAaFASKKtnmA',
-    description: 'Pro-grade website management, billed monthly',
-    note: 'Best for businesses scaling up with premium tools',
-    initialSetupTime: '3-4 weeks',
+    priceId: 'price_1Qvpn7P9fFsmlAaFASKKtnmA', // Replace with your actual Stripe Price ID
+    description: 'Scale your online presence with up to 15 pages, advanced SEO, and Next.js performance.',
+    note: 'Grow your business with advanced tools.',
     features: [
-      '15 Page Website (Tailored Layout)',
-      'Unique, Custom Design',
-      'Advanced SEO + Analytics',
-      'Blog with Growth Tips',
-      'Appointment Booking Tool',
-      'Portfolio or Testimonials',
-      'Domain, Hosting & Ongoing Care'
+      'Scale up: 15-page site',
+      'Dominate search with advanced SEO',
+      'Convert more with custom features',
+      'Integrate marketing tools seamlessly',
+      'Gain insights with detailed analytics',
+      'Free domain & hosting (1st year)',
+      'Priority support & expert guidance',
     ],
-    cta: 'Scale Smart', // Updated CTA
+    cta: 'Level Up',
     popular: true,
-    icon: React.createElement(FiPenTool, { className: "h-6 w-6" }),
+    icon: React.createElement(FiPenTool, { className: 'h-6 w-6' }),
   },
   {
     title: 'Enterprise',
     price: '499',
-    priceId: 'price_1Qvq86P9fFsmlAaFFUyGPYpa',
-    description: 'Total web domination with monthly bespoke service',
-    note: 'Tailored for enterprises aiming to lead',
-    initialSetupTime: '4-6 weeks',
+    priceId: 'price_1Qvq86P9fFsmlAaFFUyGPYpa', // Replace with your actual Stripe Price ID
+    description: 'Dominate your industry with a fully customized Next.js platform, built for large-scale operations.',
+    note: 'Dominate your industry with a custom solution.',
     features: [
-      'Unlimited Pages & Sections',
-      'Bespoke Web Solutions',
-      'Dedicated Success Manager',
-      'Multilingual Capabilities',
-      'Seamless API Connections',
-      'Top-Tier Security',
-      '24/7 Priority Support'
+      'Unlimited pages for maximum impact',
+      'Global reach with multi-language SEO',
+      'Tailored solutions with custom dev',
+      'Enterprise-grade security & scalability',
+      '24/7 support with dedicated team',
+      'Advanced analytics & strategic insights',
+      'Free domain & hosting (1st year)',
     ],
-    cta: 'Dominate Today', // Updated CTA
-    icon: React.createElement(FiServer, { className: "h-6 w-6" }),
+    cta: 'Go Big',
+    icon: React.createElement(FiServer, { className: 'h-6 w-6' }),
   },
 ];

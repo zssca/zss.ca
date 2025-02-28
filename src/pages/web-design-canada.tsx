@@ -7,6 +7,7 @@ import WebTestimonial from "@/features/web/WebTestimonial";
 import WebProjects from "@/features/web/WebProjects";
 import WebFaq from "@/features/web/WebFaq";
 import WebPricingTable from "@/features/web/WebPricingTable";
+import ComparisonTable from "@/features/web/ComparisonTable";
 import WhatsAppButton from '@/components/common/WhatsAppButton';
 
 export default function Web() {
@@ -17,6 +18,7 @@ export default function Web() {
     <MainLayout>
       {/* Main Grid Layout */}
       <div className="grid grid-cols-12 auto-rows-auto gap-4">
+        
         {/* Hero Section */}
         <div className="col-span-12 md:col-span-5 bg-white rounded-xl px-4 py-2 flex items-start justify-start bg-[url('/bg/A.svg')] bg-cover shadow-sm">
           <WebHero />
@@ -52,6 +54,11 @@ export default function Web() {
           <WhatsAppButton message={whatsappMessage} />
         </div>
 
+        {/* Comparison Table */}
+        <div className="col-span-12 bg-white rounded-xl p-2 pt-6 shadow-sm">
+          <ComparisonTable />
+        </div>
+
         {/* Pricing Table */}
         <div className="col-span-12 bg-white rounded-xl p-2 pt-6 shadow-sm">
           <WebPricingTable />
@@ -61,6 +68,7 @@ export default function Web() {
         <div className="col-span-12 bg-white rounded-xl p-2 shadow-sm">
           <WebFaq />
         </div>
+
       </div>
     </MainLayout>
   );
