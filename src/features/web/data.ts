@@ -6,7 +6,7 @@ import { PricingTier } from './types';
 export const PRICING_TIERS: PricingTier[] = [
   {
     title: 'Basic',
-    price: '29',
+    price: '129',
     priceId: 'price_1Qvq87P9fFsmlAaFwG5wtLba', // Replace with your actual Stripe Price ID
     description: 'Launch your presence with a sleek, no-fuss Next.js website—ideal for tight budgets and new ventures.',
     note: 'Get online quickly with the essentials.',
@@ -24,7 +24,7 @@ export const PRICING_TIERS: PricingTier[] = [
   },
   {
     title: 'Starter',
-    price: '49',
+    price: '249',
     priceId: 'price_1Qvq86P9fFsmlAaFuNiEIMYL', // Replace with your actual Stripe Price ID
     description: 'Strengthen your brand with a polished Next.js website that caters to growing businesses.',
     note: 'Expand your reach with more features.',
@@ -42,7 +42,7 @@ export const PRICING_TIERS: PricingTier[] = [
   },
   {
     title: 'Professional',
-    price: '149',
+    price: '449',
     priceId: 'price_1Qvpn7P9fFsmlAaFASKKtnmA', // Replace with your actual Stripe Price ID
     description: 'Scale your online presence with up to 15 pages, advanced SEO, and Next.js performance.',
     note: 'Grow your business with advanced tools.',
@@ -61,7 +61,7 @@ export const PRICING_TIERS: PricingTier[] = [
   },
   {
     title: 'Enterprise',
-    price: '499',
+    price: '1499',
     priceId: 'price_1Qvq86P9fFsmlAaFFUyGPYpa', // Replace with your actual Stripe Price ID
     description: 'Dominate your industry with a fully customized Next.js platform, built for large-scale operations.',
     note: 'Dominate your industry with a custom solution.',
