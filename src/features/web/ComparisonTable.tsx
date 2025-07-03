@@ -27,8 +27,8 @@ const ComparisonTable: React.FC = () => {
   ];
 
   const pricing = {
-    zenith: '$29/mo',
-    diy: '~$100/mo',
+    zenith: '$129/mo',
+    diy: '~$1000/mo',
     agency: '$5,000+',
   };
 
